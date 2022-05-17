@@ -14,5 +14,11 @@ class Heating {
   public void off() {
       System.out.println(description + " Heating off.");
   }
+  public void up() {
+      System.out.println(description + " Heating up.");
+  }
 
+  public void down() {
+      System.out.println(description + " Heating down.");
+  }
 }

@@ -7,8 +7,8 @@ class RemoteControl {
   private final int MAX_COMMANDS = 3;
   private List<Command> mOnCommand; // on 명령 저장
   private List<Command> mOffCommand; // off 명령 저장
-  private List<Command> mUpCommand; 
-  private List<Command> mDownCommand; 
+  private List<Command> mUpCommand;  // up 명령 저장
+  private List<Command> mDownCommand; // down 명령 저장
   
   public RemoteControl() {
       mOnCommand = new ArrayList<Command>(MAX_COMMANDS); 
@@ -25,13 +25,14 @@ class RemoteControl {
       }
   }
 
-  public void setCommand(int slot, Command onCommand, Command offCommand, Command upCommand, Command downCommand) {
+  public void setOnOffCommand(int slot, Command onCommand, Command offCommand) {
        mOnCommand.add(slot, onCommand);
        mOffCommand.add(slot, offCommand);
+  }
+public void setUpDownCommand(int slot, Command upCommand, Command downCommand) {
        mUpCommand.add(slot, upCommand);
        mDownCommand.add(slot, downCommand);
   }
-
   public void onButtonWasPushed(int slot) {
       mOnCommand.get(slot).execute();
   }
