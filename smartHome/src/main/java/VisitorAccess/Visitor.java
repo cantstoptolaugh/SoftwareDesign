@@ -7,7 +7,8 @@ package VisitorAccess;
  */
  public class Visitor {
     String familyMember;
-    public String getFamilyMember() {return familyMember;}
+    
+    // getter
     public String toString() {
         return familyMember;
     }
