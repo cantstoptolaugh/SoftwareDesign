@@ -1,12 +1,10 @@
 
 package VisitorAccess;
 
-/**
- *
- * @author sonjin-yeong
- */
-public class Sister extends Visitor{
+// Family 상속받는 Sister
+
+public class Sister extends Family{
     public Sister() {
-        familyMember = "Sister";
+        family = "Sister";
     }
 }
