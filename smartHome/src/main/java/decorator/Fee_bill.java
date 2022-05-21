@@ -3,7 +3,7 @@ package decorator;
 public class Fee_bill {
 
     public static void main(String args[]) {
-        ManagementFee ResidentFee_1 = new SamsungRaemian();
+        ManagementFee ResidentFee_1 = new Part_A();
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println(ResidentFee_1.description + ". 기본 관리비는 " + ResidentFee_1.bill() + "(원) 입니다.");
         System.out.println("---------------------------------------------------------------------------------");
@@ -13,7 +13,7 @@ public class Fee_bill {
         System.out.println(ResidentFee_1.getDescription() + "을 합산하여 " + ResidentFee_1.bill() + "(원) 입니다.");
         System.out.println("---------------------------------------------------------------------------------\n\n\n");
 
-        ManagementFee ResidentFee_2 = new HannamtheHill();
+        ManagementFee ResidentFee_2 = new Part_B();
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println(ResidentFee_2.description + ". 기본 관리비는 " + ResidentFee_2.bill() + "(원) 입니다.");
         System.out.println("---------------------------------------------------------------------------------");
@@ -23,7 +23,7 @@ public class Fee_bill {
         System.out.println(ResidentFee_2.getDescription() + "을 합산하여 " + ResidentFee_2.bill() + "(원) 입니다.");
         System.out.println("---------------------------------------------------------------------------------\n\n\n");
 
-        ManagementFee ResidentFee_3 = new HillState();
+        ManagementFee ResidentFee_3 = new Part_C();
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println(ResidentFee_3.description + ". 기본 관리비는 " + ResidentFee_3.bill() + "(원) 입니다.");
         System.out.println("---------------------------------------------------------------------------------");
