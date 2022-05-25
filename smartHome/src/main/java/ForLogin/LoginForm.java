@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI_Design;
+package ForLogin;
 
 /**
  *
@@ -64,7 +64,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(139, 139, 139)
                 .addComponent(jLabel1))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(113, 113, 113))
             .addComponent(jSeparator2)
