@@ -17,14 +17,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu2ActionPerformed"/>
               </Events>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#xb9c8;&#xc774;&#xd398;&#xc774;&#xc9c0;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu3ActionPerformed"/>
-              </Events>
-            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>
