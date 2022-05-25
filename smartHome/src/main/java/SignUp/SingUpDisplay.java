@@ -4,17 +4,30 @@
  */
 package SignUp;
 
+import javax.swing.*;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import ForLogin.LoginForm;
+
 /**
  *
  * @author 이주혁
  */
 public class SingUpDisplay extends javax.swing.JFrame {
 
+    File user_info = new File("user_info.txt");
+    File Energy_use = new File("Energy_use.txt");
+
     /**
      * Creates new form SingUpDisplay
      */
     public SingUpDisplay() {
         initComponents();
+        setTitle("회원가입");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -46,6 +59,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,30 +87,75 @@ public class SingUpDisplay extends javax.swing.JFrame {
         jLabel7.setText("가족 구성원");
 
         jButton1.setText("회원가입");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField3");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
-        jTextField4.setText("jTextField4");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
-        jTextField5.setText("jTextField5");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "가족 구성원을 체크하세요!", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("맑은 고딕", 1, 10))); // NOI18N
 
         jCheckBox1.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jCheckBox1.setText("아버지");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox3.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jCheckBox3.setText("자녀1");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
 
         jCheckBox4.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jCheckBox4.setText("자녀2");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jCheckBox2.setText("어머니");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,6 +183,13 @@ public class SingUpDisplay extends javax.swing.JFrame {
                     .addComponent(jCheckBox3)
                     .addComponent(jCheckBox4)))
         );
+
+        jButton2.setText("뒤로가기");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,8 +224,10 @@ public class SingUpDisplay extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jButton1)))
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -190,7 +258,9 @@ public class SingUpDisplay extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -220,9 +290,132 @@ public class SingUpDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            Random random = new Random();
+            String value1 = Integer.toString(random.nextInt(5000, 10000));
+            String value2 = Integer.toString(random.nextInt(5000, 10000));
+            String value3 = Integer.toString(random.nextInt(5000, 10000));
+
+            boolean signal = true;
+
+            String name = jTextField1.getText();
+            String id = jTextField2.getText();
+            String pw = jTextField3.getText();
+            String part = jTextField4.getText();
+            String room_num = jTextField5.getText();
+            List<String> family = new ArrayList<String>();
+
+            if (jCheckBox1.isSelected()) {
+                family.add(jCheckBox1.getText());
+            }
+            if (jCheckBox2.isSelected()) {
+                family.add(jCheckBox2.getText());
+            }
+            if (jCheckBox3.isSelected()) {
+                family.add(jCheckBox3.getText());
+            }
+            if (jCheckBox4.isSelected()) {
+                family.add(jCheckBox4.getText());
+            }
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(user_info, true));
+            BufferedWriter bufferedWriter1 = new BufferedWriter(new FileWriter(Energy_use, true));
+
+            Scanner scan = new Scanner(user_info);
+
+            while (scan.hasNext()) {
+                String str = scan.next();
+                if (str.equals(name) || str.equals(id) || str.equals(room_num)) {
+                    signal = false;
+                }
+            }
+
+            if (signal == true) {
+                if (user_info.isFile() && user_info.canWrite()) {
+                    bufferedWriter.write(name);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(id);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(pw);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(part);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(room_num);
+                    for (int i = 0; i < family.size(); i++) {
+                        bufferedWriter.write(" ");
+                        bufferedWriter.write(family.get(i));
+                    }
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    if (Energy_use.isFile() && Energy_use.canWrite()) {
+                        bufferedWriter1.write(value1);
+                        bufferedWriter1.write(" ");
+                        bufferedWriter1.write(value2);
+                        bufferedWriter1.write(" ");
+                        bufferedWriter1.write(value3);
+                        bufferedWriter1.newLine();
+                        bufferedWriter1.close();
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "회원가입 완료", "Result", JOptionPane.WARNING_MESSAGE);
+                LoginForm login = new LoginForm();
+                login.setVisible(true);
+                setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "중복된 정보입니다.\n회원가입 실패", "Result", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SingUpDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        LoginForm login = new LoginForm();
+        login.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -257,6 +450,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

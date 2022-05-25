@@ -4,17 +4,33 @@
  */
 package ForLogin;
 
+import javax.swing.*;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import Main.MainDisplay;
+import SignUp.SingUpDisplay;
+
 /**
  *
  * @author 이주혁
  */
 public class LoginForm extends javax.swing.JFrame {
 
+    File user_info = new File("user_info.txt");
+    String ID;
+    String PW;
+    public String SessionID;
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
         initComponents();
+        setTitle("로그인");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -49,8 +65,18 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel3.setText("User Password");
 
         jButton1.setText("Sign In");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Sign Up");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4.setText("소프트웨어설계공학 8조 스마트홈 시스템");
@@ -115,6 +141,54 @@ public class LoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            String userID = jTextField1.getText();
+            String userPW = jPasswordField1.getText();
+
+            boolean signal = false;
+
+            Scanner scan = new Scanner(user_info);
+
+            while (scan.hasNext()) {
+                String str = scan.next();
+                if (str.equals(userID)) {
+                    ID = userID;
+                }
+                if (str.equals(userPW)) {
+                    PW = userPW;
+                }
+            }
+
+            if (ID.equals(userID) && PW.equals(userPW)) {
+                signal = true;
+                this.SessionID = userID;
+            }
+
+            if (signal == true) {
+                JOptionPane.showMessageDialog(null, "로그인 성공", "Result", JOptionPane.WARNING_MESSAGE);
+                MainDisplay main = new MainDisplay();
+                main.setVisible(true);
+                setVisible(false);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "로그인 실패", "Result", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        SingUpDisplay sing = new SingUpDisplay();
+        sing.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -148,6 +222,7 @@ public class LoginForm extends javax.swing.JFrame {
                 new LoginForm().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
