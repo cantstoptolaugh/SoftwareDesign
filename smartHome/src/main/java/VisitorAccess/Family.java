@@ -7,8 +7,4 @@ public class Family extends Visitor {
         super();
     }
     
-    // ArrayList를 순회할때 사용되는 toString()
-    public String toString() {
-        return family + " " + timestamp;
-    }
 }

@@ -22,7 +22,8 @@ public class LoginForm extends javax.swing.JFrame {
     File user_info = new File("user_info.txt");
     String ID;
     String PW;
-    public String SessionID;
+    public static String SessionID;
+   
 
     /**
      * Creates new form LoginForm
@@ -175,6 +176,7 @@ public class LoginForm extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "로그인 실패", "Result", JOptionPane.WARNING_MESSAGE);
             }
+            System.out.println(SessionID);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }

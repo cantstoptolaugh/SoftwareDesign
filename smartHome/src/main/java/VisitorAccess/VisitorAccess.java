@@ -10,6 +10,7 @@ public class VisitorAccess {
     
     // 방문자 확인하는 메서드인 addVisitor
     public Visitor checkVisitor(String member) {
+                
         // Visitor 객체 null로 초기화
         Visitor visitor = null;
         

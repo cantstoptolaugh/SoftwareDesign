@@ -4,16 +4,27 @@
  */
 package VisitorAccess;
 
+import ForLogin.*;
 import VisitorAccess.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author sonjin-yeong
  */
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 public class VisitorHome extends javax.swing.JFrame {
-
+    File user_info = new File("user_info.txt");
+    DefaultTableModel dtm;
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    
     /**
      * Creates new form Visitor
      */
@@ -36,7 +47,7 @@ public class VisitorHome extends javax.swing.JFrame {
         goToHome = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -53,19 +64,23 @@ public class VisitorHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jLabel1.setText("  방문자 관리");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "방문자", "방문 시간"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(table);
 
         jMenu1.setText("메뉴");
 
@@ -108,34 +123,31 @@ public class VisitorHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToHomeActionPerformed
-        List<Visitor> visitorList = new ArrayList<Visitor>();
+        dtm = (DefaultTableModel)table.getModel();
         
+        LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
-        Door d;
-        
+        System.out.println(lf.SessionID);
+        System.out.println(vat.member);
         
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor("brother");
+        Visitor v = visitorAccess.checkVisitor(vat.member);
         
-        if(v instanceof Family) {
-            d = new Door(v);    
-            // 방문자를 방문자 리스트에 추가
-            visitorList.add(v);
+        if (v instanceof Family) {
+            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+            
         } else if(v instanceof Outer) {
-            d = new Door(v);
-            visitorList.add(v);
+            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
         }        
-        System.out.println("-----------방문자 전체 리스트-----------");
-        
-        // 방문자 리스트 전체 조회
-        for(int i = 0; i < visitorList.size(); i++) {
-            System.out.println(visitorList.get(i));
-        }
     }//GEN-LAST:event_goToHomeActionPerformed
 
     /**
@@ -181,6 +193,6 @@ public class VisitorHome extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

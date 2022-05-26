@@ -9,9 +9,4 @@ public class Outer extends Visitor {
     public Outer() {
         outer = "외부인";
     }
-    
-    // ArrayList를 순회할 때 사용하기 위한 toString()
-    public String toString() {
-        return outer + " " + timestamp;
-    }
 }
