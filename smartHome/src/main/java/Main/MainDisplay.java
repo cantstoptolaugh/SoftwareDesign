@@ -5,8 +5,10 @@
 package Main;
 
 import ForLogin.LoginForm;
-import VisitorAccess.*;
-
+import RealEnergyMeter.GUIforREM;
+import VisitorAccess.VisitorHome;
+import command.GUI_Command;
+import decorator.GUIforMF;
 /**
  *
  * @author 이주혁
@@ -15,6 +17,7 @@ public class MainDisplay extends javax.swing.JFrame {
 
     LoginForm forSessionID = new LoginForm();
     String SessionID = forSessionID.SessionID;
+    
     /**
      * Creates new form MainDisplay
      */
@@ -22,8 +25,10 @@ public class MainDisplay extends javax.swing.JFrame {
         initComponents();
         setTitle("메인화면");
         setLocationRelativeTo(null);
+        jTextField1.setText(SessionID);
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +62,7 @@ public class MainDisplay extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +70,11 @@ public class MainDisplay extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         jButton2.setText("이동");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("현재 대기 상태를 확인하세요!");
 
@@ -146,6 +156,11 @@ public class MainDisplay extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         jButton3.setText("이동");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("현재 에너지 사용량을 확인하세요!");
 
@@ -184,6 +199,11 @@ public class MainDisplay extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         jButton4.setText("이동");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Home 디바이스의 전원을 제어하세요!");
 
@@ -222,6 +242,11 @@ public class MainDisplay extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         jButton5.setText("이동");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("회원님의 이번 달 기본 관리비를 확인하세요!");
 
@@ -265,14 +290,19 @@ public class MainDisplay extends javax.swing.JFrame {
         });
 
         jMenu1.setText("메뉴");
-
-        jMenu2.setText("로그아웃");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                jMenu1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenu2);
+
+        jMenuItem1.setText("로그아웃");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -321,18 +351,56 @@ public class MainDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
-        System.out.println(SessionID);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        LoginForm log = new LoginForm();
+        log.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new VisitorHome().setVisible(true);
+        // TODO add your handling code here:
+        VisitorHome home = new VisitorHome();
+        home.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        /*
+        은지 GUI 작업되면 이동하기 버튼 작업할 것임.
+        */
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        GUIforREM energy = new GUIforREM();
+        energy.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        GUI_Command command = new GUI_Command();
+        command.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        GUIforMF receipt = new GUIforMF();
+        receipt.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,8 +455,8 @@ public class MainDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

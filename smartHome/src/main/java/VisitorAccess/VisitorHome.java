@@ -1,29 +1,79 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package VisitorAccess;
 
 import ForLogin.*;
 import VisitorAccess.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author sonjin-yeong
- */
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+
 public class VisitorHome extends javax.swing.JFrame {
-    File user_info = new File("user_info.txt");
+    
+    // DefaultTableModel, Timestamp, SimpleDateFormat 객체 초기화 및 생성
+    
     DefaultTableModel dtm;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    
+    // 로그인 파일 읽기 위한 File 객체
+    File user_info;
+    
+    // 세션 id 읽기 위한 변수 id
+    String id;
+    
+    // 가족 확인 위한 family 배열
+    String[] family;
+    
+    // 로그인 파일에서 가족 구성원들을 배열 형태로 리턴
+    public String[] familyList() {
+        
+      try { 
+            // 로그인 객체 생성 및 sessionID 설정
+            LoginForm log = new LoginForm();
+            id = LoginForm.SessionID;
+            
+            // 가족은 4개의 배열
+            family = new String[4];
+            
+            // 세션 id의 로그인 파일 생성
+            user_info = new File(id+".txt");
+            
+            // 로그인 파일 scan
+            Scanner scan = new Scanner(user_info);
+            
+            // 스캔 한 파일 하나씩 읽으며 가족 구성원 이름에 따라 배열에 추가
+            while (scan.hasNext()) {
+                String str = scan.next();
+                if (str.equals(id)) {
+                }
+                if (str.equals("아버지")) {
+                    family[0] = "아버지";
+                }
+                if (str.equals("어머니")) {
+                    family[1] = "어머니";
+                }
+                if (str.equals("자녀1")) {
+                    family[2] = "자녀1";
+                }
+                if (str.equals("자녀2")) {
+                    family[3] = "자녀2";
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VisitorHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      // family 배열 리턴
+      return family;
+    }
     
     /**
      * Creates new form Visitor
@@ -44,20 +94,24 @@ public class VisitorHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        goToHome = new javax.swing.JButton();
+        outer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        brother = new javax.swing.JButton();
+        sister = new javax.swing.JButton();
+        mother = new javax.swing.JButton();
+        father = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        goToHome.setText("들어가기");
-        goToHome.addActionListener(new java.awt.event.ActionListener() {
+        outer.setText("외부인");
+        outer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToHomeActionPerformed(evt);
+                outerActionPerformed(evt);
             }
         });
 
@@ -82,6 +136,34 @@ public class VisitorHome extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
+        brother.setText("자녀1");
+        brother.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brotherActionPerformed(evt);
+            }
+        });
+
+        sister.setText("자녀2");
+        sister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sisterActionPerformed(evt);
+            }
+        });
+
+        mother.setText("어머니");
+        mother.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motherActionPerformed(evt);
+            }
+        });
+
+        father.setText("아버지");
+        father.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fatherActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("메뉴");
 
         jMenu2.setText("뒤로가기");
@@ -98,32 +180,52 @@ public class VisitorHome extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(goToHome))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(father)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mother)
+                                .addGap(27, 27, 27)
+                                .addComponent(brother)
+                                .addGap(32, 32, 32)
+                                .addComponent(sister))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(outer)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(father)
+                    .addComponent(mother)
+                    .addComponent(brother)
+                    .addComponent(sister))
                 .addGap(18, 18, 18)
-                .addComponent(goToHome)
-                .addGap(18, 18, 18)
+                .addComponent(outer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void goToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToHomeActionPerformed
+    private void outerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outerActionPerformed
+        
+        familyList();
+ 
         dtm = (DefaultTableModel)table.getModel();
+        
         
         LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
@@ -132,11 +234,8 @@ public class VisitorHome extends javax.swing.JFrame {
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
-        System.out.println(lf.SessionID);
-        System.out.println(vat.member);
-        
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor(vat.member);
+        Visitor v = visitorAccess.checkVisitor("외부인");
         
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
@@ -148,7 +247,126 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
             dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
         }        
-    }//GEN-LAST:event_goToHomeActionPerformed
+    }//GEN-LAST:event_outerActionPerformed
+
+    // mother, father, brother, sister 모두 같은 로직
+    private void motherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motherActionPerformed
+        
+        // 가족 배열 가져옴
+        familyList();
+        
+        // DefaultTableModel 객체 생성
+        dtm = (DefaultTableModel)table.getModel();
+        
+        // 로그인 객체 생성 
+        LoginForm lf = new LoginForm();
+        
+        // 팩토리 객체 VisitorAccessTrace
+        VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
+        VisitorAccess visitorAccess = new VisitorAccess(vat);
+        
+        // 첫번째 방문자 객체를 생성
+        Visitor v = visitorAccess.checkVisitor(family[1]);
+        
+        // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
+        if (v instanceof Family) {
+            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+            
+        // 만약 v가 외부인 객체에 속한다면 문이 닫히며, 외부인, 타임스탬프가 테이블에 기록    
+        } else if(v instanceof Outer) {
+            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+        }        
+    }//GEN-LAST:event_motherActionPerformed
+
+    private void fatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fatherActionPerformed
+        familyList();
+ 
+        dtm = (DefaultTableModel)table.getModel();
+        
+        
+        LoginForm lf = new LoginForm();
+        // 팩토리 객체 VisitorAccessTrace
+        VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
+        VisitorAccess visitorAccess = new VisitorAccess(vat);
+        
+        // 첫번째 방문자 객체를 생성
+        Visitor v = visitorAccess.checkVisitor(family[0]);
+        
+        if (v instanceof Family) {
+            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+            
+        } else if(v instanceof Outer) {
+            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+        }                // TODO add your handling code here:
+    }//GEN-LAST:event_fatherActionPerformed
+
+    private void brotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brotherActionPerformed
+        familyList();
+ 
+        dtm = (DefaultTableModel)table.getModel();
+        
+        
+        LoginForm lf = new LoginForm();
+        // 팩토리 객체 VisitorAccessTrace
+        VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
+        VisitorAccess visitorAccess = new VisitorAccess(vat);
+        
+        // 첫번째 방문자 객체를 생성
+        Visitor v = visitorAccess.checkVisitor(family[2]);
+        
+        if (v instanceof Family) {
+            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+            
+        } else if(v instanceof Outer) {
+            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+        }        
+    }//GEN-LAST:event_brotherActionPerformed
+
+    private void sisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisterActionPerformed
+        familyList();
+ 
+        dtm = (DefaultTableModel)table.getModel();
+        
+        
+        LoginForm lf = new LoginForm();
+        // 팩토리 객체 VisitorAccessTrace
+        VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
+        VisitorAccess visitorAccess = new VisitorAccess(vat);
+        
+        // 첫번째 방문자 객체를 생성
+        Visitor v = visitorAccess.checkVisitor(family[3]);
+        
+        if (v instanceof Family) {
+            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+            
+        } else if(v instanceof Outer) {
+            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
+            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+        }        
+    }//GEN-LAST:event_sisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,12 +405,16 @@ public class VisitorHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton goToHome;
+    private javax.swing.JButton brother;
+    private javax.swing.JButton father;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton mother;
+    private javax.swing.JButton outer;
+    private javax.swing.JButton sister;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

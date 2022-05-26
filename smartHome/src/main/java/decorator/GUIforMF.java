@@ -4,6 +4,8 @@
  */
 package decorator;
 
+import Main.MainDisplay;
+
 /**
  *
  * @author 이주혁
@@ -15,6 +17,8 @@ public class GUIforMF extends javax.swing.JFrame {
      */
     public GUIforMF() {
         initComponents();
+        setTitle("관리비 청구");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -46,7 +50,7 @@ public class GUIforMF extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -86,8 +90,13 @@ public class GUIforMF extends javax.swing.JFrame {
 
         jMenu1.setText("메뉴");
 
-        jMenu2.setText("뒤로가기");
-        jMenu1.add(jMenu2);
+        jMenuItem1.setText("뒤로가기");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -168,6 +177,13 @@ public class GUIforMF extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,11 +228,11 @@ public class GUIforMF extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
