@@ -19,7 +19,7 @@ import SignUp.SingUpDisplay;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    File user_info = new File("user_info.txt");
+    File user_info;
     String ID;
     String PW;
     public String SessionID;
@@ -149,6 +149,8 @@ public class LoginForm extends javax.swing.JFrame {
 
             boolean signal = false;
 
+            user_info  = new File(userID + ".txt");
+            
             Scanner scan = new Scanner(user_info);
 
             while (scan.hasNext()) {

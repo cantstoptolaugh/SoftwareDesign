@@ -18,8 +18,8 @@ import ForLogin.LoginForm;
  */
 public class SingUpDisplay extends javax.swing.JFrame {
 
-    File user_info = new File("user_info.txt");
-    File Energy_use = new File("Energy_use.txt");
+    File user_info;
+    File Energy_use;
 
     /**
      * Creates new form SingUpDisplay
@@ -299,7 +299,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
             String value3 = Integer.toString(random.nextInt(5000, 10000));
 
             boolean signal = true;
-
+                      
             String name = jTextField1.getText();
             String id = jTextField2.getText();
             String pw = jTextField3.getText();
@@ -307,6 +307,9 @@ public class SingUpDisplay extends javax.swing.JFrame {
             String room_num = jTextField5.getText();
             List<String> family = new ArrayList<String>();
 
+            user_info = new File(id+".txt");
+            Energy_use = new File(id+"'sUse.txt");
+            
             if (jCheckBox1.isSelected()) {
                 family.add(jCheckBox1.getText());
             }
