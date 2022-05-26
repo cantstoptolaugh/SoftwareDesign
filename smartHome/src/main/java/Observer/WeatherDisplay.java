@@ -4,6 +4,8 @@
  */
 package Observer;
 
+import Main.MainDisplay;
+
 /**
  *
  * @author 이주혁
@@ -15,6 +17,8 @@ public class WeatherDisplay extends javax.swing.JFrame {
      */
     public WeatherDisplay() {
         initComponents();
+        setTitle("날씨관리화면");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,7 +45,7 @@ public class WeatherDisplay extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -70,9 +74,19 @@ public class WeatherDisplay extends javax.swing.JFrame {
         jTextField4.setText("jTextField4");
 
         jMenu3.setText("메뉴");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
-        jMenu4.setText("뒤로가기");
-        jMenu3.add(jMenu4);
+        jMenuItem2.setText("뒤로가기");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
 
         jMenuBar2.add(jMenu3);
 
@@ -132,6 +146,17 @@ public class WeatherDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,9 +201,9 @@ public class WeatherDisplay extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
