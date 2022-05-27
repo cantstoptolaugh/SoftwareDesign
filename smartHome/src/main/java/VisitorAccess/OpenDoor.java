@@ -6,20 +6,26 @@ import Main.MainDisplay;
 
 import ForLogin.*;
 import VisitorAccess.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-public class VisitorHome extends javax.swing.JFrame {
+public class OpenDoor extends javax.swing.JFrame {
     
     // DefaultTableModel, Timestamp, SimpleDateFormat 객체 초기화 및 생성
     
@@ -31,7 +37,7 @@ public class VisitorHome extends javax.swing.JFrame {
     File user_info;
     
     // 세션 id 읽기 위한 변수 id
-    String id;
+    String id = LoginForm.SessionID;
     
     // 가족 확인 위한 family 배열
     String[] family;
@@ -41,8 +47,7 @@ public class VisitorHome extends javax.swing.JFrame {
         
       try { 
             // 로그인 객체 생성 및 sessionID 설정
-            LoginForm log = new LoginForm();
-            id = LoginForm.SessionID;
+            LoginForm log = new LoginForm(); 
             
             // 가족은 4개의 배열
             family = new String[4];
@@ -72,7 +77,7 @@ public class VisitorHome extends javax.swing.JFrame {
                 }
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(VisitorHome.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OpenDoor.class.getName()).log(Level.SEVERE, null, ex);
         }
       // family 배열 리턴
       return family;
@@ -82,7 +87,7 @@ public class VisitorHome extends javax.swing.JFrame {
      * Creates new form Visitor
      */
     //제목설정 / 화면 정중앙에 프로그램 출력
-    public VisitorHome() {
+    public OpenDoor() {
         initComponents();
         setTitle("방문자 관리 기능");
         setLocationRelativeTo(null);
@@ -99,12 +104,11 @@ public class VisitorHome extends javax.swing.JFrame {
 
         outer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
         brother = new javax.swing.JButton();
         sister = new javax.swing.JButton();
         mother = new javax.swing.JButton();
         father = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -119,25 +123,7 @@ public class VisitorHome extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jLabel1.setText("  방문자 관리");
-
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "방문자", "방문 시간"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(table);
+        jLabel1.setText(" 방문자 출입");
 
         brother.setText("자녀1");
         brother.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +153,13 @@ public class VisitorHome extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("전체 방문자 확인");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("메뉴");
 
         jMenuItem1.setText("뒤로가기");
@@ -188,41 +181,39 @@ public class VisitorHome extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(jLabel1))
+                        .addGap(231, 231, 231)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(52, 52, 52)
+                        .addComponent(father)
+                        .addGap(28, 28, 28)
+                        .addComponent(mother)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(father)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mother)
-                                .addGap(27, 27, 27)
                                 .addComponent(brother)
                                 .addGap(32, 32, 32)
-                                .addComponent(sister))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(outer)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                                .addComponent(sister)
+                                .addGap(29, 29, 29)
+                                .addComponent(outer)))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(38, 38, 38)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(father)
                     .addComponent(mother)
                     .addComponent(brother)
-                    .addComponent(sister))
-                .addGap(18, 18, 18)
-                .addComponent(outer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(sister)
+                    .addComponent(outer))
+                .addGap(82, 82, 82)
+                .addComponent(jButton1)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         pack();
@@ -232,9 +223,6 @@ public class VisitorHome extends javax.swing.JFrame {
         
         familyList();
  
-        dtm = (DefaultTableModel)table.getModel();
-        
-        
         LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
@@ -249,11 +237,59 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         
+        try { 
+            String member = v.getFamily();
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
+            
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    
+                }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
             
         } else if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+         try { 
+            String member = v.getOuter();
+            
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
+            
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+            }
+            
+        } catch(IOException e) {
+            System.out.println(e);
+        }
         }        
     }//GEN-LAST:event_outerActionPerformed
 
@@ -262,10 +298,7 @@ public class VisitorHome extends javax.swing.JFrame {
         
         // 가족 배열 가져옴
         familyList();
-        
-        // DefaultTableModel 객체 생성
-        dtm = (DefaultTableModel)table.getModel();
-        
+       
         // 로그인 객체 생성 
         LoginForm lf = new LoginForm();
         
@@ -283,20 +316,40 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         
+        try { 
+            String member = v.getFamily();
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
             
-        // 만약 v가 외부인 객체에 속한다면 문이 닫히며, 외부인, 타임스탬프가 테이블에 기록    
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    
+                }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+            
         } else if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
         }        
     }//GEN-LAST:event_motherActionPerformed
 
     private void fatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fatherActionPerformed
         familyList();
- 
-        dtm = (DefaultTableModel)table.getModel();
-        
         
         LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
@@ -312,20 +365,41 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         
+        try { 
+            String member = v.getFamily();
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
+            
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    
+                }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
             
         } else if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
-        }                // TODO add your handling code here:
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+        }        
     }//GEN-LAST:event_fatherActionPerformed
 
     private void brotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brotherActionPerformed
         familyList();
- 
-        dtm = (DefaultTableModel)table.getModel();
-        
-        
+
         LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
@@ -340,20 +414,41 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         
+        try { 
+            String member = v.getFamily();
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
+            
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    
+                }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
             
         } else if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
         }        
     }//GEN-LAST:event_brotherActionPerformed
 
     private void sisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisterActionPerformed
         familyList();
  
-        dtm = (DefaultTableModel)table.getModel();
-        
-        
         LoginForm lf = new LoginForm();
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
@@ -368,11 +463,34 @@ public class VisitorHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
+         
+        try { 
+            String member = v.getFamily();
+            long timestamp = System.currentTimeMillis();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String date = dateFormat.format(timestamp);
+            
+            File familyListFile = new File(id+"List.txt");
+            
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
+            
+            if (familyListFile.isFile() && familyListFile.canWrite()) {
+                    bufferedWriter.write(member);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.write(date);
+                    bufferedWriter.write(" ");
+                    bufferedWriter.newLine();
+                    bufferedWriter.close();
+                    
+                }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
             
         } else if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
+         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
         }        
     }//GEN-LAST:event_sisterActionPerformed
 
@@ -382,6 +500,12 @@ public class VisitorHome extends javax.swing.JFrame {
         dis.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CheckVisitor cv = new CheckVisitor();
+        cv.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,21 +524,23 @@ public class VisitorHome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisitorHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OpenDoor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisitorHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OpenDoor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisitorHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OpenDoor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisitorHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OpenDoor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisitorHome().setVisible(true);
+                new OpenDoor().setVisible(true);
             }
         });
     }
@@ -422,14 +548,13 @@ public class VisitorHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brother;
     private javax.swing.JButton father;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mother;
     private javax.swing.JButton outer;
     private javax.swing.JButton sister;
-    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

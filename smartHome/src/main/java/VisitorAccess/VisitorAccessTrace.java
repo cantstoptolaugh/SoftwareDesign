@@ -9,7 +9,7 @@ import VisitorAccess.Visitor;
 public class VisitorAccessTrace {
     
     // VistiorHome 객체 생성
-    VisitorHome vh = new VisitorHome();
+    OpenDoor vh = new OpenDoor();
     
     // 가족 타입 확인 위한 변수
     String member;
