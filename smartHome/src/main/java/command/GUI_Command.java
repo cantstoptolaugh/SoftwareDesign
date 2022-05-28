@@ -4,30 +4,76 @@
  */
 package command;
 
+import ForLogin.LoginForm;
 import Main.MainDisplay;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSlider;
 
 /**
  *
  * @author LG
  */
 public class GUI_Command extends javax.swing.JFrame {
+    
+    RemoteControl remote = new RemoteControl(); //인보커 생성 - 명령을 저장하고 관리.
+    Command none = new NoCommand(); 
+    Refrigerator kitchenRefrigerator = new Refrigerator("Kitchen"); //  리시버 생성 - 명령의 실제 처리를 수행.
+    Heating livingRoomHeating =null;
+    int usedRefEnergy=0;
+    int usedHeatingEnergy=0;
+    int usedLedEnergy=0;
+    public static int usedEnergy=0;
+
+    String refOnOffState = "OFF"; 
+    String heatingLivingRoomOnOffState= "OFF"; 
+
 
     /**
      * Creates new form NewJFrame
      */
+  public enum Receiver {
+        HEATING, LED, REF
+    }
+ public void checkState(JSlider s) {
+     
+ }
     public GUI_Command() {
         initComponents();
-        setTitle("디바이스 제어");
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        commandMainLabel.setText(LoginForm.SessionID+"님의 누적 전기 사용량");
+        usedELabel.setText(usedEnergy +"kwh");
+        remoteControlInit();
+
+        refTempLabel.setText(""+ 0);
+        refOnOffLabel.setText(refOnOffState);
+        
+         ledTempLabel.setText(""+ 0);
+        ledOnOffLabel.setText(refOnOffState);
+        
+         heatingLivingRoomTempLabel.setText(""+0);
+        livingRoomLabel2.setText(refOnOffState);
+        
+        refSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
+        refSlider.setPaintTicks(true); //눈금을 표시한다.
+        refSlider.setPaintLabels(true); 
+        
+        ledSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
+        ledSlider.setPaintTicks(true); //눈금을 표시한다.
+        ledSlider.setPaintLabels(true); 
+        
+        heatingLivingRoomSlider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
+        heatingLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
+        heatingLivingRoomSlider.setPaintLabels(true); 
 
     }
-
+  public void remoteControlInit() {
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,14 +87,16 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        refSlider = new javax.swing.JSlider();
+        refOnBtn = new javax.swing.JButton();
+        refOffBtn = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        refTempLabel = new javax.swing.JLabel();
+        refOnOffLabel = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        refELabel = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -56,14 +104,15 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jSlider2 = new javax.swing.JSlider();
+        ledSlider = new javax.swing.JSlider();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        ledTempLabel = new javax.swing.JLabel();
+        ledOnOffLabel = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -71,14 +120,27 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jSlider3 = new javax.swing.JSlider();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        heatingLivingRoomSlider = new javax.swing.JSlider();
+        heatingOnLivingRoomBtn = new javax.swing.JButton();
+        heatingOffLivingRoomBtn = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        heatingLivingRoomTempLabel = new javax.swing.JLabel();
+        livingRoomLabel2 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        heatingOnRoom1Btn = new javax.swing.JButton();
+        heatingOffRoom2Btn = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        room1Label1 = new javax.swing.JLabel();
+        room1Label2 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        heatingRoom1Slider = new javax.swing.JSlider();
+        jLabel28 = new javax.swing.JLabel();
+        heatingELabel = new javax.swing.JLabel();
         jMenuBar4 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
@@ -92,12 +154,12 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        commandMainLabel = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
+        usedELabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         refFrame.setBackground(new java.awt.Color(0, 255, 51));
 
@@ -111,29 +173,58 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel4.setText("전원 제어");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("ON");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        refSlider.setMaximum(6);
+        refSlider.setValue(3);
+        refSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                refSliderStateChanged(evt);
+            }
+        });
+        refSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                refSliderMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                refSliderMouseReleased(evt);
             }
         });
 
-        jButton5.setText("OFF");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        refOnBtn.setBackground(new java.awt.Color(0, 0, 0));
+        refOnBtn.setForeground(new java.awt.Color(255, 255, 255));
+        refOnBtn.setText("ON");
+        refOnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                refOnBtnActionPerformed(evt);
             }
         });
 
-        jLabel18.setText("현재 난방 온도");
+        refOffBtn.setText("OFF");
+        refOffBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refOffBtnActionPerformed(evt);
+            }
+        });
 
+        jLabel18.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel18.setText("현재 냉장실 온도");
+
+        jLabel19.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel19.setText("현재 전원 상태");
 
-        jTextField5.setText("jTextField1");
+        refTempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refTempLabel.setForeground(new java.awt.Color(0, 153, 255));
+        refTempLabel.setText("현재 온도");
 
-        jTextField6.setText("jTextField2");
+        refOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refOnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
+        refOnOffLabel.setText("OFF");
+
+        jLabel22.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel22.setText("현재 전력 시용량");
+
+        refELabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refELabel.setForeground(new java.awt.Color(0, 153, 255));
+        refELabel.setText("0  KWh");
 
         jMenu3.setText("메뉴");
 
@@ -153,67 +244,73 @@ public class GUI_Command extends javax.swing.JFrame {
         refFrame.getContentPane().setLayout(refFrameLayout);
         refFrameLayout.setHorizontalGroup(
             refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator5)
             .addGroup(refFrameLayout.createSequentialGroup()
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(refFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
                     .addGroup(refFrameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator5)
+                        .addGap(27, 27, 27)
+                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(38, 38, 38)
+                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(refFrameLayout.createSequentialGroup()
+                                .addComponent(refOnBtn)
                                 .addGap(44, 44, 44)
-                                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel19))
-                                .addGap(18, 18, 18)
-                                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, refFrameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addGap(38, 38, 38)
-                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(refOffBtn))
+                            .addComponent(refSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(refFrameLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)))
-                .addGap(48, 48, 48))
+                        .addGap(52, 52, 52)
+                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(refFrameLayout.createSequentialGroup()
+                                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel22))
+                                .addGap(28, 28, 28)
+                                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(refELabel)
+                                    .addComponent(refTempLabel)))
+                            .addGroup(refFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(28, 28, 28)
+                                .addComponent(refOnOffLabel)))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         refFrameLayout.setVerticalGroup(
             refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(refFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5))
-                .addGap(52, 52, 52)
+                    .addComponent(refOnBtn)
+                    .addComponent(refOffBtn))
+                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(refFrameLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel3))
+                    .addGroup(refFrameLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(refSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(34, 34, 34)
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(refOnOffLabel))
+                .addGap(18, 18, 18)
+                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(refTempLabel))
+                .addGap(18, 18, 18)
+                .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(refELabel))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
@@ -225,6 +322,13 @@ public class GUI_Command extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel7.setText("전원 제어");
+
+        ledSlider.setMaximum(10);
+        ledSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ledSliderStateChanged(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,13 +346,15 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setText("현재 난방 온도");
+        jLabel16.setText("현재 LED 밝기");
 
         jLabel17.setText("현재 전원 상태");
 
-        jTextField3.setText("jTextField1");
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "거실", "침실1", "침실2", "침실3" }));
 
-        jTextField4.setText("jTextField2");
+        ledTempLabel.setText("ledTempLabel");
+
+        ledOnOffLabel.setText("jLabel23");
 
         jMenu5.setText("메뉴");
 
@@ -276,18 +382,20 @@ public class GUI_Command extends javax.swing.JFrame {
                                 .addGap(46, 46, 46)
                                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addGap(38, 38, 38)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(ledFrameLayout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jButton6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton7))))
+                                    .addComponent(jLabel6)))
                             .addGroup(ledFrameLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel5)))
+                        .addGap(38, 38, 38)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ledSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(ledFrameLayout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jButton6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton7))))
                         .addGap(0, 48, Short.MAX_VALUE))
                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -296,21 +404,23 @@ public class GUI_Command extends javax.swing.JFrame {
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel17))
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ledTempLabel)
+                    .addComponent(ledOnOffLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ledFrameLayout.setVerticalGroup(
             ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ledFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ledSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -318,15 +428,15 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addComponent(jButton7))
                 .addGap(42, 42, 42)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(ledTempLabel))
+                .addGap(32, 32, 32)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(ledOnOffLabel))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jLabel8.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
@@ -339,29 +449,101 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel10.setText("전원 제어");
 
-        jButton8.setBackground(new java.awt.Color(0, 0, 0));
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("ON");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+        heatingLivingRoomSlider.setMaximum(30);
+        heatingLivingRoomSlider.setMinimum(5);
+        heatingLivingRoomSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                heatingLivingRoomSliderStateChanged(evt);
+            }
+        });
+        heatingLivingRoomSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                heatingLivingRoomSliderMouseReleased(evt);
             }
         });
 
-        jButton9.setText("OFF");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        heatingOnLivingRoomBtn.setBackground(new java.awt.Color(0, 0, 0));
+        heatingOnLivingRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
+        heatingOnLivingRoomBtn.setText("ON");
+        heatingOnLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                heatingOnLivingRoomBtnActionPerformed(evt);
             }
         });
 
+        heatingOffLivingRoomBtn.setText("OFF");
+        heatingOffLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                heatingOffLivingRoomBtnActionPerformed(evt);
+            }
+        });
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator3.setToolTipText("");
+
+        jLabel14.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
         jLabel14.setText("현재 난방 온도");
 
+        jLabel15.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
         jLabel15.setText("현재 전원 상태");
 
-        jTextField1.setText("jTextField1");
+        heatingLivingRoomTempLabel.setText("jLabel22");
 
-        jTextField2.setText("jTextField2");
+        livingRoomLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        livingRoomLabel2.setText("jLabel24");
+
+        jLabel21.setFont(new java.awt.Font("맑은 고딕", 1, 13)); // NOI18N
+        jLabel21.setText("거실");
+
+        heatingOnRoom1Btn.setBackground(new java.awt.Color(0, 0, 0));
+        heatingOnRoom1Btn.setForeground(new java.awt.Color(255, 255, 255));
+        heatingOnRoom1Btn.setText("ON");
+        heatingOnRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                heatingOnRoom1BtnActionPerformed(evt);
+            }
+        });
+
+        heatingOffRoom2Btn.setText("OFF");
+        heatingOffRoom2Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                heatingOffRoom2BtnActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel23.setText("현재 난방 온도");
+
+        jLabel24.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel24.setText("현재 전원 상태");
+
+        jLabel25.setFont(new java.awt.Font("맑은 고딕", 1, 13)); // NOI18N
+        jLabel25.setText("침실1");
+
+        room1Label1.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        room1Label1.setText("jLabel22");
+
+        room1Label2.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        room1Label2.setText("jLabel24");
+
+        jLabel26.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel26.setText("온도 제어");
+        jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel27.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel27.setText("전원 제어");
+
+        heatingRoom1Slider.setMaximum(30);
+        heatingRoom1Slider.setMinimum(5);
+        heatingRoom1Slider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                heatingRoom1SliderStateChanged(evt);
+            }
+        });
+
+        jLabel28.setText("현재 전력 사용량");
+
+        heatingELabel.setText("0 kwh");
 
         jMenu7.setText("메뉴");
         jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -386,61 +568,123 @@ public class GUI_Command extends javax.swing.JFrame {
         heatingFrame.getContentPane().setLayout(heatingFrameLayout);
         heatingFrameLayout.setHorizontalGroup(
             heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(heatingFrameLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(heatingFrameLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(heatingFrameLayout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jLabel21)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel8))
-                    .addGroup(heatingFrameLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, heatingFrameLayout.createSequentialGroup()
                         .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(heatingFrameLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9))
-                        .addGap(38, 38, 38)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(heatingFrameLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jButton8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton9)))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                                .addComponent(jLabel9)
+                                .addGap(38, 38, 38)
+                                .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(32, 32, 32)
+                                .addComponent(heatingOnLivingRoomBtn)
+                                .addGap(43, 43, 43)
+                                .addComponent(heatingOffLivingRoomBtn))
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel15))
+                                .addGap(39, 39, 39)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(livingRoomLabel2)
+                                    .addComponent(heatingLivingRoomTempLabel))))
+                        .addGap(28, 28, 28)))
+                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(heatingFrameLayout.createSequentialGroup()
+                            .addComponent(jLabel28)
+                            .addGap(49, 49, 49)
+                            .addComponent(heatingELabel))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, heatingFrameLayout.createSequentialGroup()
+                            .addGap(42, 42, 42)
+                            .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(heatingFrameLayout.createSequentialGroup()
+                                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel24))
+                                    .addGap(39, 39, 39)
+                                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(room1Label1)
+                                        .addComponent(room1Label2)))
+                                .addGroup(heatingFrameLayout.createSequentialGroup()
+                                    .addComponent(jLabel26)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(heatingFrameLayout.createSequentialGroup()
+                                    .addComponent(jLabel27)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(heatingOnRoom1Btn)
+                                    .addGap(43, 43, 43)
+                                    .addComponent(heatingOffRoom2Btn)))))
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel25)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         heatingFrameLayout.setVerticalGroup(
             heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(heatingFrameLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
-                .addGap(55, 55, 55)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(heatingOnLivingRoomBtn)
+                            .addComponent(heatingOffLivingRoomBtn))
+                        .addGap(45, 45, 45)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(heatingLivingRoomTempLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(livingRoomLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(heatingELabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel27)
+                                    .addComponent(heatingOnRoom1Btn)
+                                    .addComponent(heatingOffRoom2Btn))
+                                .addGap(45, 45, 45)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel26)
+                                    .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(52, 52, 52)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel23)
+                                    .addComponent(room1Label1))
+                                .addGap(18, 18, 18)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel24)
+                                    .addComponent(room1Label2)))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))))
         );
 
         jLabel20.setText("jLabel20");
@@ -483,19 +727,25 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
         jLabel13.setText("냉장고의 온도 및 전원을 제어합니다.");
 
-        jLabel21.setText("현재 전기 사용량");
+        commandMainLabel.setText("현재 기기 전력 사용량");
 
-        jTextField7.setText("jTextField7");
+        usedELabel.setForeground(new java.awt.Color(0, 153, 204));
+        usedELabel.setText("jLabel21");
 
         jMenu1.setText("메뉴");
 
-        jMenuItem1.setText("뒤로가기");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        jMenu2.setText("뒤로가기");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu2);
 
         jMenuBar1.add(jMenu1);
 
@@ -505,60 +755,60 @@ public class GUI_Command extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator6)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_heatingCommand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_ledCommand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(btn_refCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btn_refCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel11)
                     .addComponent(jLabel13))
                 .addGap(36, 36, 36))
-            .addComponent(jSeparator6)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usedELabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(commandMainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel21)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(commandMainLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usedELabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_heatingCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(24, 24, 24)
+                .addGap(36, 36, 36)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ledCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel12))
+                .addGap(27, 27, 27)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_refCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(24, 24, 24))
+                    .addComponent(jLabel13))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -569,7 +819,7 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         ledFrame.setVisible(true);
         ledFrame.setTitle("LED 조명 제어");
-        ledFrame.setSize(500,350);  
+        ledFrame.setSize(500,650);  
         ledFrame.setLocation(900,250);    
         ledFrame.setResizable(false);
         ledFrame.setLocationRelativeTo(null);
@@ -581,32 +831,91 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         heatingFrame.setVisible(true);
         heatingFrame.setTitle("난방 기기 제어");
-        heatingFrame.setSize(500,350);  
+        heatingFrame.setSize(800,650);  
         heatingFrame.setLocation(900,250);    
         heatingFrame.setResizable(false);
         heatingFrame.setLocationRelativeTo(null);
         heatingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        if(heatingLivingRoomOnOffState.equals("ON")) {
+             heatingLivingRoomSlider. setEnabled(true); 
+        }
+        else  if(refOnOffState.equals("OFF")) {
+             heatingLivingRoomSlider. setEnabled(false); 
+        }
     }//GEN-LAST:event_btn_heatingCommandActionPerformed
 
     private void btn_refCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refCommandActionPerformed
         // TODO add your handling code here:
         this.dispose();
         refFrame.setVisible(true);
-        refFrame.setTitle("LED 조명 제어");
-        refFrame.setSize(500,350);  
+       
+        refFrame.setTitle("냉장고 제어");
+        refFrame.setSize(500,650);  
         refFrame.setLocation(900,250);     
         refFrame.setResizable(false);
         refFrame.setLocationRelativeTo(null);
-        refFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       // refFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        if(refOnOffState.equals("ON")) {
+             refSlider. setEnabled(true); 
+        }
+        else  if(refOnOffState.equals("OFF")) {
+             refSlider. setEnabled(false); 
+        }
     }//GEN-LAST:event_btn_refCommandActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void refOnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refOnBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(refOnOffState.equals("ON")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+                
+        refOnOffState="ON";
+        refOnOffLabel.setText(refOnOffState);
+        refSlider. setEnabled(true); 
+        refSlider. setValue(3); 
+        refTempLabel.setText(refSlider.getValue()+"");
+        
+        RefrigeratorOnCommand kitchenRefrigeratorOn = new RefrigeratorOnCommand(kitchenRefrigerator); // on명령 생성 및 리시버 연결
+        remote.setOnOffCommand(Receiver.REF.ordinal(), kitchenRefrigeratorOn, none); // 2번 슬롯(냉장고)의  on 명령 전달
+        remote.onButtonWasPushed(Receiver.REF.ordinal()); // 2번 슬롯의 on 명령 실행
+        
+        refELabel.setText(kitchenRefrigerator.getUsedEnergy()+" KWh"); // 현재 냉장고 사용 전력을 화면 텍스트로 표시
+        
+        usedRefEnergy+=kitchenRefrigerator.getUsedEnergy(); // 냉장고 누적 전기 사용량 
+       
+         usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+    }//GEN-LAST:event_refOnBtnActionPerformed
+
+    private void refOffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refOffBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+                if(refOnOffState.equals("OFF")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+                
+            refOnOffState="OFF";
+            refOnOffLabel.setText(refOnOffState);
+            refSlider. setEnabled(false); 
+            refTempLabel.setText(0+"");
+            
+            RefrigeratorOffCommand kitchenRefrigeratorOff = new RefrigeratorOffCommand(kitchenRefrigerator); // off명령 생성 및 리시버 연결
+            remote.setOnOffCommand(Receiver.REF.ordinal(), none, kitchenRefrigeratorOff); // 2번 슬롯(냉장고)의  off 명령 전달
+            remote.offButtonWasPushed(Receiver.REF.ordinal());// 2번 슬롯의 off 명령 실행
+            
+             refELabel.setText("0 KWh");
+             
+      
+            usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+             
+  
+    }//GEN-LAST:event_refOffBtnActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -616,24 +925,81 @@ public class GUI_Command extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void heatingOnLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+        
+        livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
+        if(heatingLivingRoomOnOffState.equals("ON")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        heatingLivingRoomOnOffState="ON";        
+        livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
+        heatingLivingRoomSlider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        heatingLivingRoomSlider. setValue(20); // 온도의 기본값으로 20도를 줌.
+        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        HeatingOnCommand  livingRoomHeatingOn = new HeatingOnCommand(livingRoomHeating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  livingRoomHeatingOn, none);
+        remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
+ 
+        
+        usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+        heatingELabel.setText(livingRoomHeating.getUsedEnergy()+" KWh");
+        
+        
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+
+ 
+    }//GEN-LAST:event_heatingOnLivingRoomBtnActionPerformed
+
+    private void heatingOffLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+        livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
+                if(heatingLivingRoomOnOffState.equals("OFF")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        heatingLivingRoomOnOffState="OFF";        
+        livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
+        heatingLivingRoomSlider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        heatingLivingRoomTempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+       HeatingOffCommand  livingRoomHeatingOff = new HeatingOffCommand(livingRoomHeating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none,  livingRoomHeatingOff);
+        remote.offButtonWasPushed(Receiver.HEATING.ordinal()); 
+
+        
+        usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+        heatingELabel.setText("0 KWh");
+
+        
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_heatingOffLivingRoomBtnActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
           refFrame.dispose(); 
           this.setVisible(true);
+          // usedELabel.setText(usedRefEnergy+"");
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
           ledFrame.dispose(); 
           this.setVisible(true);
+         //  usedELabel.setText(usedRefEnergy+"");
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
@@ -643,16 +1009,85 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
         // TODO add your handling code here:
-          ledFrame.dispose(); 
+         heatingFrame.dispose(); 
           this.setVisible(true);
+        //   usedELabel.setText(usedRefEnergy+"");
     }//GEN-LAST:event_jMenu8MouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void refSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_refSliderStateChanged
         // TODO add your handling code here:
-        MainDisplay dis = new MainDisplay();
-        dis.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        
+
+    }//GEN-LAST:event_refSliderStateChanged
+
+    private void heatingLivingRoomSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_heatingLivingRoomSliderStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_heatingLivingRoomSliderStateChanged
+
+    private void ledSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledSliderStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ledSliderStateChanged
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void refSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMouseReleased
+        // TODO add your handling code here:
+
+        refTempLabel.setText(refSlider.getValue()+"");
+        
+
+        if(refSlider.getValue() >=0 && refSlider.getValue() <= 1)  {
+             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 낮은 온도로 설정하여 소비전력량이 증가합니다.\n");
+             usedRefEnergy+=3;
+        }
+
+         if(refSlider.getValue() >=5 && refSlider.getValue() <= 6)  {
+             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 높은 온도로 설정하여 벗어나 소비전력량이 감소합니다.\n");
+             usedRefEnergy+=1;
+        }
+           refELabel.setText(usedRefEnergy + " KWh");
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_refSliderMouseReleased
+
+    private void refSliderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refSliderMousePressed
+
+    private void heatingOnRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnRoom1BtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_heatingOnRoom1BtnActionPerformed
+
+    private void heatingOffRoom2BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffRoom2BtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_heatingOffRoom2BtnActionPerformed
+
+    private void heatingRoom1SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_heatingRoom1SliderStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_heatingRoom1SliderStateChanged
+
+    private void heatingLivingRoomSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_heatingLivingRoomSliderMouseReleased
+        // TODO add your handling code here:
+ 
+        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue()+"");
+        
+
+        if(heatingLivingRoomSlider.getValue() > 25 && heatingLivingRoomSlider.getValue() <= 30)  {
+             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
+             usedHeatingEnergy+=3;
+        }
+
+         if(heatingLivingRoomSlider.getValue() >=5 && heatingLivingRoomSlider.getValue() < 15)  {
+             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
+             usedHeatingEnergy+=1;
+        }
+           heatingELabel.setText(usedHeatingEnergy + " KWh");
+           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_heatingLivingRoomSliderMouseReleased
 
     /**
      * @param args the command line arguments
@@ -694,13 +1129,19 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JButton btn_heatingCommand;
     private javax.swing.JButton btn_ledCommand;
     private javax.swing.JButton btn_refCommand;
+    private javax.swing.JLabel commandMainLabel;
+    private javax.swing.JLabel heatingELabel;
     private javax.swing.JFrame heatingFrame;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JSlider heatingLivingRoomSlider;
+    private javax.swing.JLabel heatingLivingRoomTempLabel;
+    private javax.swing.JButton heatingOffLivingRoomBtn;
+    private javax.swing.JButton heatingOffRoom2Btn;
+    private javax.swing.JButton heatingOnLivingRoomBtn;
+    private javax.swing.JButton heatingOnRoom1Btn;
+    private javax.swing.JSlider heatingRoom1Slider;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -715,6 +1156,13 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -723,6 +1171,7 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -733,24 +1182,26 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
-    private javax.swing.JSlider jSlider3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JFrame ledFrame;
+    private javax.swing.JLabel ledOnOffLabel;
+    private javax.swing.JSlider ledSlider;
+    private javax.swing.JLabel ledTempLabel;
+    private javax.swing.JLabel livingRoomLabel2;
+    private javax.swing.JLabel refELabel;
     private javax.swing.JFrame refFrame;
+    private javax.swing.JButton refOffBtn;
+    private javax.swing.JButton refOnBtn;
+    private javax.swing.JLabel refOnOffLabel;
+    private javax.swing.JSlider refSlider;
+    private javax.swing.JLabel refTempLabel;
+    private javax.swing.JLabel room1Label1;
+    private javax.swing.JLabel room1Label2;
+    private javax.swing.JLabel usedELabel;
     // End of variables declaration//GEN-END:variables
 }

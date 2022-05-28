@@ -33,6 +33,7 @@ public void setUpDownCommand(int slot, Command upCommand, Command downCommand) {
        mUpCommand.add(slot, upCommand);
        mDownCommand.add(slot, downCommand);
   }
+
   public void onButtonWasPushed(int slot) {
       mOnCommand.get(slot).execute();
   }
