@@ -6,7 +6,7 @@ package Main;
 
 import ForLogin.LoginForm;
 import RealEnergyMeter.GUIforREM;
-import VisitorAccess.VisitorHome;
+import VisitorAccess.OpenDoor;
 import command.GUI_Command;
 import decorator.GUIforMF;
 /**
@@ -369,7 +369,7 @@ public class MainDisplay extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        VisitorHome home = new VisitorHome();
+        OpenDoor home = new OpenDoor();
         home.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
