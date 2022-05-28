@@ -159,7 +159,7 @@ public class GUI_Command extends javax.swing.JFrame {
         usedELabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         refFrame.setBackground(new java.awt.Color(0, 255, 51));
 
@@ -734,18 +734,13 @@ public class GUI_Command extends javax.swing.JFrame {
 
         jMenu1.setText("메뉴");
 
-        jMenu2.setText("뒤로가기");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
-            }
-        });
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("뒤로가기");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenu2);
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -981,13 +976,6 @@ public class GUI_Command extends javax.swing.JFrame {
         usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingOffLivingRoomBtnActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // TODO add your handling code here:
-        MainDisplay dis = new MainDisplay();
-        dis.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
           refFrame.dispose(); 
@@ -1029,11 +1017,6 @@ public class GUI_Command extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_ledSliderStateChanged
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenu2MouseClicked
 
     private void refSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMouseReleased
         // TODO add your handling code here:
@@ -1088,6 +1071,13 @@ public class GUI_Command extends javax.swing.JFrame {
            heatingELabel.setText(usedHeatingEnergy + " KWh");
            usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingLivingRoomSliderMouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1171,7 +1161,6 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -1182,6 +1171,7 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
