@@ -5,6 +5,7 @@
 package Main;
 
 import ForLogin.LoginForm;
+import Observer.WeatherDisplay;
 import RealEnergyMeter.GUIforREM;
 import VisitorAccess.OpenDoor;
 import command.GUI_Command;
@@ -379,6 +380,9 @@ public class MainDisplay extends javax.swing.JFrame {
         /*
         은지 GUI 작업되면 이동하기 버튼 작업할 것임.
         */
+        WeatherDisplay Weather = new WeatherDisplay();
+        Weather.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

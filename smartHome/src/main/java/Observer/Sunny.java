@@ -7,6 +7,7 @@ public class Sunny implements WeatherKinds {
     
     }
     
+    @Override
      public void Weather(){
         System.out.println("It's Sunny day");
     }   
