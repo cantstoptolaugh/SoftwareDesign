@@ -163,7 +163,7 @@ public class LoginForm extends javax.swing.JFrame {
             String userPW = jPasswordField1.getText();
 
             boolean signal = false;
-
+            
             user_info  = new File(userID + ".txt");
             
             Scanner scan = new Scanner(user_info);
