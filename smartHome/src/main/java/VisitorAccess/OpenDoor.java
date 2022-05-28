@@ -251,39 +251,8 @@ public class OpenDoor extends javax.swing.JFrame {
         // 첫번째 방문자 객체를 생성
         Visitor v = visitorAccess.checkVisitor("외부인");
         
-        if (v instanceof Family) {
-            JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
-         
-        try { 
-            String member = v.getFamily();
-            long timestamp = System.currentTimeMillis();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            String date = dateFormat.format(timestamp);
-            
-            File familyListFile = new File(id+"List.txt");
-            
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(familyListFile, true));
-            
-            if (familyListFile.isFile() && familyListFile.canWrite()) {
-                    bufferedWriter.write(member);
-                    bufferedWriter.write(" ");
-                    bufferedWriter.write(date);
-                    bufferedWriter.write(" ");
-
-                    bufferedWriter.newLine();
-                    bufferedWriter.close();
-                    
-                }
-        } catch(IOException e) {
-            System.out.println(e);
-        }
-            
-        } else if(v instanceof Outer) {
+         if(v instanceof Outer) {
             JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
          try { 
             String member = v.getOuter();
             
@@ -327,15 +296,13 @@ public class OpenDoor extends javax.swing.JFrame {
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor(family[1]);
-        
-        // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
+        try {
+            Visitor v = visitorAccess.checkVisitor(family[1]);
+            // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
-         
         try { 
             String member = v.getFamily();
             long timestamp = System.currentTimeMillis();
@@ -360,16 +327,22 @@ public class OpenDoor extends javax.swing.JFrame {
             System.out.println(e);
         }
             
-        } else if(v instanceof Outer) {
-            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
-        }        
+        }   
+        } catch(NullPointerException e) {
+          JOptionPane.showMessageDialog(null, "가족 구성원에 포함되지 않았습니다.", "Result", JOptionPane.WARNING_MESSAGE);  
+        }
+        
+        
     }//GEN-LAST:event_motherActionPerformed
 
     private void fatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fatherActionPerformed
+               
+        // 가족 배열 가져옴
         familyList();
-        
+       
+        // 로그인 객체 생성 
         LoginForm lf = new LoginForm();
+        
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
         
@@ -377,14 +350,13 @@ public class OpenDoor extends javax.swing.JFrame {
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor(family[0]);
-        
+        try {
+            Visitor v = visitorAccess.checkVisitor(family[0]);
+            // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
-         
         try { 
             String member = v.getFamily();
             long timestamp = System.currentTimeMillis();
@@ -409,16 +381,20 @@ public class OpenDoor extends javax.swing.JFrame {
             System.out.println(e);
         }
             
-        } else if(v instanceof Outer) {
-            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
-        }        
+        } 
+        } catch(NullPointerException e) {
+          JOptionPane.showMessageDialog(null, "가족 구성원에 포함되지 않았습니다.", "Result", JOptionPane.WARNING_MESSAGE);  
+        }
     }//GEN-LAST:event_fatherActionPerformed
 
     private void brotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brotherActionPerformed
+                
+        // 가족 배열 가져옴
         familyList();
-
+       
+        // 로그인 객체 생성 
         LoginForm lf = new LoginForm();
+        
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
         
@@ -426,14 +402,13 @@ public class OpenDoor extends javax.swing.JFrame {
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor(family[2]);
-        
+        try {
+            Visitor v = visitorAccess.checkVisitor(family[2]);
+            // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
-         
         try { 
             String member = v.getFamily();
             long timestamp = System.currentTimeMillis();
@@ -457,17 +432,20 @@ public class OpenDoor extends javax.swing.JFrame {
         } catch(IOException e) {
             System.out.println(e);
         }
-            
-        } else if(v instanceof Outer) {
-            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
-        }        
+        }   
+        } catch(NullPointerException e) {
+          JOptionPane.showMessageDialog(null, "가족 구성원에 포함되지 않았습니다.", "Result", JOptionPane.WARNING_MESSAGE);  
+        }
     }//GEN-LAST:event_brotherActionPerformed
 
     private void sisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisterActionPerformed
+              
+        // 가족 배열 가져옴
         familyList();
- 
+       
+        // 로그인 객체 생성 
         LoginForm lf = new LoginForm();
+        
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
         
@@ -475,14 +453,14 @@ public class OpenDoor extends javax.swing.JFrame {
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
-        Visitor v = visitorAccess.checkVisitor(family[3]);
-        
+        try {
+            Visitor v = visitorAccess.checkVisitor(family[3]);
+            // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getFamily(), new Timestamp(System.currentTimeMillis())});
-         
+
         try { 
             String member = v.getFamily();
             long timestamp = System.currentTimeMillis();
@@ -498,6 +476,7 @@ public class OpenDoor extends javax.swing.JFrame {
                     bufferedWriter.write(" ");
                     bufferedWriter.write(date);
                     bufferedWriter.write(" ");
+
                     bufferedWriter.newLine();
                     bufferedWriter.close();
                     
@@ -506,10 +485,10 @@ public class OpenDoor extends javax.swing.JFrame {
             System.out.println(e);
         }
             
-        } else if(v instanceof Outer) {
-            JOptionPane.showMessageDialog(null, "외부인임을 감지하였습니다. 문을 닫습니다.", "Result", JOptionPane.WARNING_MESSAGE);
-         // dtm.insertRow(dtm.getRowCount(), new Object[] {v.getOuter(), new Timestamp(System.currentTimeMillis())});
-        }        
+        }
+        } catch(NullPointerException e) {
+          JOptionPane.showMessageDialog(null, "가족 구성원에 포함되지 않았습니다.", "Result", JOptionPane.WARNING_MESSAGE);  
+        }
     }//GEN-LAST:event_sisterActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
