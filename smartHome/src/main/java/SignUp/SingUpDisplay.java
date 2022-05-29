@@ -20,7 +20,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
 
     File user_info;
     File Energy_use;
-
+    File usedEnergy;
     /**
      * Creates new form SingUpDisplay
      */
@@ -314,6 +314,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
 
             user_info = new File(id+".txt");
             Energy_use = new File(id+"'sUse.txt");
+            usedEnergy=new File(id+"'sUsedEnergy.txt");
             
             if (jCheckBox1.isSelected()) {
                 family.add(jCheckBox1.getText());
@@ -329,7 +330,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
             }
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(user_info, true));
             BufferedWriter bufferedWriter1 = new BufferedWriter(new FileWriter(Energy_use, true));
-
+            BufferedWriter bufferedWriter2 = new BufferedWriter(new FileWriter(usedEnergy, true));
             Scanner scan = new Scanner(user_info);
 
             while (scan.hasNext()) {
@@ -364,6 +365,10 @@ public class SingUpDisplay extends javax.swing.JFrame {
                         bufferedWriter1.write(value3);
                         bufferedWriter1.newLine();
                         bufferedWriter1.close();
+                    }
+                    if (usedEnergy.isFile() && usedEnergy.canWrite()) {
+                        bufferedWriter2.write("0");
+                        bufferedWriter2.close();
                     }
                 }
                 JOptionPane.showMessageDialog(null, "회원가입 완료", "Result", JOptionPane.WARNING_MESSAGE);
