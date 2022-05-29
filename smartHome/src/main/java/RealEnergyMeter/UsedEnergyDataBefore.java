@@ -61,7 +61,7 @@ public class UsedEnergyDataBefore extends javax.swing.JFrame {
         jLabel3.setText("전월 요금 :");
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jLabel4.setText("전월 사용 요금량 :");
+        jLabel4.setText("전월 사용 전력량 :");
 
         jTextField3.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jTextField3.setText("jTextField3");

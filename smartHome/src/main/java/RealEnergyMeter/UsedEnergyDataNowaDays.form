@@ -124,7 +124,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xb2f9;&#xc6d4; &#xc0ac;&#xc6a9; &#xc694;&#xae08;&#xb7c9; :"/>
+            <Property name="text" type="java.lang.String" value="&#xb2f9;&#xc6d4; &#xc0ac;&#xc6a9; &#xc804;&#xb825;&#xb7c9; :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">

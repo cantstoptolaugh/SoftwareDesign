@@ -21,6 +21,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
     File user_info;
     File Energy_use;
     File usedEnergy;
+    File MonthEnergy;
     /**
      * Creates new form SingUpDisplay
      */
@@ -299,9 +300,11 @@ public class SingUpDisplay extends javax.swing.JFrame {
 
         try {
             Random random = new Random();
-            String value1 = Integer.toString(random.nextInt(5000, 10000));
-            String value2 = Integer.toString(random.nextInt(5000, 10000));
-            String value3 = Integer.toString(random.nextInt(5000, 10000));
+            String value1 = Integer.toString(random.nextInt(500, 1000));
+            String value2 = Integer.toString(random.nextInt(500, 1000));
+            String value3 = Integer.toString(random.nextInt(500, 1000));
+            String value4 = Integer.toString(random.nextInt(7500, 15000));
+            String value5 = Integer.toString(random.nextInt(7500, 15000));
 
             boolean signal = true;
                       
@@ -315,6 +318,7 @@ public class SingUpDisplay extends javax.swing.JFrame {
             user_info = new File(id+".txt");
             Energy_use = new File(id+"'sUse.txt");
             usedEnergy=new File(id+"'sUsedEnergy.txt");
+            MonthEnergy=new File(id+"'sMonthEnergy.txt");
             
             if (jCheckBox1.isSelected()) {
                 family.add(jCheckBox1.getText());
@@ -331,6 +335,8 @@ public class SingUpDisplay extends javax.swing.JFrame {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(user_info, true));
             BufferedWriter bufferedWriter1 = new BufferedWriter(new FileWriter(Energy_use, true));
             BufferedWriter bufferedWriter2 = new BufferedWriter(new FileWriter(usedEnergy, true));
+            BufferedWriter bufferedWriter3 = new BufferedWriter(new FileWriter(MonthEnergy, true));
+            
             Scanner scan = new Scanner(user_info);
 
             while (scan.hasNext()) {
@@ -369,6 +375,13 @@ public class SingUpDisplay extends javax.swing.JFrame {
                     if (usedEnergy.isFile() && usedEnergy.canWrite()) {
                         bufferedWriter2.write("0");
                         bufferedWriter2.close();
+                    }
+                    if (MonthEnergy.isFile() && MonthEnergy.canWrite())
+                    {
+                        bufferedWriter3.write(value4);
+                        bufferedWriter3.write(" ");
+                        bufferedWriter3.write(value4);
+                        bufferedWriter3.close();
                     }
                 }
                 JOptionPane.showMessageDialog(null, "회원가입 완료", "Result", JOptionPane.WARNING_MESSAGE);

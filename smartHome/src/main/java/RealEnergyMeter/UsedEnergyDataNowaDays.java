@@ -17,6 +17,8 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
         initComponents();
         setTitle("당월 에너지 사용량");
         setLocationRelativeTo(null);
+        Calculator cal = new Calculator();
+        jTextField1.setText(cal.value2);
     }
 
     /**
@@ -45,7 +47,7 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
         jLabel1.setText("당월 요금 :");
 
         jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jLabel2.setText("당월 사용 요금량 :");
+        jLabel2.setText("당월 사용 전력량 :");
 
         jTextField1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jTextField1.setText("jTextField1");

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package RealEnergyMeter;
+
+import ForLogin.LoginForm;
 import java.io.File;
 
 /**
@@ -14,8 +16,9 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
     /**
      * Creates new form UsedEnergyDataNow
      */
-    String id = "joohyeok";
-    File Energy_use = new File(id + "'sUse.txt");
+    LoginForm form = new LoginForm();
+    String SessionID = form.SessionID;
+    File Energy_use = new File(SessionID + "'sUse.txt");
 
     static String gas_num;
     static String elec_num;
@@ -28,6 +31,8 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
 
         Calculator cal = new Calculator();
 
+        cal.forAdd();
+        System.out.println(cal.add_num2);
         cal.read();
         //일단 존재하는 파일 이름 찾기
         //그 파일의 값을 읽어내기 ->  변수를 갖고와서 저장한다.
@@ -50,7 +55,8 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
         jTextField2.setText(this.elec_num);
         jTextField3.setText(this.water_num);
         jTextField4.setText(cal.sum(this.gas_num, this.elec_num, this.water_num));
-        jLabel6.setText("사용량이 많습니다! 좀 줄이세요!");
+        jTextField5.setText(Integer.toString(cal.yesterday));
+        jLabel6.setText(cal.Compare());
     }
 
     /**
