@@ -26,9 +26,9 @@ public class Calculator {
     int elec;
     int water;
 
-    int add_num1 = 15;
-    int add_num2 = 10;
-    int add_num3 = 20;
+    int add_num1 = 15; //랜덤 메소드
+    int add_num2 = 10; //채은이로부터 받는 정수 :used_Energy
+    int add_num3 = 20; //랜덤 메소드
 
     String id = "joohyeok"; //LoginForm의 id 변수
 

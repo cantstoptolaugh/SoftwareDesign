@@ -29,10 +29,18 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
         Calculator cal = new Calculator();
 
         cal.read();
+        //일단 존재하는 파일 이름 찾기
+        //그 파일의 값을 읽어내기 ->  변수를 갖고와서 저장한다.
         cal.calculate();
+        //~~~
         cal.delete();
+        //기존에 존재하는 파일 삭제(덮어쓰기). ->32번 라인 
         cal.write();
+        //파일 만들어졌을거다.
+        //하지만, 한 번더 파일 만드는 코드 + 파일 내 계산된 값들 삽입
         cal.read();
+        //존재하는 파일 이름 찾기
+        // 그 파일의 값을 읽어내기 -> 변수를 갖고와 저장.
 
         gas_num = cal.gas_num;
         elec_num = cal.elec_num;
