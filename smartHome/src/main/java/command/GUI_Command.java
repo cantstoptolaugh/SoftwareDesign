@@ -16,18 +16,27 @@ import javax.swing.JSlider;
  * @author LG
  */
 public class GUI_Command extends javax.swing.JFrame {
-    
+    String uId= LoginForm.SessionID;
     RemoteControl remote = new RemoteControl(); //인보커 생성 - 명령을 저장하고 관리.
     Command none = new NoCommand(); 
+    
     Refrigerator kitchenRefrigerator = new Refrigerator("Kitchen"); //  리시버 생성 - 명령의 실제 처리를 수행.
-    Heating livingRoomHeating =null;
+    Heating livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
+    Heating room1Heating = new Heating("Room1"); // 거실 난방 리시버 생성
+    Led livingRoomLed = new Led("Living Room");
+    Led room1Led = new Led("Room1");
+    
     int usedRefEnergy=0;
     int usedHeatingEnergy=0;
     int usedLedEnergy=0;
-    public static int usedEnergy=0;
+    
+    public static int usedEnergy;
 
     String refOnOffState = "OFF"; 
     String heatingLivingRoomOnOffState= "OFF"; 
+    String heatingRoom1OnOffState= "OFF"; 
+    String ledLivingRoomOnOffState = "OFF"; 
+    String ledRoom1OnOffState = "OFF"; 
 
 
     /**
@@ -36,43 +45,58 @@ public class GUI_Command extends javax.swing.JFrame {
   public enum Receiver {
         HEATING, LED, REF
     }
- public void checkState(JSlider s) {
-     
- }
+
     public GUI_Command() {
+        if(File_Command.read(LoginForm.SessionID)== null) {
+            usedEnergy=0;
+        }
+        else usedEnergy=Integer.parseInt(File_Command.read(LoginForm.SessionID));
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         commandMainLabel.setText(LoginForm.SessionID+"님의 누적 전기 사용량");
+        
         usedELabel.setText(usedEnergy +"kwh");
-        remoteControlInit();
+        
+        setting();
 
+       
+
+    }
+  public void setting() { // 서브 프레임 첫 화면 텍스트 및 슬라이더 설정
         refTempLabel.setText(""+ 0);
         refOnOffLabel.setText(refOnOffState);
         
-         ledTempLabel.setText(""+ 0);
-        ledOnOffLabel.setText(refOnOffState);
+        ledLivingRoomTempLabel.setText(""+ 0);
+        ledLivingRoomOnOffLabel.setText(refOnOffState);
         
-         heatingLivingRoomTempLabel.setText(""+0);
-        livingRoomLabel2.setText(refOnOffState);
+        heatingLivingRoomTempLabel.setText(""+0);
+        livingRoomLabel2.setText(heatingLivingRoomOnOffState);
+        
+        heatingRoom1TempLabel.setText(""+0);
+        heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState);
         
         refSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         refSlider.setPaintTicks(true); //눈금을 표시한다.
         refSlider.setPaintLabels(true); 
         
-        ledSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
-        ledSlider.setPaintTicks(true); //눈금을 표시한다.
-        ledSlider.setPaintLabels(true); 
+        ledLivingRoomSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
+        ledLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
+        ledLivingRoomSlider.setPaintLabels(true); 
+        
+        ledRoom1Slider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
+        ledRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
+        ledRoom1Slider.setPaintLabels(true); 
         
         heatingLivingRoomSlider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
         heatingLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
         heatingLivingRoomSlider.setPaintLabels(true); 
 
-    }
-  public void remoteControlInit() {
-        
+        heatingRoom1Slider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
+        heatingRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
+        heatingRoom1Slider.setPaintLabels(true); 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,18 +125,30 @@ public class GUI_Command extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         ledFrame = new javax.swing.JFrame();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        ledSlider = new javax.swing.JSlider();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        ledTempLabel = new javax.swing.JLabel();
-        ledOnOffLabel = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        ledRoom1OnOffLabel = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        ledLivingRoomTempLabel = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        ledLivingRoomOnOffLabel = new javax.swing.JLabel();
+        ledRoom1Slider = new javax.swing.JSlider();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        ledOnRoom1Btn = new javax.swing.JButton();
+        ledELabel = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        ledOffRoom1Btn = new javax.swing.JButton();
+        ledLivingRoomSlider = new javax.swing.JSlider();
+        jLabel38 = new javax.swing.JLabel();
+        ledOnLivingRoomBtn = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        ledOffLivingRoomBtn = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        ledRoom1TempLabel = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -134,8 +170,8 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        room1Label1 = new javax.swing.JLabel();
-        room1Label2 = new javax.swing.JLabel();
+        heatingRoom1TempLabel = new javax.swing.JLabel();
+        heatingRoom1OnOffLabel = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         heatingRoom1Slider = new javax.swing.JSlider();
@@ -159,7 +195,7 @@ public class GUI_Command extends javax.swing.JFrame {
         usedELabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         refFrame.setBackground(new java.awt.Color(0, 255, 51));
 
@@ -220,7 +256,7 @@ public class GUI_Command extends javax.swing.JFrame {
         refOnOffLabel.setText("OFF");
 
         jLabel22.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel22.setText("현재 전력 시용량");
+        jLabel22.setText("현재 전력 사용량");
 
         refELabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         refELabel.setForeground(new java.awt.Color(0, 153, 255));
@@ -313,48 +349,126 @@ public class GUI_Command extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        jLabel5.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
-        jLabel5.setText("LED 조명 제어");
+        jLabel29.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel29.setText("현재 LED 밝기");
 
-        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel6.setText("조명 제어");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ledRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledRoom1OnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
+        ledRoom1OnOffLabel.setText("jLabel24");
 
-        jLabel7.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel7.setText("전원 제어");
+        jLabel30.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel30.setText("현재 전원 상태");
 
-        ledSlider.setMaximum(10);
-        ledSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+        jLabel31.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel31.setText("밝기 제어");
+        jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        ledLivingRoomTempLabel.setForeground(new java.awt.Color(0, 153, 255));
+        ledLivingRoomTempLabel.setText("jLabel22");
+
+        jLabel32.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel32.setText("전원 제어");
+
+        ledLivingRoomOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledLivingRoomOnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
+        ledLivingRoomOnOffLabel.setText("jLabel24");
+
+        ledRoom1Slider.setMaximum(5);
+        ledRoom1Slider.setMinimum(1);
+        ledRoom1Slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                ledSliderStateChanged(evt);
+                ledRoom1SliderStateChanged(evt);
+            }
+        });
+        ledRoom1Slider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ledRoom1SliderMouseReleased(evt);
+            }
+        });
+        ledRoom1Slider.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                ledRoom1Slidernone(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(0, 0, 0));
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("ON");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jLabel33.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel33.setText("LED 제어");
+
+        jLabel34.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel34.setText("거실");
+
+        jLabel35.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel35.setText("밝기 제어");
+        jLabel35.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel36.setText("현재 전력 사용량");
+
+        ledOnRoom1Btn.setBackground(new java.awt.Color(0, 0, 0));
+        ledOnRoom1Btn.setForeground(new java.awt.Color(255, 255, 255));
+        ledOnRoom1Btn.setText("ON");
+        ledOnRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                ledOnRoom1BtnActionPerformed(evt);
             }
         });
 
-        jButton7.setText("OFF");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        ledELabel.setForeground(new java.awt.Color(0, 153, 255));
+        ledELabel.setText("0 kwh");
+
+        jLabel37.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel37.setText("전원 제어");
+
+        ledOffRoom1Btn.setText("OFF");
+        ledOffRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                ledOffRoom1BtnActionPerformed(evt);
             }
         });
 
-        jLabel16.setText("현재 LED 밝기");
+        ledLivingRoomSlider.setMaximum(5);
+        ledLivingRoomSlider.setMinimum(1);
+        ledLivingRoomSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ledLivingRoomSliderStateChanged(evt);
+            }
+        });
+        ledLivingRoomSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ledLivingRoomSliderMouseReleased(evt);
+            }
+        });
 
-        jLabel17.setText("현재 전원 상태");
+        jLabel38.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel38.setText("현재 LED 밝기");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "거실", "침실1", "침실2", "침실3" }));
+        ledOnLivingRoomBtn.setBackground(new java.awt.Color(0, 0, 0));
+        ledOnLivingRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ledOnLivingRoomBtn.setText("ON");
+        ledOnLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ledOnLivingRoomBtnActionPerformed(evt);
+            }
+        });
 
-        ledTempLabel.setText("ledTempLabel");
+        jLabel39.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel39.setText("현재 전원 상태");
 
-        ledOnOffLabel.setText("jLabel23");
+        ledOffLivingRoomBtn.setText("OFF");
+        ledOffLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ledOffLivingRoomBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel40.setText("침실");
+
+        jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator7.setToolTipText("");
+
+        ledRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledRoom1TempLabel.setForeground(new java.awt.Color(0, 153, 255));
+        ledRoom1TempLabel.setText("0");
 
         jMenu5.setText("메뉴");
 
@@ -377,66 +491,126 @@ public class GUI_Command extends javax.swing.JFrame {
             .addGroup(ledFrameLayout.createSequentialGroup()
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)))
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel30))
+                                .addGap(39, 39, 39)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ledLivingRoomOnOffLabel)
+                                    .addComponent(ledLivingRoomTempLabel)))
                             .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5)))
-                        .addGap(38, 38, 38)
-                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ledSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(ledFrameLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jButton6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton7))))
-                        .addGap(0, 48, Short.MAX_VALUE))
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-            .addGroup(ledFrameLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel17))
-                .addGap(40, 40, 40)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel37)
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(32, 32, 32)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ledFrameLayout.createSequentialGroup()
+                                        .addComponent(ledOnLivingRoomBtn)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(ledOffLivingRoomBtn))
+                                    .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel33))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel34)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ledTempLabel)
-                    .addComponent(ledOnOffLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ledFrameLayout.createSequentialGroup()
+                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel39))
+                                        .addGap(39, 39, 39)
+                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ledRoom1OnOffLabel)
+                                            .addComponent(ledRoom1TempLabel)))
+                                    .addGroup(ledFrameLayout.createSequentialGroup()
+                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel32)
+                                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                                .addComponent(ledOnRoom1Btn)
+                                                .addGap(43, 43, 43)
+                                                .addComponent(ledOffRoom1Btn))
+                                            .addComponent(ledRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel40))
+                        .addGap(0, 58, Short.MAX_VALUE))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel36)
+                        .addGap(43, 43, 43)
+                        .addComponent(ledELabel)
+                        .addGap(32, 32, 32))))
         );
         ledFrameLayout.setVerticalGroup(
             ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ledFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(ledSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addGap(42, 42, 42)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(ledTempLabel))
-                .addGap(32, 32, 32)
-                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(ledOnOffLabel))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel37)
+                                    .addComponent(ledOnLivingRoomBtn)
+                                    .addComponent(ledOffLivingRoomBtn))
+                                .addGap(50, 50, 50)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel35))
+                                .addGap(89, 89, 89)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel29)
+                                    .addComponent(ledLivingRoomTempLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel30)
+                                    .addComponent(ledLivingRoomOnOffLabel)))
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel38)
+                                    .addComponent(ledRoom1TempLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel39)
+                                    .addComponent(ledRoom1OnOffLabel)))
+                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel36)
+                            .addComponent(ledELabel))
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel32)
+                                    .addComponent(ledOnRoom1Btn)
+                                    .addComponent(ledOffRoom1Btn)))
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ledRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31))))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jLabel8.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
@@ -487,12 +661,14 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
         jLabel15.setText("현재 전원 상태");
 
+        heatingLivingRoomTempLabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingLivingRoomTempLabel.setText("jLabel22");
 
         livingRoomLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        livingRoomLabel2.setForeground(new java.awt.Color(0, 153, 255));
         livingRoomLabel2.setText("jLabel24");
 
-        jLabel21.setFont(new java.awt.Font("맑은 고딕", 1, 13)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jLabel21.setText("거실");
 
         heatingOnRoom1Btn.setBackground(new java.awt.Color(0, 0, 0));
@@ -517,14 +693,16 @@ public class GUI_Command extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
         jLabel24.setText("현재 전원 상태");
 
-        jLabel25.setFont(new java.awt.Font("맑은 고딕", 1, 13)); // NOI18N
-        jLabel25.setText("침실1");
+        jLabel25.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel25.setText("침실");
 
-        room1Label1.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
-        room1Label1.setText("jLabel22");
+        heatingRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        heatingRoom1TempLabel.setForeground(new java.awt.Color(0, 153, 255));
+        heatingRoom1TempLabel.setText("0");
 
-        room1Label2.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
-        room1Label2.setText("jLabel24");
+        heatingRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        heatingRoom1OnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
+        heatingRoom1OnOffLabel.setText("jLabel24");
 
         jLabel26.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel26.setText("온도 제어");
@@ -540,9 +718,20 @@ public class GUI_Command extends javax.swing.JFrame {
                 heatingRoom1SliderStateChanged(evt);
             }
         });
+        heatingRoom1Slider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                heatingRoom1SliderMouseReleased(evt);
+            }
+        });
+        heatingRoom1Slider.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                none(evt);
+            }
+        });
 
         jLabel28.setText("현재 전력 사용량");
 
+        heatingELabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingELabel.setText("0 kwh");
 
         jMenu7.setText("메뉴");
@@ -569,27 +758,10 @@ public class GUI_Command extends javax.swing.JFrame {
         heatingFrameLayout.setHorizontalGroup(
             heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(heatingFrameLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(heatingFrameLayout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jLabel21)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, heatingFrameLayout.createSequentialGroup()
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(heatingFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(38, 38, 38)
-                                .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(heatingFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(32, 32, 32)
-                                .addComponent(heatingOnLivingRoomBtn)
-                                .addGap(43, 43, 43)
-                                .addComponent(heatingOffLivingRoomBtn))
                             .addGroup(heatingFrameLayout.createSequentialGroup()
                                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -597,39 +769,60 @@ public class GUI_Command extends javax.swing.JFrame {
                                 .addGap(39, 39, 39)
                                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(livingRoomLabel2)
-                                    .addComponent(heatingLivingRoomTempLabel))))
-                        .addGap(28, 28, 28)))
-                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(heatingFrameLayout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addGap(49, 49, 49)
-                            .addComponent(heatingELabel))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, heatingFrameLayout.createSequentialGroup()
-                            .addGap(42, 42, 42)
-                            .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(heatingFrameLayout.createSequentialGroup()
-                                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel24))
-                                    .addGap(39, 39, 39)
-                                    .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(room1Label1)
-                                        .addComponent(room1Label2)))
-                                .addGroup(heatingFrameLayout.createSequentialGroup()
-                                    .addComponent(jLabel26)
-                                    .addGap(38, 38, 38)
-                                    .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(heatingFrameLayout.createSequentialGroup()
-                                    .addComponent(jLabel27)
-                                    .addGap(32, 32, 32)
-                                    .addComponent(heatingOnRoom1Btn)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(heatingOffRoom2Btn)))))
+                                    .addComponent(heatingLivingRoomTempLabel)))
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(32, 32, 32)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                                        .addComponent(heatingOnLivingRoomBtn)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(heatingOffLivingRoomBtn))
+                                    .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(heatingFrameLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel25)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel8))
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel21)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel24))
+                                        .addGap(39, 39, 39)
+                                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(heatingRoom1OnOffLabel)
+                                            .addComponent(heatingRoom1TempLabel)))
+                                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel27)
+                                            .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                                .addComponent(heatingOnRoom1Btn)
+                                                .addGap(43, 43, 43)
+                                                .addComponent(heatingOffRoom2Btn))
+                                            .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel25))
+                        .addGap(0, 58, Short.MAX_VALUE))
+                    .addGroup(heatingFrameLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel28)
+                        .addGap(43, 43, 43)
+                        .addComponent(heatingELabel)
+                        .addGap(32, 32, 32))))
         );
         heatingFrameLayout.setVerticalGroup(
             heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,52 +832,53 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addGroup(heatingFrameLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(heatingOnLivingRoomBtn)
-                            .addComponent(heatingOffLivingRoomBtn))
-                        .addGap(45, 45, 45)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(heatingLivingRoomTempLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(livingRoomLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(heatingOnLivingRoomBtn)
+                                    .addComponent(heatingOffLivingRoomBtn))
+                                .addGap(50, 50, 50)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(heatingLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addGap(89, 89, 89)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(heatingLivingRoomTempLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(livingRoomLabel2)))
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel23)
+                                    .addComponent(heatingRoom1TempLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel24)
+                                    .addComponent(heatingRoom1OnOffLabel)))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(heatingFrameLayout.createSequentialGroup()
                         .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(heatingELabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(heatingFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
+                                .addGap(89, 89, 89)
                                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel27)
                                     .addComponent(heatingOnRoom1Btn)
-                                    .addComponent(heatingOffRoom2Btn))
-                                .addGap(45, 45, 45)
-                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel26)
-                                    .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(52, 52, 52)
-                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel23)
-                                    .addComponent(room1Label1))
-                                .addGap(18, 18, 18)
-                                .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel24)
-                                    .addComponent(room1Label2)))
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))))
+                                    .addComponent(heatingOffRoom2Btn)))
+                            .addGroup(heatingFrameLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
+                        .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26)))))
         );
 
         jLabel20.setText("jLabel20");
@@ -734,13 +928,18 @@ public class GUI_Command extends javax.swing.JFrame {
 
         jMenu1.setText("메뉴");
 
-        jMenuItem1.setText("뒤로가기");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        jMenu2.setText("뒤로가기");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu2);
 
         jMenuBar1.add(jMenu1);
 
@@ -750,7 +949,6 @@ public class GUI_Command extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator6)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -775,6 +973,7 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addComponent(usedELabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(commandMainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
+            .addComponent(jSeparator6)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,9 +984,9 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addComponent(commandMainLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usedELabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_heatingCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
@@ -814,11 +1013,25 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         ledFrame.setVisible(true);
         ledFrame.setTitle("LED 조명 제어");
-        ledFrame.setSize(500,650);  
+        ledFrame.setSize(859,500);  
         ledFrame.setLocation(900,250);    
         ledFrame.setResizable(false);
         ledFrame.setLocationRelativeTo(null);
         ledFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        if(ledLivingRoomOnOffState.equals("ON")) {
+             ledLivingRoomSlider. setEnabled(true); 
+        }
+        else  if(ledLivingRoomOnOffState.equals("OFF")) {
+             ledLivingRoomSlider. setEnabled(false); 
+        }
+        
+        if(ledRoom1OnOffState.equals("ON")) {
+             ledRoom1Slider. setEnabled(true); 
+        }
+        else  if(ledRoom1OnOffState.equals("OFF")) {
+             ledRoom1Slider. setEnabled(false); 
+        }
     }//GEN-LAST:event_btn_ledCommandActionPerformed
 
     private void btn_heatingCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_heatingCommandActionPerformed
@@ -826,7 +1039,7 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         heatingFrame.setVisible(true);
         heatingFrame.setTitle("난방 기기 제어");
-        heatingFrame.setSize(800,650);  
+        heatingFrame.setSize(859,500);  
         heatingFrame.setLocation(900,250);    
         heatingFrame.setResizable(false);
         heatingFrame.setLocationRelativeTo(null);
@@ -835,8 +1048,15 @@ public class GUI_Command extends javax.swing.JFrame {
         if(heatingLivingRoomOnOffState.equals("ON")) {
              heatingLivingRoomSlider. setEnabled(true); 
         }
-        else  if(refOnOffState.equals("OFF")) {
+        else  if(heatingLivingRoomOnOffState.equals("OFF")) {
              heatingLivingRoomSlider. setEnabled(false); 
+        }
+        
+        if(heatingRoom1OnOffState.equals("ON")) {
+             heatingRoom1Slider. setEnabled(true); 
+        }
+        else  if(heatingRoom1OnOffState.equals("OFF")) {
+             heatingRoom1Slider. setEnabled(false); 
         }
     }//GEN-LAST:event_btn_heatingCommandActionPerformed
 
@@ -846,7 +1066,7 @@ public class GUI_Command extends javax.swing.JFrame {
         refFrame.setVisible(true);
        
         refFrame.setTitle("냉장고 제어");
-        refFrame.setSize(500,650);  
+        refFrame.setSize(500,550);  
         refFrame.setLocation(900,250);     
         refFrame.setResizable(false);
         refFrame.setLocationRelativeTo(null);
@@ -881,9 +1101,8 @@ public class GUI_Command extends javax.swing.JFrame {
         refELabel.setText(kitchenRefrigerator.getUsedEnergy()+" KWh"); // 현재 냉장고 사용 전력을 화면 텍스트로 표시
         
         usedRefEnergy+=kitchenRefrigerator.getUsedEnergy(); // 냉장고 누적 전기 사용량 
-       
-         usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
 
+        usedEnergy+=usedRefEnergy;
         
     }//GEN-LAST:event_refOnBtnActionPerformed
 
@@ -905,30 +1124,21 @@ public class GUI_Command extends javax.swing.JFrame {
             remote.offButtonWasPushed(Receiver.REF.ordinal());// 2번 슬롯의 off 명령 실행
             
              refELabel.setText("0 KWh");
-             
-      
-            usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+             usedRefEnergy=0;
              
   
     }//GEN-LAST:event_refOffBtnActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void heatingOnLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnLivingRoomBtnActionPerformed
         // TODO add your handling code here:
         
-        livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
+
         if(heatingLivingRoomOnOffState.equals("ON")) {
              JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
                             "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
              return;
         }
+        
         heatingLivingRoomOnOffState="ON";        
         livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
         heatingLivingRoomSlider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
@@ -941,18 +1151,18 @@ public class GUI_Command extends javax.swing.JFrame {
  
         
         usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+
+        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");
         
-        heatingELabel.setText(livingRoomHeating.getUsedEnergy()+" KWh");
-        
-        
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+
+
 
  
     }//GEN-LAST:event_heatingOnLivingRoomBtnActionPerformed
 
     private void heatingOffLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-        livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
+
                 if(heatingLivingRoomOnOffState.equals("OFF")) {
              JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
                             "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
@@ -970,24 +1180,32 @@ public class GUI_Command extends javax.swing.JFrame {
         
         usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
         
-        heatingELabel.setText("0 KWh");
+        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");        
 
         
         usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingOffLivingRoomBtnActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
           refFrame.dispose(); 
           this.setVisible(true);
-          // usedELabel.setText(usedRefEnergy+"");
+          usedELabel.setText(usedEnergy+ " KWh");
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
           ledFrame.dispose(); 
           this.setVisible(true);
-         //  usedELabel.setText(usedRefEnergy+"");
+          usedEnergy=usedLedEnergy+usedHeatingEnergy+usedRefEnergy;
+        usedELabel.setText(usedEnergy+ " KWh"); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
@@ -999,7 +1217,8 @@ public class GUI_Command extends javax.swing.JFrame {
         // TODO add your handling code here:
          heatingFrame.dispose(); 
           this.setVisible(true);
-        //   usedELabel.setText(usedRefEnergy+"");
+          usedEnergy=usedLedEnergy+usedHeatingEnergy+usedRefEnergy;
+        usedELabel.setText(usedEnergy+ " KWh"); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_jMenu8MouseClicked
 
     private void refSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_refSliderStateChanged
@@ -1013,28 +1232,34 @@ public class GUI_Command extends javax.swing.JFrame {
 
     }//GEN-LAST:event_heatingLivingRoomSliderStateChanged
 
-    private void ledSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledSliderStateChanged
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_ledSliderStateChanged
+        MainDisplay dis = new MainDisplay();
+        dis.setVisible(true);
+        setVisible(false);
+        File_Command.write(uId, usedEnergy);
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     private void refSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMouseReleased
         // TODO add your handling code here:
 
         refTempLabel.setText(refSlider.getValue()+"");
-        
 
         if(refSlider.getValue() >=0 && refSlider.getValue() <= 1)  {
              JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 낮은 온도로 설정하여 소비전력량이 증가합니다.\n");
-             usedRefEnergy+=3;
+             usedRefEnergy+=2;
         }
-
-         if(refSlider.getValue() >=5 && refSlider.getValue() <= 6)  {
-             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 높은 온도로 설정하여 벗어나 소비전력량이 감소합니다.\n");
+     if(refSlider.getValue() >=2&& refSlider.getValue() <= 4)  {
              usedRefEnergy+=1;
         }
+//         if(refSlider.getValue() >=5 && refSlider.getValue() <= 6)  {
+//             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 높은 온도로 설정하여 벗어나 소비전력량이 감소합니다.\n");
+//             usedRefEnergy-=1;
+//        }
            refELabel.setText(usedRefEnergy + " KWh");
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+     
+           usedEnergy=usedRefEnergy;
     }//GEN-LAST:event_refSliderMouseReleased
 
     private void refSliderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMousePressed
@@ -1043,10 +1268,57 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void heatingOnRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnRoom1BtnActionPerformed
         // TODO add your handling code here:
+           
+       
+        if(heatingRoom1OnOffState.equals("ON")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        heatingRoom1OnOffState="ON";        
+        heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 침실1 난방 전원 텍스트 설정
+        heatingRoom1Slider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        heatingRoom1Slider. setValue(20); // 온도의 기본값으로 20도를 줌.
+        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        HeatingOnCommand  Room1HeatingOn = new HeatingOnCommand(room1Heating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  Room1HeatingOn, none);
+        remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
+ 
+        
+        usedHeatingEnergy+=room1Heating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+
+        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");
+        
+        
+
+
+ 
     }//GEN-LAST:event_heatingOnRoom1BtnActionPerformed
 
     private void heatingOffRoom2BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffRoom2BtnActionPerformed
         // TODO add your handling code here:
+                if(heatingRoom1OnOffState.equals("OFF")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        heatingRoom1OnOffState="OFF";        
+        heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 거실 난방 전원 텍스트 설정
+        heatingRoom1Slider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        heatingRoom1TempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        HeatingOffCommand room1HeatingOff = new HeatingOffCommand(room1Heating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none,  room1HeatingOff);
+        remote.offButtonWasPushed(Receiver.HEATING.ordinal()); 
+
+        
+        usedHeatingEnergy+=room1Heating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");        
+        
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingOffRoom2BtnActionPerformed
 
     private void heatingRoom1SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_heatingRoom1SliderStateChanged
@@ -1061,23 +1333,187 @@ public class GUI_Command extends javax.swing.JFrame {
 
         if(heatingLivingRoomSlider.getValue() > 25 && heatingLivingRoomSlider.getValue() <= 30)  {
              JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
-             usedHeatingEnergy+=3;
+             usedHeatingEnergy+=2;
         }
 
-         if(heatingLivingRoomSlider.getValue() >=5 && heatingLivingRoomSlider.getValue() < 15)  {
-             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
-             usedHeatingEnergy+=1;
-        }
+//         if(heatingLivingRoomSlider.getValue() >=5 && heatingLivingRoomSlider.getValue() < 15)  {
+//             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
+//            if(usedHeatingEnergy>0) usedHeatingEnergy-=1;
+//        }
            heatingELabel.setText(usedHeatingEnergy + " KWh");
-           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+//           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingLivingRoomSliderMouseReleased
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void none(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_none
         // TODO add your handling code here:
-        MainDisplay dis = new MainDisplay();
-        dis.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    }//GEN-LAST:event_none
+
+    private void heatingRoom1SliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_heatingRoom1SliderMouseReleased
+        // TODO add your handling code here:
+        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue()+"");
+        
+
+        if(heatingRoom1Slider.getValue() > 25 && heatingRoom1Slider.getValue() <= 30)  {
+             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
+             usedHeatingEnergy+=1;
+        }
+//
+//         if(heatingRoom1Slider.getValue() >=5 && heatingRoom1Slider.getValue() < 15)  {
+//             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
+//            if(usedHeatingEnergy>=1) usedHeatingEnergy-=1;
+//        }
+           heatingELabel.setText(usedHeatingEnergy + " KWh");
+//           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_heatingRoom1SliderMouseReleased
+
+    private void ledRoom1SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledRoom1SliderStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ledRoom1SliderStateChanged
+
+    private void ledRoom1SliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ledRoom1SliderMouseReleased
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        ledRoom1TempLabel.setText(ledRoom1Slider.getValue()+"");
+        
+
+        if(ledRoom1Slider.getValue() > 3)  {
+             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
+             usedLedEnergy+=2;
+        }
+
+//         if(ledRoom1Slider.getValue() < 3)  {
+//             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 낮게 설정하여 소비전력량이 감소합니다.\n");
+//            if(usedLedEnergy>0) usedLedEnergy-=1;
+//        }
+           ledELabel.setText(usedLedEnergy + " KWh");
+           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_ledRoom1SliderMouseReleased
+
+    private void ledRoom1Slidernone(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_ledRoom1Slidernone
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ledRoom1Slidernone
+
+    private void ledOnRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOnRoom1BtnActionPerformed
+        // TODO add your handling code here:
+               
+        if(ledRoom1OnOffState.equals("ON")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        ledRoom1OnOffState="ON";        
+        ledRoom1OnOffLabel.setText(ledRoom1OnOffState); // 침실1 난방 전원 텍스트 설정
+        ledRoom1Slider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        ledRoom1Slider. setValue(3); // 온도의 기본값으로 20도를 줌.
+        ledRoom1TempLabel.setText(ledRoom1Slider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        LedOnCommand  Room1LedOn = new LedOnCommand(room1Led); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  Room1LedOn, none);
+        remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
+ 
+        
+        usedLedEnergy+=room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+  //      usedEnergy+=usedLedEnergy;
+        
+        ledELabel.setText(room1Led.getUsedEnergy()+livingRoomLed.getUsedEnergy()+" KWh");
+    }//GEN-LAST:event_ledOnRoom1BtnActionPerformed
+
+    private void ledOffRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOffRoom1BtnActionPerformed
+        // TODO add your handling code here:
+                        if(ledRoom1OnOffState.equals("OFF")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        ledRoom1OnOffState="OFF";        
+        ledRoom1OnOffLabel.setText(ledRoom1OnOffState); // 거실 난방 전원 텍스트 설정
+        ledRoom1Slider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        ledRoom1TempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        LedOffCommand room1LedOff = new LedOffCommand(room1Led); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.LED.ordinal(), none,  room1LedOff);
+        remote.offButtonWasPushed(Receiver.LED.ordinal()); 
+
+        
+        usedLedEnergy+=room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+        ledELabel.setText(room1Led.getUsedEnergy()+livingRoomLed.getUsedEnergy()+" KWh");        
+        
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_ledOffRoom1BtnActionPerformed
+
+    private void ledLivingRoomSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledLivingRoomSliderStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ledLivingRoomSliderStateChanged
+
+    private void ledLivingRoomSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ledLivingRoomSliderMouseReleased
+        // TODO add your handling code here:
+            ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue()+"");
+        
+
+        if(ledLivingRoomSlider.getValue() > 3)  {
+             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
+             usedLedEnergy+=2;
+        }
+
+//         if(ledLivingRoomSlider.getValue() < 3)  {
+//             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 낮게 설정하여 소비전력량이 감소합니다.\n");
+//            if(usedLedEnergy>0) usedLedEnergy-=1;
+//        }
+           ledELabel.setText(usedLedEnergy + " KWh");
+           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        
+    }//GEN-LAST:event_ledLivingRoomSliderMouseReleased
+
+    private void ledOnLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOnLivingRoomBtnActionPerformed
+        // TODO add your handling code here:
+                if(ledLivingRoomOnOffState.equals("ON")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        ledLivingRoomOnOffState="ON";        
+        ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
+        ledLivingRoomSlider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        ledLivingRoomSlider. setValue(3); // 온도의 기본값으로 20도를 줌.
+        ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        LedOnCommand  livingRoomLedOn = new LedOnCommand(livingRoomLed); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.LED.ordinal(),  livingRoomLedOn, none);
+        remote.onButtonWasPushed(Receiver.LED.ordinal()); // 0번 슬롯의 on 명령 실행
+ 
+        
+        usedLedEnergy+=livingRoomLed.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+ //                 usedEnergy+=usedLedEnergy;
+        ledELabel.setText(livingRoomLed.getUsedEnergy()+room1Led.getUsedEnergy()+" KWh");
+    }//GEN-LAST:event_ledOnLivingRoomBtnActionPerformed
+
+    private void ledOffLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOffLivingRoomBtnActionPerformed
+        // TODO add your handling code here:
+        
+                if(ledLivingRoomOnOffState.equals("OFF")) {
+             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        ledLivingRoomOnOffState="OFF";        
+        ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
+        ledLivingRoomSlider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
+        ledLivingRoomTempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+
+        LedOffCommand  livingRoomLedOff = new LedOffCommand(livingRoomLed); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.LED.ordinal(), none,  livingRoomLedOff);
+        remote.offButtonWasPushed(Receiver.LED.ordinal()); 
+
+        
+        usedLedEnergy+=livingRoomLed.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        
+           ledELabel.setText(livingRoomLed.getUsedEnergy()+room1Led.getUsedEnergy()+" KWh");   
+
+        
+        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+    }//GEN-LAST:event_ledOffLivingRoomBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1128,10 +1564,9 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JButton heatingOffRoom2Btn;
     private javax.swing.JButton heatingOnLivingRoomBtn;
     private javax.swing.JButton heatingOnRoom1Btn;
+    private javax.swing.JLabel heatingRoom1OnOffLabel;
     private javax.swing.JSlider heatingRoom1Slider;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel heatingRoom1TempLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1139,8 +1574,6 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1153,14 +1586,24 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -1171,17 +1614,24 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel ledELabel;
     private javax.swing.JFrame ledFrame;
-    private javax.swing.JLabel ledOnOffLabel;
-    private javax.swing.JSlider ledSlider;
-    private javax.swing.JLabel ledTempLabel;
+    private javax.swing.JLabel ledLivingRoomOnOffLabel;
+    private javax.swing.JSlider ledLivingRoomSlider;
+    private javax.swing.JLabel ledLivingRoomTempLabel;
+    private javax.swing.JButton ledOffLivingRoomBtn;
+    private javax.swing.JButton ledOffRoom1Btn;
+    private javax.swing.JButton ledOnLivingRoomBtn;
+    private javax.swing.JButton ledOnRoom1Btn;
+    private javax.swing.JLabel ledRoom1OnOffLabel;
+    private javax.swing.JSlider ledRoom1Slider;
+    private javax.swing.JLabel ledRoom1TempLabel;
     private javax.swing.JLabel livingRoomLabel2;
     private javax.swing.JLabel refELabel;
     private javax.swing.JFrame refFrame;
@@ -1190,8 +1640,6 @@ public class GUI_Command extends javax.swing.JFrame {
     private javax.swing.JLabel refOnOffLabel;
     private javax.swing.JSlider refSlider;
     private javax.swing.JLabel refTempLabel;
-    private javax.swing.JLabel room1Label1;
-    private javax.swing.JLabel room1Label2;
     private javax.swing.JLabel usedELabel;
     // End of variables declaration//GEN-END:variables
 }
