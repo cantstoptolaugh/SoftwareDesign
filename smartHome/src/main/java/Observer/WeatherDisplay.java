@@ -5,12 +5,8 @@ import Main.MainDisplay;
 import java.io.File;
 import Observer.WeatherState.*;
 import Observer.WeatherData.*;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,30 +16,80 @@ import java.util.logging.Logger;
  */
 public class WeatherDisplay extends javax.swing.JFrame {
 
-    File Weather_info;
-    // 로그인 파일 읽기 위한 File 객체
+    Rain rain = new Rain();
+    Snow snow = new Snow();
+    Sunny sunny = new Sunny();
+    Cloud cloud = new Cloud();
 
-    LoginForm abc = new LoginForm();
-    String id = abc.SessionID;
-    // 세션 id 읽기 위한 변수 id
+    String todayweather;//textfield에 출력할 오늘 날씨 값
+    String tomorrowweather;//textfield에 출력할  내일 날씨 값
 
-    BufferedWriter bufferedWriter = null;
+    Random random = new Random();
 
-    String temperature_num;
-    String humidity_num;
-    String Tomorrow_weather;
+    int temperatureR = 27;//random.nextInt(0, 30);
+    int humidityR = 40;//random.nextInt(40, 60);
+
+    String temperatureS;
+    String humidityS;
+    //문자열 변환
+
+    String todayTemperature;
+    //출력할 온도
+    String todayHumidity;
+
+    WeatherData weatherData = new WeatherData();
 
     public WeatherDisplay() {
         initComponents();
         setTitle("날씨관리화면");
         setLocationRelativeTo(null);
-        temperature.setText("랜덤 온도 값");
-        humidity.setText("랜덤 습도 값");
-        TodayWeather.setText("온도습도 맞춘 오늘 날씨");
-        TomorrowWeather.setText("랜덤 내일 날씨");
-        
+
+        temperatureS = Integer.toString(temperatureR);
+        humidityS = Integer.toString(humidityR);
+
+        todayTemperature = weatherData.setMeasurements(temperatureS);
+        todayHumidity = weatherData.setMeasurements(humidityS);
+
+        //온도, 습도 랜덤 
+
+        /*random = new Random();
+            int num = random.nextInt(0, 4);
+            
+           if (num == 0) {
+                tomorrowweather = sunny.Weather("It's sunny tomorrow");
+            } else if (num == 1) {
+                tomorrowweather = rain.Weather("It's rainy tomorrow");
+            } else if (num == 2) {
+                tomorrowweather = snow.Weather("It's snowing tomorrow");
+            } else if (num == 3) {
+                tomorrowweather = cloud.Weather("It's cloudy tomorrow");
+            }*/
+        tomorrowweather = sunny.Weather("It's sunny tomorrow");
+
+        //온도, 습도 랜덤값-> 오늘 날씨 출력
+        if (temperatureR >= 20 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //sunny
+            todayweather = sunny.Weather("It's Sunny today");
+
+        } else if (temperatureR >= 10 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //rain
+            todayweather = rain.Weather("It's rainy today");
+
+        } else if (temperatureR >= 0 && temperatureR <= 10 && humidityR >= 40 && humidityR <= 60) {
+            //snow
+            todayweather = snow.Weather("It's snowing today");
+
+        } else if (temperatureR >= 0 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //cloud
+            todayweather = cloud.Weather("It's cloudy today");
+        }
+
+        temperature.setText(todayTemperature);
+        humidity.setText(todayHumidity);
+        TomorrowWeather.setText(tomorrowweather);
+        TodayWeather.setText(todayweather);
+
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -62,7 +108,6 @@ public class WeatherDisplay extends javax.swing.JFrame {
         TodayWeather = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         TomorrowWeather = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -113,13 +158,6 @@ public class WeatherDisplay extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jMenu3.setText("메뉴");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,17 +203,11 @@ public class WeatherDisplay extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TomorrowWeather, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,9 +215,9 @@ public class WeatherDisplay extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(temperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(humidity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(9, 9, 9)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
@@ -204,7 +236,6 @@ public class WeatherDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
         MainDisplay dis = new MainDisplay();
         dis.setVisible(true);
         setVisible(false);
@@ -227,85 +258,20 @@ public class WeatherDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TomorrowWeatherActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FileWriter fw = null;
-        try {
-            Weather_info = new File(id + "'sWeather.txt");
-            bufferedWriter = new BufferedWriter(new FileWriter(Weather_info, true));
-            
-            Random random = new Random();
-            int temperatureR = random.nextInt(0, 30);
-            int humidityR = random.nextInt(20, 60);
-            //온도, 습도 랜덤 출력
-            
-            fw = new FileWriter(Weather_info, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(temperatureR);
-            bw.write(humidityR);
-            //Weather_info 파일에 랜덤한 온도, 습도 저장
-            
-            //온도, 습도에 맞춰서 오늘 날씨 출력
-            if (temperatureR >= 20 && temperatureR <= 30 && humidityR >= 20 && humidityR <= 30) {
-                //sunny
-            } else if (temperatureR >= 10 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
-                //rain
-            } else if (temperatureR >= 0 && temperatureR <= 10 && humidityR >= 30 && humidityR <= 40) {
-                //snow
-            } else if (temperatureR >= 10 && temperatureR <= 20 && humidityR >= 30 && humidityR <= 50) {
-                //cloud
-            }   
-            
-            //내일 날씨 랜덤 출력
-            
-            int WeatherR = random.nextInt(0, 3);
-            if (WeatherR == 0) {
-                //내일 날씨 sunny
-            } else if (WeatherR == 1) {
-                //내일 날씨 rain
-            } else if (WeatherR == 2) {
-                //내일 날씨 snow
-            } else if (WeatherR == 3) {
-                //내일 날씨 cloud
-            }
-            Scanner scan = new Scanner(Weather_info);
-            temperature_num = scan.next();
-            humidity_num = scan.next();
-            Tomorrow_weather = scan.next();
-            //저장된 값 읽어와서 출력
-            
-            if (Weather_info.exists()) {
-                if (Weather_info.delete()) {
-                    System.out.println("파일삭제 성공");
-                } else {
-                    System.out.println("파일삭제 실패");
-                }
-            } else {
-                System.out.println("파일이 존재하지 않습니다.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(WeatherDisplay.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(WeatherDisplay.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WeatherDisplay().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TodayWeather;
     private javax.swing.JTextField TomorrowWeather;
     private javax.swing.JTextField humidity;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,4 +286,8 @@ public class WeatherDisplay extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField temperature;
     // End of variables declaration//GEN-END:variables
+
+    private String toString(int temperatureR) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
