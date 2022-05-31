@@ -4,6 +4,7 @@
  */
 package RealEnergyMeter;
 
+import RealEnergyMeter.UsageFee;
 import java.util.Random;
 /**
  *

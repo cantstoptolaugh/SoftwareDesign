@@ -12,14 +12,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author 이주혁
  */
-public class Calculator {
+public class File_task {
 
     LoginForm form = new LoginForm();
     String SessionID = form.SessionID;
@@ -27,16 +25,16 @@ public class Calculator {
     BufferedWriter bufferedWriter = null;
     Random random = new Random();
 
-    static String gas_num;
-    static String elec_num;
-    static String water_num;
+    public static String gas_num;
+    public static String elec_num;
+    public static String water_num;
 
     int gas;
     int elec;
     int water;
 
     int add_num1 = random.nextInt(10, 20);
-    int add_num2; //채은이로부터 받는 정수 :used_Energy
+    int add_num2; // :used_Energy
     int add_num3 = random.nextInt(10, 20);
 
     int yesterday = random.nextInt(600, 1100);

@@ -4,6 +4,9 @@
  */
 package RealEnergyMeter;
 
+import RealEnergyMeter.File_task;
+import RealEnergyMeter.MeterDisplay;
+import RealEnergyMeter.UsedEnergyDataNow;
 import ForLogin.LoginForm;
 import java.io.File;
 
@@ -19,6 +22,7 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
     LoginForm form = new LoginForm();
     String SessionID = form.SessionID;
     File Energy_use = new File(SessionID + "'sUse.txt");
+    EnergyData energy = new EnergyData();
 
     static String gas_num;
     static String elec_num;
@@ -29,7 +33,7 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
         setTitle("에너지 사용량");
         setLocationRelativeTo(null);
 
-        Calculator cal = new Calculator();
+        File_task cal = new File_task();
 
         cal.forAdd();
         System.out.println(cal.add_num2);
@@ -46,11 +50,20 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
         cal.read();
         //존재하는 파일 이름 찾기
         // 그 파일의 값을 읽어내기 -> 변수를 갖고와 저장.
-
+        
         gas_num = cal.gas_num;
         elec_num = cal.elec_num;
         water_num = cal.water_num;
 
+        float num1 = Float.valueOf(this.gas_num);
+        float num2 = Float.valueOf(this.elec_num);
+        float num3 = Float.valueOf(this.water_num);
+        
+        
+        UsedEnergy usedEnergy = new UsedEnergy(energy);
+        UsageFee usageFee = new UsageFee(energy);
+        energy.setMeasurements(num1, num2, num3);
+        
         jTextField1.setText(this.gas_num);
         jTextField2.setText(this.elec_num);
         jTextField3.setText(this.water_num);

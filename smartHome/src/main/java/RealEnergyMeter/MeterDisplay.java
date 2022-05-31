@@ -4,7 +4,15 @@
  */
 package RealEnergyMeter;
 
+import ForLogin.LoginForm;
+import RealEnergyMeter.MeterDisplay;
+import RealEnergyMeter.UsedEnergyDataBefore;
+import RealEnergyMeter.UsedEnergyDataNow;
+import RealEnergyMeter.UsedEnergyDataNowaDays;
 import Main.MainDisplay;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *
@@ -15,13 +23,29 @@ public class MeterDisplay extends javax.swing.JFrame {
     /**
      * Creates new form MeterDisplay
      */
-    String part = "A";
-    String room_num = "101";
+    
+    LoginForm log = new LoginForm();
+    String SessionID = log.SessionID;
+    
+    static String part;
+    static String room_num;
 
     public MeterDisplay() {
         initComponents();
         setTitle("에너지 사용량 관리");
         setLocationRelativeTo(null);
+        
+        try {
+            File Info = new File(SessionID + ".txt");
+            Scanner scan = new Scanner(Info);
+            scan.next();
+            scan.next();
+            scan.next();
+            part = scan.next();
+            room_num = scan.next();
+        } catch (IOException ex) {
+        }
+        
         jLabel1.setText(part + " 동 " + room_num + "호 사용자님의 현재 에너지 사용량을 확인하세요!");
         jLabel3.setText(part + " 동 " + room_num + "호 사용자님의 이번 달 예상 요금과 사용 전력량을 확인하세요!");
         jLabel4.setText(part + " 동 " + room_num + "호 사용자님의 저번 달 예상 요금과 사용 전력량을 확인하세요!");

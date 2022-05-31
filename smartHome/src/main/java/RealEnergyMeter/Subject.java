@@ -1,6 +1,8 @@
 
 package RealEnergyMeter;
 
+import RealEnergyMeter.Observer;
+
 public interface Subject {
 
     public void registerObserver(Observer o);
