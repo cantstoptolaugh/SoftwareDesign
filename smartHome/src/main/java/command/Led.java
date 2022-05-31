@@ -14,16 +14,8 @@ class Led {
 
   public void off( ) {
         System.out.println(description + " Led off.");
-              usedEnergy=0;
   }
 
-  public void up() {
-        System.out.println(description + " Led up.");
-  }
-
-  public void down() {
-        System.out.println(description + " Led down.");
-  }
   public int getUsedEnergy() {
     return usedEnergy;
 }

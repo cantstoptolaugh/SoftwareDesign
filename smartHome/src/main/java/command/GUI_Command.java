@@ -16,88 +16,94 @@ import javax.swing.JSlider;
  * @author LG
  */
 public class GUI_Command extends javax.swing.JFrame {
-    String uId= LoginForm.SessionID;
+
+    String uId = LoginForm.SessionID;
     RemoteControl remote = new RemoteControl(); //인보커 생성 - 명령을 저장하고 관리.
-    Command none = new NoCommand(); 
-    
+    Command none = new NoCommand();
+
     Refrigerator kitchenRefrigerator = new Refrigerator("Kitchen"); //  리시버 생성 - 명령의 실제 처리를 수행.
     Heating livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
     Heating room1Heating = new Heating("Room1"); // 거실 난방 리시버 생성
     Led livingRoomLed = new Led("Living Room");
     Led room1Led = new Led("Room1");
-    
-    int usedRefEnergy=0;
-    int usedHeatingEnergy=0;
-    int usedLedEnergy=0;
+
+    int usedRefEnergy = 0;
+    int usedHeatingEnergy = 0;
+    int usedLedEnergy = 0;
+
+    int usedHeatingEnergyLivingRoom=0;
+    int usedHeatingEnergyRoom1=0;
+    int usedLedEnergyLivingRoom=0;
+    int usedLedEnergyRoom1=0;
     
     public static int usedEnergy;
 
-    String refOnOffState = "OFF"; 
-    String heatingLivingRoomOnOffState= "OFF"; 
-    String heatingRoom1OnOffState= "OFF"; 
-    String ledLivingRoomOnOffState = "OFF"; 
-    String ledRoom1OnOffState = "OFF"; 
-
+    String refOnOffState = "OFF";
+    String heatingLivingRoomOnOffState = "OFF";
+    String heatingRoom1OnOffState = "OFF";
+    String ledLivingRoomOnOffState = "OFF";
+    String ledRoom1OnOffState = "OFF";
 
     /**
      * Creates new form NewJFrame
      */
-  public enum Receiver {
+    public enum Receiver {
         HEATING, LED, REF
     }
 
     public GUI_Command() {
-        if(File_Command.read(LoginForm.SessionID)== null) {
-            usedEnergy=0;
+        if (File_Command.read(LoginForm.SessionID) == null) {
+            usedEnergy = 0;
+        } else {
+            usedEnergy = Integer.parseInt(File_Command.read(LoginForm.SessionID));
         }
-        else usedEnergy=Integer.parseInt(File_Command.read(LoginForm.SessionID));
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-        commandMainLabel.setText(LoginForm.SessionID+"님의 누적 전기 사용량");
-        
-        usedELabel.setText(usedEnergy +"kwh");
-        
+        commandMainLabel.setText(LoginForm.SessionID + "님의 누적 전기 사용량");
+
+        usedELabel.setText(usedEnergy + "kwh");
+
         setting();
 
-       
-
     }
-  public void setting() { // 서브 프레임 첫 화면 텍스트 및 슬라이더 설정
-        refTempLabel.setText(""+ 0);
+
+    public void setting() { // 서브 프레임 첫 화면 텍스트 및 슬라이더 설정
+        refTempLabel.setText("" + 0);
         refOnOffLabel.setText(refOnOffState);
-        
-        ledLivingRoomTempLabel.setText(""+ 0);
+
+        ledLivingRoomTempLabel.setText("" + 0);
         ledLivingRoomOnOffLabel.setText(refOnOffState);
-        
-        heatingLivingRoomTempLabel.setText(""+0);
+
+        heatingLivingRoomTempLabel.setText("" + 0);
         livingRoomLabel2.setText(heatingLivingRoomOnOffState);
-        
-        heatingRoom1TempLabel.setText(""+0);
+
+        heatingRoom1TempLabel.setText("" + 0);
         heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState);
-        
+
         refSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         refSlider.setPaintTicks(true); //눈금을 표시한다.
-        refSlider.setPaintLabels(true); 
-        
+        refSlider.setPaintLabels(true);
+
         ledLivingRoomSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         ledLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
-        ledLivingRoomSlider.setPaintLabels(true); 
-        
+        ledLivingRoomSlider.setPaintLabels(true);
+
         ledRoom1Slider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         ledRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
-        ledRoom1Slider.setPaintLabels(true); 
-        
+        ledRoom1Slider.setPaintLabels(true);
+
         heatingLivingRoomSlider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
         heatingLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
-        heatingLivingRoomSlider.setPaintLabels(true); 
+        heatingLivingRoomSlider.setPaintLabels(true);
 
         heatingRoom1Slider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
         heatingRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
-        heatingRoom1Slider.setPaintLabels(true); 
+        heatingRoom1Slider.setPaintLabels(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1013,24 +1019,22 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         ledFrame.setVisible(true);
         ledFrame.setTitle("LED 조명 제어");
-        ledFrame.setSize(859,500);  
-        ledFrame.setLocation(900,250);    
+        ledFrame.setSize(859, 500);
+        ledFrame.setLocation(900, 250);
         ledFrame.setResizable(false);
         ledFrame.setLocationRelativeTo(null);
         ledFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        if(ledLivingRoomOnOffState.equals("ON")) {
-             ledLivingRoomSlider. setEnabled(true); 
+
+        if (ledLivingRoomOnOffState.equals("ON")) {
+            ledLivingRoomSlider.setEnabled(true);
+        } else if (ledLivingRoomOnOffState.equals("OFF")) {
+            ledLivingRoomSlider.setEnabled(false);
         }
-        else  if(ledLivingRoomOnOffState.equals("OFF")) {
-             ledLivingRoomSlider. setEnabled(false); 
-        }
-        
-        if(ledRoom1OnOffState.equals("ON")) {
-             ledRoom1Slider. setEnabled(true); 
-        }
-        else  if(ledRoom1OnOffState.equals("OFF")) {
-             ledRoom1Slider. setEnabled(false); 
+
+        if (ledRoom1OnOffState.equals("ON")) {
+            ledRoom1Slider.setEnabled(true);
+        } else if (ledRoom1OnOffState.equals("OFF")) {
+            ledRoom1Slider.setEnabled(false);
         }
     }//GEN-LAST:event_btn_ledCommandActionPerformed
 
@@ -1039,24 +1043,22 @@ public class GUI_Command extends javax.swing.JFrame {
         this.dispose();
         heatingFrame.setVisible(true);
         heatingFrame.setTitle("난방 기기 제어");
-        heatingFrame.setSize(859,500);  
-        heatingFrame.setLocation(900,250);    
+        heatingFrame.setSize(859, 500);
+        heatingFrame.setLocation(900, 250);
         heatingFrame.setResizable(false);
         heatingFrame.setLocationRelativeTo(null);
         heatingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        if(heatingLivingRoomOnOffState.equals("ON")) {
-             heatingLivingRoomSlider. setEnabled(true); 
+
+        if (heatingLivingRoomOnOffState.equals("ON")) {
+            heatingLivingRoomSlider.setEnabled(true);
+        } else if (heatingLivingRoomOnOffState.equals("OFF")) {
+            heatingLivingRoomSlider.setEnabled(false);
         }
-        else  if(heatingLivingRoomOnOffState.equals("OFF")) {
-             heatingLivingRoomSlider. setEnabled(false); 
-        }
-        
-        if(heatingRoom1OnOffState.equals("ON")) {
-             heatingRoom1Slider. setEnabled(true); 
-        }
-        else  if(heatingRoom1OnOffState.equals("OFF")) {
-             heatingRoom1Slider. setEnabled(false); 
+
+        if (heatingRoom1OnOffState.equals("ON")) {
+            heatingRoom1Slider.setEnabled(true);
+        } else if (heatingRoom1OnOffState.equals("OFF")) {
+            heatingRoom1Slider.setEnabled(false);
         }
     }//GEN-LAST:event_btn_heatingCommandActionPerformed
 
@@ -1064,126 +1066,125 @@ public class GUI_Command extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         refFrame.setVisible(true);
-       
+
         refFrame.setTitle("냉장고 제어");
-        refFrame.setSize(500,550);  
-        refFrame.setLocation(900,250);     
+        refFrame.setSize(500, 550);
+        refFrame.setLocation(900, 250);
         refFrame.setResizable(false);
         refFrame.setLocationRelativeTo(null);
-       // refFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        if(refOnOffState.equals("ON")) {
-             refSlider. setEnabled(true); 
-        }
-        else  if(refOnOffState.equals("OFF")) {
-             refSlider. setEnabled(false); 
+        // refFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        if (refOnOffState.equals("ON")) {
+            refSlider.setEnabled(true);
+        } else if (refOnOffState.equals("OFF")) {
+            refSlider.setEnabled(false);
         }
     }//GEN-LAST:event_btn_refCommandActionPerformed
 
     private void refOnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refOnBtnActionPerformed
         // TODO add your handling code here:
-        if(refOnOffState.equals("ON")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (refOnOffState.equals("ON")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-                
-        refOnOffState="ON";
+
+        refOnOffState = "ON";
         refOnOffLabel.setText(refOnOffState);
-        refSlider. setEnabled(true); 
-        refSlider. setValue(3); 
-        refTempLabel.setText(refSlider.getValue()+"");
-        
+        refSlider.setEnabled(true);
+        refSlider.setValue(3);
+        refTempLabel.setText(refSlider.getValue() + "");
+
         RefrigeratorOnCommand kitchenRefrigeratorOn = new RefrigeratorOnCommand(kitchenRefrigerator); // on명령 생성 및 리시버 연결
         remote.setOnOffCommand(Receiver.REF.ordinal(), kitchenRefrigeratorOn, none); // 2번 슬롯(냉장고)의  on 명령 전달
         remote.onButtonWasPushed(Receiver.REF.ordinal()); // 2번 슬롯의 on 명령 실행
-        
-        refELabel.setText(kitchenRefrigerator.getUsedEnergy()+" KWh"); // 현재 냉장고 사용 전력을 화면 텍스트로 표시
-        
-        usedRefEnergy+=kitchenRefrigerator.getUsedEnergy(); // 냉장고 누적 전기 사용량 
 
-        usedEnergy+=usedRefEnergy;
-        
+        refELabel.setText(kitchenRefrigerator.getUsedEnergy() + " KWh"); // 현재 냉장고 사용 전력을 화면 텍스트로 표시
+
+        usedRefEnergy += kitchenRefrigerator.getUsedEnergy(); // 냉장고 누적 전기 사용량 
+
+        usedEnergy += usedRefEnergy;
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_refOnBtnActionPerformed
 
     private void refOffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refOffBtnActionPerformed
         // TODO add your handling code here:
-                if(refOnOffState.equals("OFF")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (refOnOffState.equals("OFF")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-                
-            refOnOffState="OFF";
-            refOnOffLabel.setText(refOnOffState);
-            refSlider. setEnabled(false); 
-            refTempLabel.setText(0+"");
-            
-            RefrigeratorOffCommand kitchenRefrigeratorOff = new RefrigeratorOffCommand(kitchenRefrigerator); // off명령 생성 및 리시버 연결
-            remote.setOnOffCommand(Receiver.REF.ordinal(), none, kitchenRefrigeratorOff); // 2번 슬롯(냉장고)의  off 명령 전달
-            remote.offButtonWasPushed(Receiver.REF.ordinal());// 2번 슬롯의 off 명령 실행
-            
-             refELabel.setText("0 KWh");
-             usedRefEnergy=0;
-             
-  
+
+        refOnOffState = "OFF";
+        refOnOffLabel.setText(refOnOffState);
+        refSlider.setEnabled(false);
+        refTempLabel.setText(0 + "");
+
+        RefrigeratorOffCommand kitchenRefrigeratorOff = new RefrigeratorOffCommand(kitchenRefrigerator); // off명령 생성 및 리시버 연결
+        remote.setOnOffCommand(Receiver.REF.ordinal(), none, kitchenRefrigeratorOff); // 2번 슬롯(냉장고)의  off 명령 전달
+        remote.offButtonWasPushed(Receiver.REF.ordinal());// 2번 슬롯의 off 명령 실행
+
+        refELabel.setText("0 KWh");
+        usedRefEnergy = 0;
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
+
     }//GEN-LAST:event_refOffBtnActionPerformed
 
     private void heatingOnLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-        
 
-        if(heatingLivingRoomOnOffState.equals("ON")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (heatingLivingRoomOnOffState.equals("ON")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
-        heatingLivingRoomOnOffState="ON";        
+
+        heatingLivingRoomOnOffState = "ON";
         livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
         heatingLivingRoomSlider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        heatingLivingRoomSlider. setValue(20); // 온도의 기본값으로 20도를 줌.
-        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        heatingLivingRoomSlider.setValue(20); // 온도의 기본값으로 20도를 줌.
+        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue() + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-        HeatingOnCommand  livingRoomHeatingOn = new HeatingOnCommand(livingRoomHeating); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  livingRoomHeatingOn, none);
+        HeatingOnCommand livingRoomHeatingOn = new HeatingOnCommand(livingRoomHeating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), livingRoomHeatingOn, none);
         remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
- 
+
+        usedHeatingEnergyLivingRoom += livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        heatingELabel.setText(usedHeatingEnergyLivingRoom + usedHeatingEnergyRoom1 + " KWh");
         
-        usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+        usedEnergy += livingRoomHeating.getUsedEnergy();
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedEnergy);
 
-        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");
+        
         
 
-
-
- 
     }//GEN-LAST:event_heatingOnLivingRoomBtnActionPerformed
 
     private void heatingOffLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffLivingRoomBtnActionPerformed
         // TODO add your handling code here:
 
-                if(heatingLivingRoomOnOffState.equals("OFF")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (heatingLivingRoomOnOffState.equals("OFF")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        heatingLivingRoomOnOffState="OFF";        
+        heatingLivingRoomOnOffState = "OFF";
         livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
         heatingLivingRoomSlider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        heatingLivingRoomTempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        heatingLivingRoomTempLabel.setText(0 + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-       HeatingOffCommand  livingRoomHeatingOff = new HeatingOffCommand(livingRoomHeating); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none,  livingRoomHeatingOff);
-        remote.offButtonWasPushed(Receiver.HEATING.ordinal()); 
+        HeatingOffCommand livingRoomHeatingOff = new HeatingOffCommand(livingRoomHeating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none, livingRoomHeatingOff);
+        remote.offButtonWasPushed(Receiver.HEATING.ordinal());
 
-        
-        usedHeatingEnergy+=livingRoomHeating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-        
-        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");        
+        usedHeatingEnergyLivingRoom = 0;
 
-        
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedHeatingEnergy + "," + livingRoomHeating.getUsedEnergy());
+        heatingELabel.setText(usedHeatingEnergyLivingRoom + usedHeatingEnergyRoom1 + " KWh");
+
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedEnergy);
     }//GEN-LAST:event_heatingOffLivingRoomBtnActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
@@ -1195,17 +1196,16 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
-          refFrame.dispose(); 
-          this.setVisible(true);
-          usedELabel.setText(usedEnergy+ " KWh");
+        refFrame.dispose();
+        this.setVisible(true);
+        usedELabel.setText(usedEnergy + " KWh");
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
-          ledFrame.dispose(); 
-          this.setVisible(true);
-          usedEnergy=usedLedEnergy+usedHeatingEnergy+usedRefEnergy;
-        usedELabel.setText(usedEnergy+ " KWh"); // 메인화면 전체 누적 전기 사용량
+        ledFrame.dispose();
+        this.setVisible(true);
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
@@ -1215,15 +1215,15 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
         // TODO add your handling code here:
-         heatingFrame.dispose(); 
-          this.setVisible(true);
-          usedEnergy=usedLedEnergy+usedHeatingEnergy+usedRefEnergy;
-        usedELabel.setText(usedEnergy+ " KWh"); // 메인화면 전체 누적 전기 사용량
+        heatingFrame.dispose();
+        this.setVisible(true);
+
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_jMenu8MouseClicked
 
     private void refSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_refSliderStateChanged
         // TODO add your handling code here:
-        
+
 
     }//GEN-LAST:event_refSliderStateChanged
 
@@ -1244,22 +1244,24 @@ public class GUI_Command extends javax.swing.JFrame {
     private void refSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMouseReleased
         // TODO add your handling code here:
 
-        refTempLabel.setText(refSlider.getValue()+"");
+        refTempLabel.setText(refSlider.getValue() + "");
 
-        if(refSlider.getValue() >=0 && refSlider.getValue() <= 1)  {
-             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 낮은 온도로 설정하여 소비전력량이 증가합니다.\n");
-             usedRefEnergy+=2;
+        if (refSlider.getValue() >= 0 && refSlider.getValue() <= 1) {
+            JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 낮은 온도로 설정하여 소비전력량이 증가합니다.\n");
+            usedRefEnergy += 2;
+            usedEnergy += 2;
         }
-     if(refSlider.getValue() >=2&& refSlider.getValue() <= 4)  {
-             usedRefEnergy+=1;
+        if (refSlider.getValue() >= 2 && refSlider.getValue() <= 4) {
+            usedRefEnergy += 1;
+            usedEnergy += 1;
         }
 //         if(refSlider.getValue() >=5 && refSlider.getValue() <= 6)  {
 //             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 높은 온도로 설정하여 벗어나 소비전력량이 감소합니다.\n");
 //             usedRefEnergy-=1;
 //        }
-           refELabel.setText(usedRefEnergy + " KWh");
-     
-           usedEnergy=usedRefEnergy;
+        refELabel.setText(usedRefEnergy + " KWh");
+
+
     }//GEN-LAST:event_refSliderMouseReleased
 
     private void refSliderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refSliderMousePressed
@@ -1268,57 +1270,53 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void heatingOnRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOnRoom1BtnActionPerformed
         // TODO add your handling code here:
-           
-       
-        if(heatingRoom1OnOffState.equals("ON")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+
+        if (heatingRoom1OnOffState.equals("ON")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        heatingRoom1OnOffState="ON";        
+        heatingRoom1OnOffState = "ON";
         heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 침실1 난방 전원 텍스트 설정
         heatingRoom1Slider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        heatingRoom1Slider. setValue(20); // 온도의 기본값으로 20도를 줌.
-        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        heatingRoom1Slider.setValue(20); // 온도의 기본값으로 20도를 줌.
+        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue() + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-        HeatingOnCommand  Room1HeatingOn = new HeatingOnCommand(room1Heating); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  Room1HeatingOn, none);
+        HeatingOnCommand Room1HeatingOn = new HeatingOnCommand(room1Heating); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), Room1HeatingOn, none);
         remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
- 
-        
-        usedHeatingEnergy+=room1Heating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-        
 
-        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");
-        
-        
+        usedHeatingEnergyRoom1 += room1Heating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+
+        heatingELabel.setText(usedHeatingEnergyRoom1 + usedHeatingEnergyLivingRoom + " KWh");
+        usedEnergy += room1Heating.getUsedEnergy();
+        System.out.println(usedEnergy);
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
 
 
- 
     }//GEN-LAST:event_heatingOnRoom1BtnActionPerformed
 
     private void heatingOffRoom2BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heatingOffRoom2BtnActionPerformed
         // TODO add your handling code here:
-                if(heatingRoom1OnOffState.equals("OFF")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (heatingRoom1OnOffState.equals("OFF")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        heatingRoom1OnOffState="OFF";        
+        heatingRoom1OnOffState = "OFF";
         heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 거실 난방 전원 텍스트 설정
         heatingRoom1Slider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        heatingRoom1TempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        heatingRoom1TempLabel.setText(0 + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
         HeatingOffCommand room1HeatingOff = new HeatingOffCommand(room1Heating); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none,  room1HeatingOff);
-        remote.offButtonWasPushed(Receiver.HEATING.ordinal()); 
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), none, room1HeatingOff);
+        remote.offButtonWasPushed(Receiver.HEATING.ordinal());
 
-        
-        usedHeatingEnergy+=room1Heating.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-        
-        heatingELabel.setText(room1Heating.getUsedEnergy()+livingRoomHeating.getUsedEnergy()+" KWh");        
-        
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        usedHeatingEnergyRoom1 = 0;
+
+        heatingELabel.setText(usedHeatingEnergyRoom1 + usedHeatingEnergyLivingRoom + " KWh");
+        System.out.println(usedEnergy);
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingOffRoom2BtnActionPerformed
 
     private void heatingRoom1SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_heatingRoom1SliderStateChanged
@@ -1327,21 +1325,17 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void heatingLivingRoomSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_heatingLivingRoomSliderMouseReleased
         // TODO add your handling code here:
- 
-        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue()+"");
-        
 
-        if(heatingLivingRoomSlider.getValue() > 25 && heatingLivingRoomSlider.getValue() <= 30)  {
-             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
-             usedHeatingEnergy+=2;
+        heatingLivingRoomTempLabel.setText(heatingLivingRoomSlider.getValue() + "");
+
+        if (heatingLivingRoomSlider.getValue() > 25 && heatingLivingRoomSlider.getValue() <= 30) {
+            JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
+            usedHeatingEnergyLivingRoom += 2;
+            usedEnergy += 2;
         }
 
-//         if(heatingLivingRoomSlider.getValue() >=5 && heatingLivingRoomSlider.getValue() < 15)  {
-//             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
-//            if(usedHeatingEnergy>0) usedHeatingEnergy-=1;
-//        }
-           heatingELabel.setText(usedHeatingEnergy + " KWh");
-//           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        heatingELabel.setText(usedHeatingEnergyLivingRoom + usedHeatingEnergyRoom1 + " KWh");
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingLivingRoomSliderMouseReleased
 
     private void none(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_none
@@ -1351,20 +1345,16 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void heatingRoom1SliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_heatingRoom1SliderMouseReleased
         // TODO add your handling code here:
-        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue()+"");
-        
+        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue() + "");
 
-        if(heatingRoom1Slider.getValue() > 25 && heatingRoom1Slider.getValue() <= 30)  {
-             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
-             usedHeatingEnergy+=1;
+        if (heatingRoom1Slider.getValue() > 25 && heatingRoom1Slider.getValue() <= 30) {
+            JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 높은 온도로 설정하여 소비전력량이 증가합니다.\n");
+            usedHeatingEnergyRoom1 += 2;
+            usedEnergy += 2;
         }
-//
-//         if(heatingRoom1Slider.getValue() >=5 && heatingRoom1Slider.getValue() < 15)  {
-//             JOptionPane.showMessageDialog(null, "적정 온도(16°C ~ 25°C)보다 낮은 온도로 설정하여 소비전력량이 감소합니다.\n");
-//            if(usedHeatingEnergy>=1) usedHeatingEnergy-=1;
-//        }
-           heatingELabel.setText(usedHeatingEnergy + " KWh");
-//           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+
+        heatingELabel.setText(usedHeatingEnergyRoom1 + usedHeatingEnergyLivingRoom + " KWh");
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_heatingRoom1SliderMouseReleased
 
     private void ledRoom1SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledRoom1SliderStateChanged
@@ -1373,21 +1363,21 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void ledRoom1SliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ledRoom1SliderMouseReleased
         // TODO add your handling code here:
-                // TODO add your handling code here:
-        ledRoom1TempLabel.setText(ledRoom1Slider.getValue()+"");
-        
+        // TODO add your handling code here:
+        ledRoom1TempLabel.setText(ledRoom1Slider.getValue() + "");
 
-        if(ledRoom1Slider.getValue() > 3)  {
-             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
-             usedLedEnergy+=2;
+        if (ledRoom1Slider.getValue() > 3) {
+            JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
+            usedLedEnergyRoom1 += 2;
+            usedEnergy += 2;
         }
 
 //         if(ledRoom1Slider.getValue() < 3)  {
 //             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 낮게 설정하여 소비전력량이 감소합니다.\n");
 //            if(usedLedEnergy>0) usedLedEnergy-=1;
 //        }
-           ledELabel.setText(usedLedEnergy + " KWh");
-           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        ledELabel.setText(usedLedEnergyRoom1 + usedLedEnergyLivingRoom + " KWh");
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_ledRoom1SliderMouseReleased
 
     private void ledRoom1Slidernone(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_ledRoom1Slidernone
@@ -1396,51 +1386,55 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void ledOnRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOnRoom1BtnActionPerformed
         // TODO add your handling code here:
-               
-        if(ledRoom1OnOffState.equals("ON")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+
+        if (ledRoom1OnOffState.equals("ON")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        ledRoom1OnOffState="ON";        
+        ledRoom1OnOffState = "ON";
         ledRoom1OnOffLabel.setText(ledRoom1OnOffState); // 침실1 난방 전원 텍스트 설정
         ledRoom1Slider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        ledRoom1Slider. setValue(3); // 온도의 기본값으로 20도를 줌.
-        ledRoom1TempLabel.setText(ledRoom1Slider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        ledRoom1Slider.setValue(3); // 온도의 기본값으로 20도를 줌.
+        ledRoom1TempLabel.setText(ledRoom1Slider.getValue() + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-        LedOnCommand  Room1LedOn = new LedOnCommand(room1Led); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.HEATING.ordinal(),  Room1LedOn, none);
+        LedOnCommand Room1LedOn = new LedOnCommand(room1Led); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.HEATING.ordinal(), Room1LedOn, none);
         remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
- 
-        
-        usedLedEnergy+=room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-  //      usedEnergy+=usedLedEnergy;
-        
-        ledELabel.setText(room1Led.getUsedEnergy()+livingRoomLed.getUsedEnergy()+" KWh");
+
+        usedLedEnergyRoom1+=room1Led.getUsedEnergy(); 
+        usedLedEnergy += room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
+
+         ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
+        usedEnergy += room1Led.getUsedEnergy();
+
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedEnergy);
+
     }//GEN-LAST:event_ledOnRoom1BtnActionPerformed
 
     private void ledOffRoom1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOffRoom1BtnActionPerformed
         // TODO add your handling code here:
-                        if(ledRoom1OnOffState.equals("OFF")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (ledRoom1OnOffState.equals("OFF")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        ledRoom1OnOffState="OFF";        
+        ledRoom1OnOffState = "OFF";
         ledRoom1OnOffLabel.setText(ledRoom1OnOffState); // 거실 난방 전원 텍스트 설정
         ledRoom1Slider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        ledRoom1TempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        ledRoom1TempLabel.setText(0 + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
         LedOffCommand room1LedOff = new LedOffCommand(room1Led); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.LED.ordinal(), none,  room1LedOff);
-        remote.offButtonWasPushed(Receiver.LED.ordinal()); 
+        remote.setOnOffCommand(Receiver.LED.ordinal(), none, room1LedOff);
+        remote.offButtonWasPushed(Receiver.LED.ordinal());
 
         
-        usedLedEnergy+=room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-        
-        ledELabel.setText(room1Led.getUsedEnergy()+livingRoomLed.getUsedEnergy()+" KWh");        
-        
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        usedLedEnergyRoom1=0;
+        ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
+        System.out.println(usedEnergy);
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
+
     }//GEN-LAST:event_ledOffRoom1BtnActionPerformed
 
     private void ledLivingRoomSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ledLivingRoomSliderStateChanged
@@ -1449,70 +1443,71 @@ public class GUI_Command extends javax.swing.JFrame {
 
     private void ledLivingRoomSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ledLivingRoomSliderMouseReleased
         // TODO add your handling code here:
-            ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue()+"");
-        
+        ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue() + "");
 
-        if(ledLivingRoomSlider.getValue() > 3)  {
-             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
-             usedLedEnergy+=2;
+        if (ledLivingRoomSlider.getValue() > 3) {
+            JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 높게 설정하여 소비전력량이 증가합니다.\n");
+            usedLedEnergyLivingRoom += 2;
+            usedEnergy += 2;
         }
 
-//         if(ledLivingRoomSlider.getValue() < 3)  {
-//             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 낮게 설정하여 소비전력량이 감소합니다.\n");
-//            if(usedLedEnergy>0) usedLedEnergy-=1;
-//        }
-           ledELabel.setText(usedLedEnergy + " KWh");
-           usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
-        
+        ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
+
     }//GEN-LAST:event_ledLivingRoomSliderMouseReleased
 
     private void ledOnLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOnLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-                if(ledLivingRoomOnOffState.equals("ON")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+        if (ledLivingRoomOnOffState.equals("ON")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 켜져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        ledLivingRoomOnOffState="ON";        
+        ledLivingRoomOnOffState = "ON";
         ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
         ledLivingRoomSlider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        ledLivingRoomSlider. setValue(3); // 온도의 기본값으로 20도를 줌.
-        ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue()+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        ledLivingRoomSlider.setValue(3); // 온도의 기본값으로 20도를 줌.
+        ledLivingRoomTempLabel.setText(ledLivingRoomSlider.getValue() + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-        LedOnCommand  livingRoomLedOn = new LedOnCommand(livingRoomLed); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.LED.ordinal(),  livingRoomLedOn, none);
+        LedOnCommand livingRoomLedOn = new LedOnCommand(livingRoomLed); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.LED.ordinal(), livingRoomLedOn, none);
         remote.onButtonWasPushed(Receiver.LED.ordinal()); // 0번 슬롯의 on 명령 실행
- 
+
+        usedLedEnergyLivingRoom+= livingRoomLed.getUsedEnergy();
+
+        ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
+        usedEnergy += livingRoomLed.getUsedEnergy();
+        usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedEnergy);
         
-        usedLedEnergy+=livingRoomLed.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
- //                 usedEnergy+=usedLedEnergy;
-        ledELabel.setText(livingRoomLed.getUsedEnergy()+room1Led.getUsedEnergy()+" KWh");
+
+
     }//GEN-LAST:event_ledOnLivingRoomBtnActionPerformed
 
     private void ledOffLivingRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ledOffLivingRoomBtnActionPerformed
         // TODO add your handling code here:
-        
-                if(ledLivingRoomOnOffState.equals("OFF")) {
-             JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
-                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
-             return;
+
+        if (ledLivingRoomOnOffState.equals("OFF")) {
+            JOptionPane.showMessageDialog(null, "이미 전원이 꺼져있습니다.\n",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        ledLivingRoomOnOffState="OFF";        
+        ledLivingRoomOnOffState = "OFF";
         ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState); // 거실 난방 전원 텍스트 설정
         ledLivingRoomSlider.setEnabled(false);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
-        ledLivingRoomTempLabel.setText(0+""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        ledLivingRoomTempLabel.setText(0 + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
 
-        LedOffCommand  livingRoomLedOff = new LedOffCommand(livingRoomLed); // 커맨드 생성
-        remote.setOnOffCommand(Receiver.LED.ordinal(), none,  livingRoomLedOff);
-        remote.offButtonWasPushed(Receiver.LED.ordinal()); 
+        LedOffCommand livingRoomLedOff = new LedOffCommand(livingRoomLed); // 커맨드 생성
+        remote.setOnOffCommand(Receiver.LED.ordinal(), none, livingRoomLedOff);
+        remote.offButtonWasPushed(Receiver.LED.ordinal());
+        
+        usedLedEnergyLivingRoom = 0;
 
-        
-        usedLedEnergy+=livingRoomLed.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
-        
-           ledELabel.setText(livingRoomLed.getUsedEnergy()+room1Led.getUsedEnergy()+" KWh");   
+        System.out.println(usedLedEnergy + "," + livingRoomLed.getUsedEnergy());
+        ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
 
-        
-        usedELabel.setText(usedRefEnergy+usedLedEnergy+usedHeatingEnergy+""); // 메인화면 전체 누적 전기 사용량
+        usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
+        System.out.println(usedEnergy);
     }//GEN-LAST:event_ledOffLivingRoomBtnActionPerformed
 
     /**

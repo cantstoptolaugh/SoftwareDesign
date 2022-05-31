@@ -14,15 +14,9 @@ class Heating {
 
   public void off() {
       System.out.println(description + " Heating off.");
-      usedEnergy=0;
-  }
-  public void up() {
-      System.out.println(description + " Heating up.");
+
   }
 
-  public void down() {
-      System.out.println(description + " Heating down.");
-  }
   public int getUsedEnergy() {
     return usedEnergy;
 }
