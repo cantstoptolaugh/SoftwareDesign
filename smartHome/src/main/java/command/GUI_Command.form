@@ -20,22 +20,6 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="refOnBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                  <Component id="refOffBtn" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="refSlider" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -56,8 +40,24 @@
                               </Group>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="refOnBtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="refOffBtn" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="refSlider" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="79" max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -66,14 +66,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="refOnBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="refOffBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -82,7 +82,7 @@
                           <Component id="refSlider" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -99,7 +99,7 @@
                       <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="refELabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -108,7 +108,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="15" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xb0c9;&#xc7a5;&#xace0; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -116,7 +116,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc628;&#xb3c4; &#xc81c;&#xc5b4;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -127,7 +127,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc804;&#xc6d0; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -148,6 +148,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -159,6 +162,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="refOffBtn">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="OFF"/>
           </Properties>
           <Events>
@@ -170,7 +176,7 @@
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xb0c9;&#xc7a5;&#xc2e4; &#xc628;&#xb3c4;"/>
           </Properties>
@@ -178,7 +184,7 @@
         <Component class="javax.swing.JLabel" name="jLabel19">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xc6d0; &#xc0c1;&#xd0dc;"/>
           </Properties>
@@ -186,7 +192,7 @@
         <Component class="javax.swing.JLabel" name="refTempLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -197,7 +203,7 @@
         <Component class="javax.swing.JLabel" name="refOnOffLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -208,7 +214,7 @@
         <Component class="javax.swing.JLabel" name="jLabel22">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xb825; &#xc0ac;&#xc6a9;&#xb7c9;"/>
           </Properties>
@@ -216,7 +222,7 @@
         <Component class="javax.swing.JLabel" name="refELabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -253,7 +259,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -273,65 +284,53 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ledLivingRoomSlider" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="ledOnLivingRoomBtn" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Component id="ledOffLivingRoomBtn" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="ledLivingRoomSlider" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="56" max="32767" attributes="0"/>
+                          <Component id="jSeparator7" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
-                  <Component id="jSeparator7" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel38" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ledRoom1OnOffLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ledRoom1TempLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel31" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ledRoom1Slider" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabel38" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="ledRoom1OnOffLabel" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ledRoom1TempLabel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel31" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="ledOnRoom1Btn" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                                  <Component id="ledOffRoom1Btn" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="ledRoom1Slider" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="ledOnRoom1Btn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="ledOffRoom1Btn" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="58" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -351,44 +350,48 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel33" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel34" min="-2" pref="17" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledOnLivingRoomBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledOffLivingRoomBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="ledLivingRoomSlider" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledLivingRoomTempLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledLivingRoomOnOffLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledRoom1TempLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledRoom1OnOffLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jSeparator7" alignment="1" min="-2" pref="298" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel40" min="-2" pref="17" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledRoom1TempLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledRoom1OnOffLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel34" min="-2" pref="17" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledOnLivingRoomBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledOffLivingRoomBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="ledLivingRoomSlider" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledLivingRoomTempLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ledLivingRoomOnOffLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -396,19 +399,11 @@
                               <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ledELabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledOnRoom1Btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ledOffRoom1Btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="jLabel40" min="-2" pref="17" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ledOnRoom1Btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ledOffRoom1Btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -417,7 +412,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -426,7 +421,7 @@
         <Component class="javax.swing.JLabel" name="jLabel29">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; LED &#xbc1d;&#xae30;"/>
           </Properties>
@@ -434,7 +429,7 @@
         <Component class="javax.swing.JLabel" name="ledRoom1OnOffLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -445,7 +440,7 @@
         <Component class="javax.swing.JLabel" name="jLabel30">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xc6d0; &#xc0c1;&#xd0dc;"/>
           </Properties>
@@ -453,7 +448,7 @@
         <Component class="javax.swing.JLabel" name="jLabel31">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xbc1d;&#xae30; &#xc81c;&#xc5b4;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -463,6 +458,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ledLivingRoomTempLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
@@ -472,7 +470,7 @@
         <Component class="javax.swing.JLabel" name="jLabel32">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc804;&#xc6d0; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -480,7 +478,7 @@
         <Component class="javax.swing.JLabel" name="ledLivingRoomOnOffLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -502,7 +500,7 @@
         <Component class="javax.swing.JLabel" name="jLabel33">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="15" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="LED &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -510,7 +508,7 @@
         <Component class="javax.swing.JLabel" name="jLabel34">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xac70;&#xc2e4;"/>
           </Properties>
@@ -518,7 +516,7 @@
         <Component class="javax.swing.JLabel" name="jLabel35">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xbc1d;&#xae30; &#xc81c;&#xc5b4;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -528,6 +526,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel36">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="17" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xb825; &#xc0ac;&#xc6a9;&#xb7c9;"/>
           </Properties>
         </Component>
@@ -535,6 +536,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -547,6 +551,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ledELabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="17" style="0"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
@@ -556,13 +563,16 @@
         <Component class="javax.swing.JLabel" name="jLabel37">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc804;&#xc6d0; &#xc81c;&#xc5b4;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="ledOffRoom1Btn">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="OFF"/>
           </Properties>
           <Events>
@@ -582,7 +592,7 @@
         <Component class="javax.swing.JLabel" name="jLabel38">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; LED &#xbc1d;&#xae30;"/>
           </Properties>
@@ -591,6 +601,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -604,13 +617,16 @@
         <Component class="javax.swing.JLabel" name="jLabel39">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xc6d0; &#xc0c1;&#xd0dc;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="ledOffLivingRoomBtn">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="OFF"/>
           </Properties>
           <Events>
@@ -620,7 +636,7 @@
         <Component class="javax.swing.JLabel" name="jLabel40">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xce68;&#xc2e4;"/>
           </Properties>
@@ -634,7 +650,7 @@
         <Component class="javax.swing.JLabel" name="ledRoom1TempLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -710,7 +726,7 @@
                           <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -749,7 +765,7 @@
                               </Group>
                               <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="58" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="54" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -843,7 +859,7 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="15" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xb09c;&#xbc29; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -851,7 +867,7 @@
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc628;&#xb3c4; &#xc81c;&#xc5b4;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -862,7 +878,7 @@
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc804;&#xc6d0; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -882,6 +898,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -893,6 +912,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="heatingOffLivingRoomBtn">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="OFF"/>
           </Properties>
           <Events>
@@ -908,7 +930,7 @@
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xb09c;&#xbc29; &#xc628;&#xb3c4;"/>
           </Properties>
@@ -916,13 +938,16 @@
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xc6d0; &#xc0c1;&#xd0dc;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="heatingLivingRoomTempLabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
@@ -932,7 +957,7 @@
         <Component class="javax.swing.JLabel" name="livingRoomLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -943,7 +968,7 @@
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xac70;&#xc2e4;"/>
           </Properties>
@@ -952,6 +977,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -964,6 +992,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="heatingOffRoom2Btn">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="OFF"/>
           </Properties>
           <Events>
@@ -973,7 +1004,7 @@
         <Component class="javax.swing.JLabel" name="jLabel23">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xb09c;&#xbc29; &#xc628;&#xb3c4;"/>
           </Properties>
@@ -981,7 +1012,7 @@
         <Component class="javax.swing.JLabel" name="jLabel24">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xc6d0; &#xc0c1;&#xd0dc;"/>
           </Properties>
@@ -989,7 +1020,7 @@
         <Component class="javax.swing.JLabel" name="jLabel25">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xce68;&#xc2e4;"/>
           </Properties>
@@ -997,7 +1028,7 @@
         <Component class="javax.swing.JLabel" name="heatingRoom1TempLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -1008,7 +1039,7 @@
         <Component class="javax.swing.JLabel" name="heatingRoom1OnOffLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -1019,7 +1050,7 @@
         <Component class="javax.swing.JLabel" name="jLabel26">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc628;&#xb3c4; &#xc81c;&#xc5b4;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -1030,7 +1061,7 @@
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc804;&#xc6d0; &#xc81c;&#xc5b4;"/>
           </Properties>
@@ -1048,11 +1079,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel28">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="17" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xc804;&#xb825; &#xc0ac;&#xc6a9;&#xb7c9;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="heatingELabel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="17" style="0"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
@@ -1175,7 +1212,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="usedELabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Component id="jSeparator6" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -1205,7 +1242,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xae30;&#xae30;&#xc81c;&#xc5b4;"/>
       </Properties>
@@ -1213,7 +1250,7 @@
     <Component class="javax.swing.JButton" name="btn_heatingCommand">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xb09c;&#xbc29; &#xc81c;&#xc5b4;"/>
       </Properties>
@@ -1224,7 +1261,7 @@
     <Component class="javax.swing.JButton" name="btn_ledCommand">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="LED &#xc870;&#xba85; &#xc81c;&#xc5b4;"/>
       </Properties>
@@ -1235,7 +1272,7 @@
     <Component class="javax.swing.JButton" name="btn_refCommand">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xb0c9;&#xc7a5;&#xace0; &#xc81c;&#xc5b4;"/>
       </Properties>
@@ -1246,7 +1283,7 @@
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xb09c;&#xbc29;&#xc758; &#xc628;&#xb3c4; &#xbc0f; &#xc804;&#xc6d0;&#xc744; &#xc81c;&#xc5b4;&#xd569;&#xb2c8;&#xb2e4;."/>
       </Properties>
@@ -1254,7 +1291,7 @@
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="LED &#xc870;&#xba85;&#xc758; &#xbc1d;&#xae30; &#xbc0f; &#xc804;&#xc6d0;&#xc744; &#xc81c;&#xc5b4;&#xd569;&#xb2c8;&#xb2e4;."/>
       </Properties>
@@ -1262,7 +1299,7 @@
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="13" style="0"/>
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xb0c9;&#xc7a5;&#xace0;&#xc758; &#xc628;&#xb3c4; &#xbc0f; &#xc804;&#xc6d0;&#xc744; &#xc81c;&#xc5b4;&#xd569;&#xb2c8;&#xb2e4;."/>
       </Properties>
@@ -1273,6 +1310,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="commandMainLabel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&#xd604;&#xc7ac; &#xae30;&#xae30; &#xc804;&#xb825; &#xc0ac;&#xc6a9;&#xb7c9;"/>
       </Properties>
     </Component>
@@ -1280,6 +1320,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="usedELabel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="0"/>
+        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="99" red="0" type="rgb"/>
         </Property>

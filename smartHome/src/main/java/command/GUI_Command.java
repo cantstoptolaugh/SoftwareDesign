@@ -72,11 +72,12 @@ public class GUI_Command extends javax.swing.JFrame {
 
     public void setting() { // 서브 프레임 첫 화면 텍스트 및 슬라이더 설정
         refTempLabel.setText("" + 0);
-        refOnOffLabel.setText(refOnOffState);
+        refOnOffLabel.setText("OFF");
 
         ledLivingRoomTempLabel.setText("" + 0);
-        ledLivingRoomOnOffLabel.setText(refOnOffState);
-
+        ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState);
+        ledRoom1OnOffLabel.setText(ledRoom1OnOffState);
+        
         heatingLivingRoomTempLabel.setText("" + 0);
         livingRoomLabel2.setText(heatingLivingRoomOnOffState);
 
@@ -205,14 +206,14 @@ public class GUI_Command extends javax.swing.JFrame {
 
         refFrame.setBackground(new java.awt.Color(0, 255, 51));
 
-        jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel2.setText("냉장고 제어");
 
-        jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel3.setText("온도 제어");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel4.setText("전원 제어");
 
         refSlider.setMaximum(6);
@@ -232,6 +233,7 @@ public class GUI_Command extends javax.swing.JFrame {
         });
 
         refOnBtn.setBackground(new java.awt.Color(0, 0, 0));
+        refOnBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         refOnBtn.setForeground(new java.awt.Color(255, 255, 255));
         refOnBtn.setText("ON");
         refOnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +242,7 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
+        refOffBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         refOffBtn.setText("OFF");
         refOffBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,24 +250,24 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel18.setText("현재 냉장실 온도");
 
-        jLabel19.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel19.setText("현재 전원 상태");
 
-        refTempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refTempLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         refTempLabel.setForeground(new java.awt.Color(0, 153, 255));
         refTempLabel.setText("현재 온도");
 
-        refOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         refOnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
         refOnOffLabel.setText("OFF");
 
-        jLabel22.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel22.setText("현재 전력 사용량");
 
-        refELabel.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        refELabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         refELabel.setForeground(new java.awt.Color(0, 153, 255));
         refELabel.setText("0  KWh");
 
@@ -293,18 +296,6 @@ public class GUI_Command extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2))
                     .addGroup(refFrameLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(38, 38, 38)
-                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(refFrameLayout.createSequentialGroup()
-                                .addComponent(refOnBtn)
-                                .addGap(44, 44, 44)
-                                .addComponent(refOffBtn))
-                            .addComponent(refSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(refFrameLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(refFrameLayout.createSequentialGroup()
@@ -318,15 +309,27 @@ public class GUI_Command extends javax.swing.JFrame {
                             .addGroup(refFrameLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addGap(28, 28, 28)
-                                .addComponent(refOnOffLabel)))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                                .addComponent(refOnOffLabel))))
+                    .addGroup(refFrameLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(38, 38, 38)
+                        .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(refFrameLayout.createSequentialGroup()
+                                .addComponent(refOnBtn)
+                                .addGap(44, 44, 44)
+                                .addComponent(refOffBtn))
+                            .addComponent(refSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         refFrameLayout.setVerticalGroup(
             refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(refFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(refOnBtn)
@@ -338,7 +341,7 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addGroup(refFrameLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(refSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45)
+                .addGap(37, 37, 37)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -352,30 +355,31 @@ public class GUI_Command extends javax.swing.JFrame {
                 .addGroup(refFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(refELabel))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jLabel29.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel29.setText("현재 LED 밝기");
 
-        ledRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         ledRoom1OnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
         ledRoom1OnOffLabel.setText("jLabel24");
 
-        jLabel30.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel30.setText("현재 전원 상태");
 
-        jLabel31.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel31.setText("밝기 제어");
         jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        ledLivingRoomTempLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         ledLivingRoomTempLabel.setForeground(new java.awt.Color(0, 153, 255));
         ledLivingRoomTempLabel.setText("jLabel22");
 
-        jLabel32.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel32.setText("전원 제어");
 
-        ledLivingRoomOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledLivingRoomOnOffLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         ledLivingRoomOnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
         ledLivingRoomOnOffLabel.setText("jLabel24");
 
@@ -397,19 +401,21 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel33.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
         jLabel33.setText("LED 제어");
 
-        jLabel34.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel34.setText("거실");
 
-        jLabel35.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel35.setText("밝기 제어");
         jLabel35.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jLabel36.setFont(new java.awt.Font("맑은 고딕", 0, 17)); // NOI18N
         jLabel36.setText("현재 전력 사용량");
 
         ledOnRoom1Btn.setBackground(new java.awt.Color(0, 0, 0));
+        ledOnRoom1Btn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         ledOnRoom1Btn.setForeground(new java.awt.Color(255, 255, 255));
         ledOnRoom1Btn.setText("ON");
         ledOnRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -418,12 +424,14 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
+        ledELabel.setFont(new java.awt.Font("맑은 고딕", 0, 17)); // NOI18N
         ledELabel.setForeground(new java.awt.Color(0, 153, 255));
         ledELabel.setText("0 kwh");
 
-        jLabel37.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel37.setText("전원 제어");
 
+        ledOffRoom1Btn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         ledOffRoom1Btn.setText("OFF");
         ledOffRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,10 +452,11 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel38.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel38.setText("현재 LED 밝기");
 
         ledOnLivingRoomBtn.setBackground(new java.awt.Color(0, 0, 0));
+        ledOnLivingRoomBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         ledOnLivingRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
         ledOnLivingRoomBtn.setText("ON");
         ledOnLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -456,9 +465,10 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel39.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel39.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel39.setText("현재 전원 상태");
 
+        ledOffLivingRoomBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         ledOffLivingRoomBtn.setText("OFF");
         ledOffLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -466,13 +476,13 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel40.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel40.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel40.setText("침실");
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator7.setToolTipText("");
 
-        ledRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        ledRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         ledRoom1TempLabel.setForeground(new java.awt.Color(0, 153, 255));
         ledRoom1TempLabel.setText("0");
 
@@ -497,7 +507,11 @@ public class GUI_Command extends javax.swing.JFrame {
             .addGroup(ledFrameLayout.createSequentialGroup()
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ledFrameLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addContainerGap()
+                        .addComponent(jLabel33)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(ledFrameLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
                         .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ledFrameLayout.createSequentialGroup()
                                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -513,47 +527,39 @@ public class GUI_Command extends javax.swing.JFrame {
                                     .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(32, 32, 32)
                                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(ledFrameLayout.createSequentialGroup()
                                         .addComponent(ledOnLivingRoomBtn)
                                         .addGap(43, 43, 43)
-                                        .addComponent(ledOffLivingRoomBtn))
-                                    .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(ledFrameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel33))
-                    .addGroup(ledFrameLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel34)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ledOffLivingRoomBtn))))
+                            .addComponent(jLabel34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ledFrameLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(91, 91, 91)
                         .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel39))
+                                .addGap(39, 39, 39)
                                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ledRoom1OnOffLabel)
+                                    .addComponent(ledRoom1TempLabel)))
+                            .addGroup(ledFrameLayout.createSequentialGroup()
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel32)
+                                    .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel40))
+                                .addGap(32, 32, 32)
+                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ledRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(ledFrameLayout.createSequentialGroup()
-                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel39))
-                                        .addGap(39, 39, 39)
-                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ledRoom1OnOffLabel)
-                                            .addComponent(ledRoom1TempLabel)))
-                                    .addGroup(ledFrameLayout.createSequentialGroup()
-                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel32)
-                                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(ledFrameLayout.createSequentialGroup()
-                                                .addComponent(ledOnRoom1Btn)
-                                                .addGap(43, 43, 43)
-                                                .addComponent(ledOffRoom1Btn))
-                                            .addComponent(ledRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jLabel40))
-                        .addGap(0, 58, Short.MAX_VALUE))
+                                        .addComponent(ledOnRoom1Btn)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(ledOffRoom1Btn)))))
+                        .addGap(0, 50, Short.MAX_VALUE))
                     .addGroup(ledFrameLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel36)
@@ -568,65 +574,63 @@ public class GUI_Command extends javax.swing.JFrame {
                 .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ledFrameLayout.createSequentialGroup()
                         .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel37)
-                                    .addComponent(ledOnLivingRoomBtn)
-                                    .addComponent(ledOffLivingRoomBtn))
-                                .addGap(50, 50, 50)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel35))
-                                .addGap(89, 89, 89)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel29)
-                                    .addComponent(ledLivingRoomTempLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel30)
-                                    .addComponent(ledLivingRoomOnOffLabel)))
-                            .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel38)
-                                    .addComponent(ledRoom1TempLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel39)
-                                    .addComponent(ledRoom1OnOffLabel)))
-                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(ledFrameLayout.createSequentialGroup()
+                                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel38)
+                                        .addComponent(ledRoom1TempLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel39)
+                                        .addComponent(ledRoom1OnOffLabel)))
+                                .addGroup(ledFrameLayout.createSequentialGroup()
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(44, 44, 44)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel37)
+                                        .addComponent(ledOnLivingRoomBtn)
+                                        .addComponent(ledOffLivingRoomBtn))
+                                    .addGap(50, 50, 50)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ledLivingRoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel35))
+                                    .addGap(89, 89, 89)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel29)
+                                        .addComponent(ledLivingRoomTempLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel30)
+                                        .addComponent(ledLivingRoomOnOffLabel))))))
                     .addGroup(ledFrameLayout.createSequentialGroup()
                         .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel36)
                             .addComponent(ledELabel))
-                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel32)
-                                    .addComponent(ledOnRoom1Btn)
-                                    .addComponent(ledOffRoom1Btn)))
-                            .addGroup(ledFrameLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(ledOnRoom1Btn)
+                            .addComponent(ledOffRoom1Btn))
                         .addGap(47, 47, 47)
                         .addGroup(ledFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ledRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel31))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        jLabel8.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
         jLabel8.setText("난방 제어");
 
-        jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel9.setText("온도 제어");
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel10.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel10.setText("전원 제어");
 
         heatingLivingRoomSlider.setMaximum(30);
@@ -643,6 +647,7 @@ public class GUI_Command extends javax.swing.JFrame {
         });
 
         heatingOnLivingRoomBtn.setBackground(new java.awt.Color(0, 0, 0));
+        heatingOnLivingRoomBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         heatingOnLivingRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
         heatingOnLivingRoomBtn.setText("ON");
         heatingOnLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -651,6 +656,7 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
+        heatingOffLivingRoomBtn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         heatingOffLivingRoomBtn.setText("OFF");
         heatingOffLivingRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -661,23 +667,25 @@ public class GUI_Command extends javax.swing.JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator3.setToolTipText("");
 
-        jLabel14.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel14.setText("현재 난방 온도");
 
-        jLabel15.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel15.setText("현재 전원 상태");
 
+        heatingLivingRoomTempLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         heatingLivingRoomTempLabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingLivingRoomTempLabel.setText("jLabel22");
 
-        livingRoomLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        livingRoomLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         livingRoomLabel2.setForeground(new java.awt.Color(0, 153, 255));
         livingRoomLabel2.setText("jLabel24");
 
-        jLabel21.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel21.setText("거실");
 
         heatingOnRoom1Btn.setBackground(new java.awt.Color(0, 0, 0));
+        heatingOnRoom1Btn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         heatingOnRoom1Btn.setForeground(new java.awt.Color(255, 255, 255));
         heatingOnRoom1Btn.setText("ON");
         heatingOnRoom1Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -686,6 +694,7 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
+        heatingOffRoom2Btn.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         heatingOffRoom2Btn.setText("OFF");
         heatingOffRoom2Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -693,28 +702,28 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel23.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel23.setText("현재 난방 온도");
 
-        jLabel24.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel24.setText("현재 전원 상태");
 
-        jLabel25.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jLabel25.setText("침실");
 
-        heatingRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        heatingRoom1TempLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         heatingRoom1TempLabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingRoom1TempLabel.setText("0");
 
-        heatingRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        heatingRoom1OnOffLabel.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         heatingRoom1OnOffLabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingRoom1OnOffLabel.setText("jLabel24");
 
-        jLabel26.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel26.setText("온도 제어");
         jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel27.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel27.setText("전원 제어");
 
         heatingRoom1Slider.setMaximum(30);
@@ -735,8 +744,10 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
+        jLabel28.setFont(new java.awt.Font("맑은 고딕", 0, 17)); // NOI18N
         jLabel28.setText("현재 전력 사용량");
 
+        heatingELabel.setFont(new java.awt.Font("맑은 고딕", 0, 17)); // NOI18N
         heatingELabel.setForeground(new java.awt.Color(0, 153, 255));
         heatingELabel.setText("0 kwh");
 
@@ -793,7 +804,7 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addGroup(heatingFrameLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel21)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(heatingFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(heatingFrameLayout.createSequentialGroup()
@@ -822,7 +833,7 @@ public class GUI_Command extends javax.swing.JFrame {
                                                 .addComponent(heatingOffRoom2Btn))
                                             .addComponent(heatingRoom1Slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel25))
-                        .addGap(0, 58, Short.MAX_VALUE))
+                        .addGap(0, 54, Short.MAX_VALUE))
                     .addGroup(heatingFrameLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel28)
@@ -891,10 +902,10 @@ public class GUI_Command extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
         jLabel1.setText("기기제어");
 
-        btn_heatingCommand.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btn_heatingCommand.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         btn_heatingCommand.setText("난방 제어");
         btn_heatingCommand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -902,7 +913,7 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        btn_ledCommand.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btn_ledCommand.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         btn_ledCommand.setText("LED 조명 제어");
         btn_ledCommand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -910,7 +921,7 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        btn_refCommand.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btn_refCommand.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         btn_refCommand.setText("냉장고 제어");
         btn_refCommand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -918,17 +929,19 @@ public class GUI_Command extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel11.setText("난방의 온도 및 전원을 제어합니다.");
 
-        jLabel12.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel12.setText("LED 조명의 밝기 및 전원을 제어합니다.");
 
-        jLabel13.setFont(new java.awt.Font("맑은 고딕", 0, 13)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         jLabel13.setText("냉장고의 온도 및 전원을 제어합니다.");
 
+        commandMainLabel.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         commandMainLabel.setText("현재 기기 전력 사용량");
 
+        usedELabel.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
         usedELabel.setForeground(new java.awt.Color(0, 153, 204));
         usedELabel.setText("jLabel21");
 
@@ -990,7 +1003,7 @@ public class GUI_Command extends javax.swing.JFrame {
                     .addComponent(commandMainLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usedELabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
