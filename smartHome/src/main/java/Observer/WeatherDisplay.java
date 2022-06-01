@@ -5,12 +5,8 @@ import Main.MainDisplay;
 import java.io.File;
 import Observer.WeatherState.*;
 import Observer.WeatherData.*;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,30 +16,82 @@ import java.util.logging.Logger;
  */
 public class WeatherDisplay extends javax.swing.JFrame {
 
-    File Weather_info;
-    // 로그인 파일 읽기 위한 File 객체
+    Rain rain = new Rain();
+    Snow snow = new Snow();
+    Sunny sunny = new Sunny();
+    Cloud cloud = new Cloud();
 
-    LoginForm abc = new LoginForm();
-    String id = abc.SessionID;
-    // 세션 id 읽기 위한 변수 id
+    String todayweather;//textfield에 출력할 오늘 날씨 값
+    String tomorrowweather;//textfield에 출력할  내일 날씨 값
 
-    BufferedWriter bufferedWriter = null;
+    Random random = new Random();
 
-    String temperature_num;
-    String humidity_num;
-    String Tomorrow_weather;
+    int temperatureR = 27;//random.nextInt(0, 30);
+    int humidityR = 40;//random.nextInt(40, 60);
+
+    String temperatureS;
+    String humidityS;
+    //문자열 변환
+
+    String todayTemperature;
+    //출력할 온도
+    String todayHumidity;
+
+    WeatherData weatherData = new WeatherData();
 
     public WeatherDisplay() {
         initComponents();
         setTitle("날씨관리화면");
         setLocationRelativeTo(null);
-        temperature.setText("랜덤 온도 값");
-        humidity.setText("랜덤 습도 값");
-        TodayWeather.setText("온도습도 맞춘 오늘 날씨");
-        TomorrowWeather.setText("랜덤 내일 날씨");
+
+        temperatureS = Integer.toString(temperatureR);
+        humidityS = Integer.toString(humidityR);
+
+        todayTemperature = weatherData.setMeasurements(temperatureS);
+        todayHumidity = weatherData.setMeasurements(humidityS);
+
+        //온도, 습도 랜덤 
+
+        /*random = new Random();
+            int num = random.nextInt(0, 4);
+            
+           if (num == 0) {
+                tomorrowweather = sunny.Weather("It's sunny tomorrow");
+            } else if (num == 1) {
+                tomorrowweather = rain.Weather("It's rainy tomorrow");
+            } else if (num == 2) {
+                tomorrowweather = snow.Weather("It's snowing tomorrow");
+            } else if (num == 3) {
+                tomorrowweather = cloud.Weather("It's cloudy tomorrow");
+            }*/
         
+        tomorrowweather = sunny.Weather("맑음");
+        jLabel7.setText("내일은 맑은 날씨로 예상됩니다. 즐거운 하루 되세요!");
+        //온도, 습도 랜덤값-> 오늘 날씨 출력
+        if (temperatureR >= 20 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //sunny
+            todayweather = sunny.Weather("맑음");
+            jLabel6.setText("오늘은 맑은 날씨입니다. 즐거운 하루 되세요!");
+        } else if (temperatureR >= 10 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //rain
+            todayweather = rain.Weather("비");
+            jLabel6.setText("오늘은 비 오는 날씨입니다. 우산을 꼭 챙기세요!");
+        } else if (temperatureR >= 0 && temperatureR <= 10 && humidityR >= 40 && humidityR <= 60) {
+            //snow
+            todayweather = snow.Weather("눈");
+            jLabel6.setText("오늘은 눈 오는 날씨입니다. 빙판길 조심하세요!");
+        } else if (temperatureR >= 0 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
+            //cloud
+            todayweather = cloud.Weather("흐림");
+            jLabel6.setText("오늘은 흐린 날씨입니다. 소나기 조심하세요!");
+        }
+
+        temperature.setText(todayTemperature);
+        humidity.setText(todayHumidity);
+        TomorrowWeather.setText(tomorrowweather);
+        TodayWeather.setText(todayweather);
+
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -52,17 +100,27 @@ public class WeatherDisplay extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        temperature = new javax.swing.JTextField();
-        humidity = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        TodayWeather = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPanel1 = new javax.swing.JPanel();
         TomorrowWeather = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        TodayWeather = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        humidity = new javax.swing.JTextField();
+        temperature = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -73,39 +131,13 @@ public class WeatherDisplay extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
+        jScrollPane1.setViewportView(jEditorPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("현재 대기 상태");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "날씨 기후 및 상태 확인", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("맑은 고딕", 1, 18))); // NOI18N
 
-        jLabel2.setText("온도");
-
-        jLabel3.setText("습도");
-
-        temperature.setText("jTextField1");
-        temperature.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                temperatureActionPerformed(evt);
-            }
-        });
-
-        humidity.setText("jTextField2");
-        humidity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                humidityActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("오늘의 날씨");
-
-        TodayWeather.setText("jTextField3");
-        TodayWeather.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TodayWeatherActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("내일 예상 날씨");
-
+        TomorrowWeather.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         TomorrowWeather.setText("jTextField4");
         TomorrowWeather.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,12 +145,211 @@ public class WeatherDisplay extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        jLabel5.setText("내일 예상 날씨");
+
+        TodayWeather.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        TodayWeather.setText("jTextField3");
+        TodayWeather.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TodayWeatherActionPerformed(evt);
             }
         });
+
+        jLabel4.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        jLabel4.setText("오늘의 날씨");
+
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 1, true));
+
+        jLabel6.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(218, 0, 0));
+        jLabel6.setText("jLabel6");
+
+        jLabel7.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel7.setText("jLabel7");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(TodayWeather, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(TomorrowWeather, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TodayWeather, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TomorrowWeather, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "기온 및 대기상태 확인", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("맑은 고딕", 1, 18))); // NOI18N
+
+        humidity.setFont(new java.awt.Font("맑은 고딕", 1, 17)); // NOI18N
+        humidity.setText("jTextField2");
+        humidity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                humidityActionPerformed(evt);
+            }
+        });
+
+        temperature.setFont(new java.awt.Font("맑은 고딕", 1, 17)); // NOI18N
+        temperature.setText("jTextField1");
+        temperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                temperatureActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("맑은 고딕", 1, 17)); // NOI18N
+        jLabel3.setText("습도");
+
+        jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 17)); // NOI18N
+        jLabel2.setText("기온");
+
+        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel1.setText("°C");
+
+        jLabel8.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel8.setText("%");
+
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 204), 1, true));
+
+        jLabel9.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel9.setText("기온이 높습니다. 반팔 반바지가 괜찮을 것 같군요!");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 204), 1, true));
+
+        jLabel10.setFont(new java.awt.Font("맑은 고딕", 1, 15)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel10.setText("습도가 다소 높습니다. ");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(temperature, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(28, 28, 28))
+                                    .addComponent(humidity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(temperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(humidity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jMenu3.setText("메뉴");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
@@ -143,57 +374,21 @@ public class WeatherDisplay extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(temperature, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(humidity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TodayWeather, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TomorrowWeather, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(temperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(humidity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TodayWeather, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TomorrowWeather, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -204,7 +399,6 @@ public class WeatherDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
         MainDisplay dis = new MainDisplay();
         dis.setVisible(true);
         setVisible(false);
@@ -227,97 +421,48 @@ public class WeatherDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TomorrowWeatherActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FileWriter fw = null;
-        try {
-            Weather_info = new File(id + "'sWeather.txt");
-            bufferedWriter = new BufferedWriter(new FileWriter(Weather_info, true));
-            
-            Random random = new Random();
-            int temperatureR = random.nextInt(0, 30);
-            int humidityR = random.nextInt(20, 60);
-            //온도, 습도 랜덤 출력
-            
-            fw = new FileWriter(Weather_info, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(temperatureR);
-            bw.write(humidityR);
-            //Weather_info 파일에 랜덤한 온도, 습도 저장
-            
-            //온도, 습도에 맞춰서 오늘 날씨 출력
-            if (temperatureR >= 20 && temperatureR <= 30 && humidityR >= 20 && humidityR <= 30) {
-                //sunny
-            } else if (temperatureR >= 10 && temperatureR <= 30 && humidityR >= 40 && humidityR <= 60) {
-                //rain
-            } else if (temperatureR >= 0 && temperatureR <= 10 && humidityR >= 30 && humidityR <= 40) {
-                //snow
-            } else if (temperatureR >= 10 && temperatureR <= 20 && humidityR >= 30 && humidityR <= 50) {
-                //cloud
-            }   
-            
-            //내일 날씨 랜덤 출력
-            
-            int WeatherR = random.nextInt(0, 3);
-            if (WeatherR == 0) {
-                //내일 날씨 sunny
-            } else if (WeatherR == 1) {
-                //내일 날씨 rain
-            } else if (WeatherR == 2) {
-                //내일 날씨 snow
-            } else if (WeatherR == 3) {
-                //내일 날씨 cloud
-            }
-            Scanner scan = new Scanner(Weather_info);
-            temperature_num = scan.next();
-            humidity_num = scan.next();
-            Tomorrow_weather = scan.next();
-            //저장된 값 읽어와서 출력
-            
-            if (Weather_info.exists()) {
-                if (Weather_info.delete()) {
-                    System.out.println("파일삭제 성공");
-                } else {
-                    System.out.println("파일삭제 실패");
-                }
-            } else {
-                System.out.println("파일이 존재하지 않습니다.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(WeatherDisplay.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(WeatherDisplay.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WeatherDisplay().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TodayWeather;
     private javax.swing.JTextField TomorrowWeather;
     private javax.swing.JTextField humidity;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField temperature;
     // End of variables declaration//GEN-END:variables
+
+    private String toString(int temperatureR) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

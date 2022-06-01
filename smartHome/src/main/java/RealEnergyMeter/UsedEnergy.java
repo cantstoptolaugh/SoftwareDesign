@@ -1,5 +1,7 @@
 package RealEnergyMeter;
 
+import RealEnergyMeter.Observer;
+
 public class UsedEnergy implements Observer, DisplayElement {
 
     private float gas_energy;

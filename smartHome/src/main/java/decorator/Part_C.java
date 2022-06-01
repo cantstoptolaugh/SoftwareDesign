@@ -3,7 +3,7 @@ package decorator;
 class Part_C extends ManagementFee {
 
     public Part_C() {
-        description = " C동 거주자님";
+        description = "C";
     }
 
     public double bill() {

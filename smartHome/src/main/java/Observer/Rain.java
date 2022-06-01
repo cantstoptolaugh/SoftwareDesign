@@ -1,15 +1,22 @@
-
 package Observer;
 
 public class Rain implements WeatherKinds {
-    public void Rain(){
-    }
-    public void Weather(){
-       System.out.println("It's riany day");
+
+    String weather_type;
+
+    public void Rain() {
     }
 
-    public void weather() {
+    public String Weather(String Weather) {
+
+        this.weather_type = Weather;
+
+        return this.weather_type;
+    }
+
+    @Override
+    public String Weather() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

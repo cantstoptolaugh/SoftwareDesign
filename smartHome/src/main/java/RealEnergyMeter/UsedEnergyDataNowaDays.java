@@ -4,6 +4,15 @@
  */
 package RealEnergyMeter;
 
+import ForLogin.LoginForm;
+import RealEnergyMeter.File_task;
+import RealEnergyMeter.MeterDisplay;
+import static RealEnergyMeter.UsedEnergyDataNow.elec_num;
+import static RealEnergyMeter.UsedEnergyDataNow.gas_num;
+import static RealEnergyMeter.UsedEnergyDataNow.water_num;
+import RealEnergyMeter.UsedEnergyDataNowaDays;
+import java.io.File;
+
 /**
  *
  * @author 이주혁
@@ -13,12 +22,56 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
     /**
      * Creates new form EnergyUseDisplay
      */
+    LoginForm form = new LoginForm();
+    String SessionID = form.SessionID;
+    File Energy_use = new File(SessionID + "'sUse.txt");
+    EnergyData energy = new EnergyData();
+
+    static String gas_num;
+    static String elec_num;
+    static String water_num;
+    
     public UsedEnergyDataNowaDays() {
         initComponents();
         setTitle("당월 에너지 사용량");
         setLocationRelativeTo(null);
-        Calculator cal = new Calculator();
-        jTextField1.setText(cal.value2);
+        
+        File_task cal = new File_task();
+
+        cal.forAdd();
+        System.out.println(cal.add_num2);
+        cal.read();
+        //일단 존재하는 파일 이름 찾기
+        //그 파일의 값을 읽어내기 ->  변수를 갖고와서 저장한다.
+        cal.calculate();
+        //~~~
+        cal.delete();
+        //기존에 존재하는 파일 삭제(덮어쓰기). ->32번 라인 
+        cal.write();
+        //파일 만들어졌을거다.
+        //하지만, 한 번더 파일 만드는 코드 + 파일 내 계산된 값들 삽입
+        cal.read();
+        //존재하는 파일 이름 찾기
+        // 그 파일의 값을 읽어내기 -> 변수를 갖고와 저장.
+        
+        gas_num = cal.gas_num;
+        elec_num = cal.elec_num;
+        water_num = cal.water_num;
+
+        float num1 = Float.valueOf(this.gas_num);
+        float num2 = Float.valueOf(this.elec_num);
+        float num3 = Float.valueOf(this.water_num);
+        
+        
+        UsedEnergy usedEnergy = new UsedEnergy(energy);
+        UsageFee usageFee = new UsageFee(energy);
+        energy.setMeasurements(num1, num2, num3);
+        
+        String str1 = Float.toString(usageFee.expect_Fee);
+        String str2 = Float.toString(usageFee.use_energy);
+        
+        jTextField1.setText(str1);
+        jTextField2.setText(str2);
     }
 
     /**
@@ -35,6 +88,8 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -43,10 +98,10 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "당월 예상 요금 및 전력 사용량", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("맑은 고딕", 1, 18))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         jLabel1.setText("당월 요금 :");
 
-        jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         jLabel2.setText("당월 사용 전력량 :");
 
         jTextField1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
@@ -55,33 +110,45 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jTextField2.setText("jTextField2");
 
+        jLabel3.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel3.setText("원");
+
+        jLabel4.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        jLabel4.setText("kWh");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(44, 44, 44))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jMenu1.setText("메뉴");
@@ -164,6 +231,8 @@ public class UsedEnergyDataNowaDays extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

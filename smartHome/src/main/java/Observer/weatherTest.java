@@ -1,28 +1,52 @@
 package Observer;
 
+import java.util.Random;
 
-public class weatherTest{
+public class weatherTest {
 
     public static void main(String[] args) {
+
+        Rain rain = new Rain();
+        Snow snow = new Snow();
+        Sunny sunny = new Sunny();
+        Cloud cloud = new Cloud();
+
+        String todayweather;
+        String tomorrowweather;
+
+        Random random = new Random();
+
+        int temperatureR = 27;//random.nextInt(0, 30);
+        int humidityR = 40;//random.nextInt(40, 60);
+
+        String temperatureS;
+        String humidityS;
+        //문자열 변환
+
+        String todayTemperature;
+        //출력할 온도
+        String todayHumidity;
+
         WeatherData weatherData = new WeatherData();
+
         //날씨 데이터 객체 생성
-        
-        CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay(weatherData);
-        // 현재 값 보여주는 클래스 currenCinditionsDisplay 객체 생성
-        
-        WeatherState TodayWeatherstate = new TodayWeather();
-        WeatherState TomorrowWeatherState = new TomorrowWeather();
-        
-        weatherData.setMeasurements(20,40);
-        TodayWeatherstate.WeatherDisplay();
-        TomorrowWeatherState.WeatherDisplay();
-        
-        //날씨 출력
-        
-        //온도랑 날씨 맞게 출력 if문
-        //로그아웃 할 때 온도 날씨 유지 ,
-        //새로 로그인하면 날씨 업데이트
-   
-    }  
-    
+        String todayWeather = null;
+        String tomorrowWeather = null;
+
+        todayWeather = sunny.Weather("It's sunny today");
+        tomorrowWeather = sunny.Weather("It's sunny tomorrow");
+
+        temperatureS = Integer.toString(temperatureR);
+        humidityS = Integer.toString(humidityR);
+
+        todayTemperature = weatherData.setMeasurements(temperatureS);
+        todayHumidity = weatherData.setMeasurements(humidityS);
+
+        System.out.println(temperatureS);
+        System.out.println(humidityS);
+        System.out.println(todayWeather);
+        System.out.println(tomorrowWeather);
+
+    }
+
 }

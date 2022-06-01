@@ -4,6 +4,8 @@
  */
 package RealEnergyMeter;
 
+import RealEnergyMeter.Observer;
+import RealEnergyMeter.Subject;
 import java.util.*;
 
 /**
