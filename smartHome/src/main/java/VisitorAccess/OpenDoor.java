@@ -301,7 +301,7 @@ public class OpenDoor extends javax.swing.JFrame {
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, v.getFamily() + "님이 방문하셨습니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
         try { 
             String member = v.getFamily();
@@ -355,7 +355,7 @@ public class OpenDoor extends javax.swing.JFrame {
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, v.getFamily() + "님이 방문하셨습니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
         try { 
             String member = v.getFamily();
@@ -407,7 +407,7 @@ public class OpenDoor extends javax.swing.JFrame {
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, v.getFamily() + "님이 방문하셨습니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
         try { 
             String member = v.getFamily();
@@ -458,7 +458,7 @@ public class OpenDoor extends javax.swing.JFrame {
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
-            JOptionPane.showMessageDialog(null,"------" + v.getFamily() + "님이 방문하셨습니다. ------", "Result", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, v.getFamily() + "님이 방문하셨습니다.", "Result", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "문이 닫힙니다.", "Result", JOptionPane.WARNING_MESSAGE);     
 
         try { 
