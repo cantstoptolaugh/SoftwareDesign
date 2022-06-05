@@ -68,8 +68,8 @@ public class GUIforMF extends javax.swing.JFrame {
             ResidentFee = new GasFee(ResidentFee);
             ResidentFee = new ElectricityFee(ResidentFee);
             
-            jTextField4.setText(Double.toString(ef.plusElec));
-            jTextField5.setText(Double.toString(gf.plusGas));
+            jTextField4.setText(String.format("%.1f",ef.plusElec));
+            jTextField5.setText(String.format("%.1f",gf.plusGas));
             jTextField6.setText(String.format("%.1f",wf.plusWater));
             jTextField7.setText(String.format("%.1f",ResidentFee.bill()));
 
@@ -82,10 +82,10 @@ public class GUIforMF extends javax.swing.JFrame {
             ResidentFee = new GasFee(ResidentFee);
             ResidentFee = new ElectricityFee(ResidentFee);
             
-            jTextField4.setText(elec_energy);
-            jTextField5.setText(gas_energy);
-            jTextField6.setText(water_energy);
-            jTextField7.setText(Double.toString(ResidentFee.bill()));
+            jTextField4.setText(String.format("%.1f",ef.plusElec));
+            jTextField5.setText(String.format("%.1f",gf.plusGas));
+            jTextField6.setText(String.format("%.1f",wf.plusWater));
+            jTextField7.setText(String.format("%.1f",ResidentFee.bill()));
 
         } else if (part.equals("C")) {
             ManagementFee ResidentFee = new Part_C();
@@ -96,10 +96,10 @@ public class GUIforMF extends javax.swing.JFrame {
             ResidentFee = new GasFee(ResidentFee);
             ResidentFee = new ElectricityFee(ResidentFee);
             
-            jTextField4.setText(elec_energy);
-            jTextField5.setText(gas_energy);
-            jTextField6.setText(water_energy);
-            jTextField7.setText(Double.toString(ResidentFee.bill()));
+            jTextField4.setText(String.format("%.1f",ef.plusElec));
+            jTextField5.setText(String.format("%.1f",gf.plusGas));
+            jTextField6.setText(String.format("%.1f",wf.plusWater));
+            jTextField7.setText(String.format("%.1f",ResidentFee.bill()));
 
         }
 
