@@ -1,7 +1,7 @@
 
 package VisitorAccess;
 
-import ForLogin.LoginForm;
+import SmartHome.LoginForm;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.table.DefaultTableModel;

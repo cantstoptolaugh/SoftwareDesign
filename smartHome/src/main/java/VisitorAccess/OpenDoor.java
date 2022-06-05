@@ -1,10 +1,9 @@
 
 package VisitorAccess;
 
-import ForLogin.LoginForm;
-import Main.MainDisplay;
+import SmartHome.LoginForm;
+import MainDisplay.MainDisplay;
 
-import ForLogin.*;
 import VisitorAccess.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

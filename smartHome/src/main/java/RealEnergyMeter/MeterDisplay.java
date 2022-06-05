@@ -4,12 +4,12 @@
  */
 package RealEnergyMeter;
 
-import ForLogin.LoginForm;
+import SmartHome.LoginForm;
 import RealEnergyMeter.MeterDisplay;
 import RealEnergyMeter.UsedEnergyDataBefore;
 import RealEnergyMeter.UsedEnergyDataNow;
 import RealEnergyMeter.UsedEnergyDataNowaDays;
-import Main.MainDisplay;
+import MainDisplay.MainDisplay;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
