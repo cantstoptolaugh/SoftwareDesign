@@ -71,7 +71,7 @@ public class GUIforMF extends javax.swing.JFrame {
             jTextField4.setText(Double.toString(ef.plusElec));
             jTextField5.setText(Double.toString(gf.plusGas));
             jTextField6.setText(String.format("%.1f",wf.plusWater));
-            jTextField7.setText(Double.toString(ResidentFee.bill()));
+            jTextField7.setText(String.format("%.1f",ResidentFee.bill()));
 
         } else if (part.equals("B")) {
             ManagementFee ResidentFee = new Part_B();

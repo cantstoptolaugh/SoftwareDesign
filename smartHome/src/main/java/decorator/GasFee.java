@@ -21,7 +21,7 @@ public class GasFee extends AdditionalFee {
 
     public double bill() {
         forget.get();
-        return plusGas + managementFee.bill();
+        return Double.parseDouble(forget.gas_num)*15.9 + managementFee.bill();
     }
 
 }

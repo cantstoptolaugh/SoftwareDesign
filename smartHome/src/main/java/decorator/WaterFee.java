@@ -21,7 +21,7 @@ class WaterFee extends AdditionalFee {
 
     public double bill() {
         forget.get();
-        return plusWater + managementFee.bill();
+        return Double.parseDouble(forget.water_num)*15.9 + managementFee.bill();
     }
 
 }
