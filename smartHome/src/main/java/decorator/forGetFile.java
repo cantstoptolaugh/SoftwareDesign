@@ -27,9 +27,9 @@ public class forGetFile {
             File Energy_use = new File(SessionID + "'sUse.txt");
             Scanner scan = new Scanner(Energy_use);
 
-            this.gas_num = scan.next();
-            this.elec_num = scan.next();
-            this.water_num = scan.next();
+            gas_num = scan.next();
+            elec_num = scan.next();
+            water_num = scan.next();
         } catch (IOException ex) {
         }
     }

@@ -1,11 +1,16 @@
 package decorator;
 
 class WaterFee extends AdditionalFee {
-
-    forGetFile forget = new forGetFile();
     
     private ManagementFee managementFee;
+        forGetFile forget = new forGetFile();
+        double plusWater;
 
+
+    public WaterFee(forGetFile f) {
+        f.get();
+        plusWater = Double.parseDouble(forget.water_num)*15.9;
+    }        
     public WaterFee(ManagementFee managementFee) {
         this.managementFee = managementFee;
     }
@@ -15,7 +20,8 @@ class WaterFee extends AdditionalFee {
     }
 
     public double bill() {
-        return Double.parseDouble(forget.elec_num)*15.9 + managementFee.bill();
+        forget.get();
+        return plusWater + managementFee.bill();
     }
 
 }

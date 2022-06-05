@@ -29,11 +29,18 @@ public class GUIforMF extends javax.swing.JFrame {
     String gas_energy;
     String elec_energy;
     String water_energy;
+    
+    forGetFile f = new forGetFile();
+    
+    WaterFee wf = new WaterFee(f);
+    GasFee gf = new GasFee(f);
+    ElectricityFee ef = new ElectricityFee(f);
 
     public GUIforMF() {
         initComponents();
         setTitle("관리비 청구");
         setLocationRelativeTo(null);
+        
 
         File_task file = new File_task();
         file.read();
@@ -59,11 +66,11 @@ public class GUIforMF extends javax.swing.JFrame {
 
             ResidentFee = new WaterFee(ResidentFee);
             ResidentFee = new GasFee(ResidentFee);
-            ResidentFee = new Electricity(ResidentFee);
+            ResidentFee = new ElectricityFee(ResidentFee);
             
-            jTextField4.setText(elec_energy);
-            jTextField5.setText(gas_energy);
-            jTextField6.setText(water_energy);
+            jTextField4.setText(Double.toString(ef.plusElec));
+            jTextField5.setText(Double.toString(gf.plusGas));
+            jTextField6.setText(String.format("%.1f",wf.plusWater));
             jTextField7.setText(Double.toString(ResidentFee.bill()));
 
         } else if (part.equals("B")) {
@@ -73,7 +80,7 @@ public class GUIforMF extends javax.swing.JFrame {
             
             ResidentFee = new WaterFee(ResidentFee);
             ResidentFee = new GasFee(ResidentFee);
-            ResidentFee = new Electricity(ResidentFee);
+            ResidentFee = new ElectricityFee(ResidentFee);
             
             jTextField4.setText(elec_energy);
             jTextField5.setText(gas_energy);
@@ -87,7 +94,7 @@ public class GUIforMF extends javax.swing.JFrame {
             
             ResidentFee = new WaterFee(ResidentFee);
             ResidentFee = new GasFee(ResidentFee);
-            ResidentFee = new Electricity(ResidentFee);
+            ResidentFee = new ElectricityFee(ResidentFee);
             
             jTextField4.setText(elec_energy);
             jTextField5.setText(gas_energy);

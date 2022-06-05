@@ -1,13 +1,16 @@
 package decorator;
 
-class Electricity extends AdditionalFee {
+class ElectricityFee extends AdditionalFee {
 
     forGetFile forget = new forGetFile();
-    
+    double plusElec;
     private ManagementFee managementFee;
     
-    
-    public Electricity(ManagementFee managementFee) {
+    public ElectricityFee(forGetFile f) {
+        f.get();
+        plusElec = Double.parseDouble(forget.elec_num)*15.9;
+    }
+    public ElectricityFee(ManagementFee managementFee) {
         this.managementFee = managementFee;
     }
 
@@ -16,9 +19,7 @@ class Electricity extends AdditionalFee {
     }
 
     public double bill() {
-        forget.get();
-        
-        return Double.parseDouble(forget.elec_num)*15.9 + managementFee.bill();
+        return plusElec + managementFee.bill();
     }
 
 }
