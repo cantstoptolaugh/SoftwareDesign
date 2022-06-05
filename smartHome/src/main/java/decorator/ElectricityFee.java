@@ -18,7 +18,7 @@ class Electricity extends AdditionalFee {
     public double bill() {
         forget.get();
         
-        return Double.parseDouble(forget.elec_num) + managementFee.bill();
+        return Double.parseDouble(forget.elec_num)*15.9 + managementFee.bill();
     }
 
 }

@@ -32,10 +32,10 @@ public class UsageFee implements Observer, DisplayElement {
 
     public void display() {
 
-        this.expect_Fee = (float)((gas_energy+elec_energy+water_energy)*1.8);
+        this.expect_Fee = (float)((gas_energy+elec_energy+water_energy)*15.9);
         this.use_energy = (float)(sum*15);
-        this.Before_Fee = (float)((gas_energy+elec_energy+water_energy)*1.4);
-        this.Before_energy = (float)(sum*15-3000);
+        this.Before_Fee = 56870;
+        this.Before_energy = 49820;
         
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("전/당월 예상 요금 및 사용 전력량");

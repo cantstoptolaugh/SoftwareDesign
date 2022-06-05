@@ -37,7 +37,7 @@ public class File_task {
     int add_num2; // :used_Energy
     int add_num3 = random.nextInt(10, 20);
 
-    int yesterday = random.nextInt(600, 1100);
+    int yesterday = 2562;
 
     String str;
 

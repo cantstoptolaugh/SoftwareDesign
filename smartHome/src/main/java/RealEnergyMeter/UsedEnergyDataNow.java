@@ -123,7 +123,7 @@ public class UsedEnergyDataNow extends javax.swing.JFrame {
         jLabel4.setText("총 에너지 사용량 :");
 
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jLabel5.setText("전일대비 사용량 차이 :");
+        jLabel5.setText("전일 총 에너지 사용량 :");
 
         jTextField1.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         jTextField1.setText("jTextField1");
