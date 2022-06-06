@@ -4,25 +4,15 @@ package VisitorAccess;
 import ForLogin.LoginForm;
 import Main.MainDisplay;
 
-import ForLogin.*;
-import VisitorAccess.*;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class OpenDoor extends javax.swing.JFrame {
@@ -33,55 +23,9 @@ public class OpenDoor extends javax.swing.JFrame {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     
-    // 로그인 파일 읽기 위한 File 객체
-    File user_info;
-    
     // 세션 id 읽기 위한 변수 id
     String id = LoginForm.SessionID;
-    
-    // 가족 확인 위한 family 배열
-    String[] family;
-    
-    // 로그인 파일에서 가족 구성원들을 배열 형태로 리턴
-    public String[] familyList() {
-        
-      try { 
-            // 로그인 객체 생성 및 sessionID 설정
-            LoginForm log = new LoginForm(); 
-            
-            // 가족은 4개의 배열
-            family = new String[4];
-            
-            // 세션 id의 로그인 파일 생성
-            user_info = new File(id+".txt");
-            
-            // 로그인 파일 scan
-            Scanner scan = new Scanner(user_info);
-            
-            // 스캔 한 파일 하나씩 읽으며 가족 구성원 이름에 따라 배열에 추가
-            while (scan.hasNext()) {
-                String str = scan.next();
-                if (str.equals(id)) {
-                }
-                if (str.equals("아버지")) {
-                    family[0] = "아버지";
-                }
-                if (str.equals("어머니")) {
-                    family[1] = "어머니";
-                }
-                if (str.equals("자녀1")) {
-                    family[2] = "자녀1";
-                }
-                if (str.equals("자녀2")) {
-                    family[3] = "자녀2";
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(OpenDoor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      // family 배열 리턴
-      return family;
-    }
+   
     
     /**
      * Creates new form Visitor
@@ -238,12 +182,11 @@ public class OpenDoor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void outerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outerActionPerformed
-        
-        familyList();
- 
-        LoginForm lf = new LoginForm();
+
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        vat.familyList();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
@@ -282,22 +225,18 @@ public class OpenDoor extends javax.swing.JFrame {
 
     // mother, father, brother, sister 모두 같은 로직
     private void motherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motherActionPerformed
-        
-        // 가족 배열 가져옴
-        familyList();
-       
-        // 로그인 객체 생성 
-        LoginForm lf = new LoginForm();
-        
+ 
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
+        
+        vat.familyList();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
         try {
-            Visitor v = visitorAccess.checkVisitor(family[1]);
+            Visitor v = visitorAccess.checkVisitor(vat.family[1]);
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
@@ -336,22 +275,17 @@ public class OpenDoor extends javax.swing.JFrame {
     }//GEN-LAST:event_motherActionPerformed
 
     private void fatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fatherActionPerformed
-               
-        // 가족 배열 가져옴
-        familyList();
-       
-        // 로그인 객체 생성 
-        LoginForm lf = new LoginForm();
-        
+
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
+        vat.familyList();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
         try {
-            Visitor v = visitorAccess.checkVisitor(family[0]);
+            Visitor v = visitorAccess.checkVisitor(vat.family[0]);
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
@@ -388,22 +322,17 @@ public class OpenDoor extends javax.swing.JFrame {
     }//GEN-LAST:event_fatherActionPerformed
 
     private void brotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brotherActionPerformed
-                
-        // 가족 배열 가져옴
-        familyList();
-       
-        // 로그인 객체 생성 
-        LoginForm lf = new LoginForm();
-        
+
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
+        vat.familyList();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
         try {
-            Visitor v = visitorAccess.checkVisitor(family[2]);
+            Visitor v = visitorAccess.checkVisitor(vat.family[2]);
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
@@ -440,21 +369,17 @@ public class OpenDoor extends javax.swing.JFrame {
 
     private void sisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisterActionPerformed
               
-        // 가족 배열 가져옴
-        familyList();
-       
-        // 로그인 객체 생성 
-        LoginForm lf = new LoginForm();
         
         // 팩토리 객체 VisitorAccessTrace
         VisitorAccessTrace vat = new VisitorAccessTrace();
+        vat.familyList();
         
         // VisitorAccess 객체 생성 후 인자에 VisitorAccessTrace 추가
         VisitorAccess visitorAccess = new VisitorAccess(vat);
         
         // 첫번째 방문자 객체를 생성
         try {
-            Visitor v = visitorAccess.checkVisitor(family[3]);
+            Visitor v = visitorAccess.checkVisitor(vat.family[3]);
             // 만약 v가 Family 객체에 속한다면 문이 열리고 닫히며, 해당 가족 구성원의 이름과 타임스탬프가 테이블에 기록
         if (v instanceof Family) {
             JOptionPane.showMessageDialog(null, "문이 열립니다.", "Result", JOptionPane.WARNING_MESSAGE);
