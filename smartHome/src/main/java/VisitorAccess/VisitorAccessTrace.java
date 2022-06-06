@@ -9,9 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VisitorAccessTrace {
- 
-    // 가족 타입 확인 위한 변수
-    String member;
+
     // 방문자 초기화
     Visitor visitor = null;
     // 가족 확인 위한 family 배열
