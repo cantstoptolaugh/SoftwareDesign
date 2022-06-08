@@ -17,89 +17,89 @@ import javax.swing.JSlider;
  */
 public class GUI_Command extends javax.swing.JFrame {
 
-    String uId = LoginForm.SessionID;
-    RemoteControl remote = new RemoteControl(); //인보커 생성 - 명령을 저장하고 관리.
-    Command none = new NoCommand();
+    String uId = LoginForm.SessionID; // 사용자 아이디
+    
+    RemoteControl remote = new RemoteControl(); // 인보커 생성 - 명령을 저장하고 관리.
+    Command none = new NoCommand(); // 명령이 없음을 표시하는 널 객체
 
     Refrigerator kitchenRefrigerator = new Refrigerator("Kitchen"); //  리시버 생성 - 명령의 실제 처리를 수행.
     Heating livingRoomHeating = new Heating("Living Room"); // 거실 난방 리시버 생성
-    Heating room1Heating = new Heating("Room1"); // 거실 난방 리시버 생성
-    Led livingRoomLed = new Led("Living Room");
-    Led room1Led = new Led("Room1");
+    Heating room1Heating = new Heating("Room1"); // 침실1 난방 리시버 생성
+    Led livingRoomLed = new Led("Living Room"); // 거실 LED 리시버 생성
+    Led room1Led = new Led("Room1"); // 침실1 LED 리비서 생성
 
-    int usedRefEnergy = 0;
-    int usedHeatingEnergy = 0;
-    int usedLedEnergy = 0;
-
-    int usedHeatingEnergyLivingRoom=0;
-    int usedHeatingEnergyRoom1=0;
-    int usedLedEnergyLivingRoom=0;
-    int usedLedEnergyRoom1=0;
+    int usedRefEnergy = 0; // 냉장고 사용 에너지
+    int usedHeatingEnergyLivingRoom=0;  // 거실 난방기 사용 에너지
+    int usedHeatingEnergyRoom1=0; // 침실 난방기 사용 에너지
+    int usedLedEnergyLivingRoom=0; // 거실 LED조명 사용 에너지
+    int usedLedEnergyRoom1=0; // 침실 LED조명 사용 에너지
     
-    public static int usedEnergy;
+    public static int usedEnergy;  // 총 사용 에너지
 
-    String refOnOffState = "OFF";
-    String heatingLivingRoomOnOffState = "OFF";
-    String heatingRoom1OnOffState = "OFF";
-    String ledLivingRoomOnOffState = "OFF";
-    String ledRoom1OnOffState = "OFF";
+    String refOnOffState = "OFF"; // 냉장고 전원 상태
+    String heatingLivingRoomOnOffState = "OFF"; // 거실 난방기 전원 상태
+    String heatingRoom1OnOffState = "OFF"; // 침실 난방기 전원 상태
+    String ledLivingRoomOnOffState = "OFF"; // 거실 LED 전원 상태
+    String ledRoom1OnOffState = "OFF"; // 침실 LED 전원 상태
 
-    /**
-     * Creates new form NewJFrame
-     */
-    public enum Receiver {
+    public enum Receiver { // 리시버 - 난방기(0), LED조명(1), 냉장고(2)
         HEATING, LED, REF
     }
 
     public GUI_Command() {
-        if (File_Command.read(LoginForm.SessionID) == null) {
-            usedEnergy = 0;
-        } else {
-            usedEnergy = Integer.parseInt(File_Command.read(LoginForm.SessionID));
-        }
+        
+       usedEnergy = Integer.parseInt(File_Command.read(LoginForm.SessionID)); // 현재 로그인 한 사용자의 누적 전기 사용량(기기 제어)
+
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        
         commandMainLabel.setText(LoginForm.SessionID + "님의 누적 전기 사용량");
+        usedELabel.setText(usedEnergy + "kwh"); // 누적 사용 전기량
 
-        usedELabel.setText(usedEnergy + "kwh");
-
-        setting();
+        setting(); // 각 서브 프레임(냉장고 제어, LED 제어, 난방기 제어) 첫 화면 텍스트 및 슬라이더 설정
 
     }
 
     public void setting() { // 서브 프레임 첫 화면 텍스트 및 슬라이더 설정
-        refTempLabel.setText("" + 0);
-        refOnOffLabel.setText("OFF");
+        refTempLabel.setText("" + 0); // 냉장고 초기 온도
+        refOnOffLabel.setText("OFF"); // 냉장고 초기 전원 상태
 
-        ledLivingRoomTempLabel.setText("" + 0);
-        ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState);
-        ledRoom1OnOffLabel.setText(ledRoom1OnOffState);
+        ledLivingRoomTempLabel.setText("" + 0); // 거실 LED 초기 밝기
+        ledLivingRoomOnOffLabel.setText(ledLivingRoomOnOffState); // 거실 LED 초기 전원 상태
         
-        heatingLivingRoomTempLabel.setText("" + 0);
-        livingRoomLabel2.setText(heatingLivingRoomOnOffState);
+        ledRoom1TempLabel.setText("" + 0); // 침실 LED 초기 밝기
+        ledRoom1OnOffLabel.setText(ledRoom1OnOffState); // 침실 LED 초기 전원 상태
+        
+        heatingLivingRoomTempLabel.setText("" + 0); // 거실 난방기 초기 온도
+        livingRoomLabel2.setText(heatingLivingRoomOnOffState); // 거실 난방기 초기 전원 상태
 
-        heatingRoom1TempLabel.setText("" + 0);
-        heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState);
+        heatingRoom1TempLabel.setText("" + 0); // 침실 난방기 초기 온도
+        heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 침실 난방기 초기 전원 상태 
 
-        refSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
+        // 냉장고 온도 조절 슬라이더
+        refSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정 
         refSlider.setPaintTicks(true); //눈금을 표시한다.
         refSlider.setPaintLabels(true);
 
+        // 거실 LED 밝기 조절 슬라이더
         ledLivingRoomSlider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         ledLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
         ledLivingRoomSlider.setPaintLabels(true);
 
+        // 침실 LED 밝기 조절 슬라이더
         ledRoom1Slider.setMajorTickSpacing(1); //큰 눈금 간격 5로 설정
         ledRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
         ledRoom1Slider.setPaintLabels(true);
 
+        // 거실 난방기 온도 조절 슬라이더
         heatingLivingRoomSlider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
         heatingLivingRoomSlider.setPaintTicks(true); //눈금을 표시한다.
         heatingLivingRoomSlider.setPaintLabels(true);
-
+        
+        // 침실 난방기 온도 조절 슬라이더
         heatingRoom1Slider.setMajorTickSpacing(5); //큰 눈금 간격 5로 설정
         heatingRoom1Slider.setPaintTicks(true); //눈금을 표시한다.
         heatingRoom1Slider.setPaintLabels(true);
@@ -1030,7 +1030,7 @@ public class GUI_Command extends javax.swing.JFrame {
     private void btn_ledCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ledCommandActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        ledFrame.setVisible(true);
+        ledFrame.setVisible(true); // LED 제어 화면
         ledFrame.setTitle("LED 조명 제어");
         ledFrame.setSize(859, 500);
         ledFrame.setLocation(900, 250);
@@ -1038,9 +1038,9 @@ public class GUI_Command extends javax.swing.JFrame {
         ledFrame.setLocationRelativeTo(null);
         ledFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        if (ledLivingRoomOnOffState.equals("ON")) {
+        if (ledLivingRoomOnOffState.equals("ON")) { // 전원 상태가 On이면 슬라이더 활성화
             ledLivingRoomSlider.setEnabled(true);
-        } else if (ledLivingRoomOnOffState.equals("OFF")) {
+        } else if (ledLivingRoomOnOffState.equals("OFF")) { // 전원 상태가 Off이면 슬라이더 활성화
             ledLivingRoomSlider.setEnabled(false);
         }
 
@@ -1054,7 +1054,7 @@ public class GUI_Command extends javax.swing.JFrame {
     private void btn_heatingCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_heatingCommandActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        heatingFrame.setVisible(true);
+        heatingFrame.setVisible(true); // 난방기 제어 화면
         heatingFrame.setTitle("난방 기기 제어");
         heatingFrame.setSize(859, 500);
         heatingFrame.setLocation(900, 250);
@@ -1062,9 +1062,9 @@ public class GUI_Command extends javax.swing.JFrame {
         heatingFrame.setLocationRelativeTo(null);
         heatingFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        if (heatingLivingRoomOnOffState.equals("ON")) {
+        if (heatingLivingRoomOnOffState.equals("ON")) { // 전원 상태가 On이면 슬라이더 활성화
             heatingLivingRoomSlider.setEnabled(true);
-        } else if (heatingLivingRoomOnOffState.equals("OFF")) {
+        } else if (heatingLivingRoomOnOffState.equals("OFF")) { // 전원 상태가 Off이면 슬라이더 활성화
             heatingLivingRoomSlider.setEnabled(false);
         }
 
@@ -1085,11 +1085,10 @@ public class GUI_Command extends javax.swing.JFrame {
         refFrame.setLocation(900, 250);
         refFrame.setResizable(false);
         refFrame.setLocationRelativeTo(null);
-        // refFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        if (refOnOffState.equals("ON")) {
+        if (refOnOffState.equals("ON")) { // 전원 상태가 On이면 슬라이더 활성화
             refSlider.setEnabled(true);
-        } else if (refOnOffState.equals("OFF")) {
+        } else if (refOnOffState.equals("OFF")) { // 전원 상태가 Off이면 슬라이더 활성화
             refSlider.setEnabled(false);
         }
     }//GEN-LAST:event_btn_refCommandActionPerformed
@@ -1193,7 +1192,6 @@ public class GUI_Command extends javax.swing.JFrame {
 
         usedHeatingEnergyLivingRoom = 0;
 
-        System.out.println(usedHeatingEnergy + "," + livingRoomHeating.getUsedEnergy());
         heatingELabel.setText(usedHeatingEnergyLivingRoom + usedHeatingEnergyRoom1 + " KWh");
 
         usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
@@ -1268,10 +1266,7 @@ public class GUI_Command extends javax.swing.JFrame {
             usedRefEnergy += 1;
             usedEnergy += 1;
         }
-//         if(refSlider.getValue() >=5 && refSlider.getValue() <= 6)  {
-//             JOptionPane.showMessageDialog(null, "적정 온도(2°C ~ 4°C)보다 높은 온도로 설정하여 벗어나 소비전력량이 감소합니다.\n");
-//             usedRefEnergy-=1;
-//        }
+
         refELabel.setText(usedRefEnergy + " KWh");
 
 
@@ -1293,7 +1288,7 @@ public class GUI_Command extends javax.swing.JFrame {
         heatingRoom1OnOffLabel.setText(heatingRoom1OnOffState); // 침실1 난방 전원 텍스트 설정
         heatingRoom1Slider.setEnabled(true);  // 전원이 켜지면 온도조절 슬라이더를 사용가능하게 함. 
         heatingRoom1Slider.setValue(20); // 온도의 기본값으로 20도를 줌.
-        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue() + ""); // 슬라이더에서 얻어온 값으로 거실 난방 온도 텍스트 설정.
+        heatingRoom1TempLabel.setText(heatingRoom1Slider.getValue() + ""); // 슬라이더에서 얻어온 값으로 침실 난방 온도 텍스트 설정.
 
         HeatingOnCommand Room1HeatingOn = new HeatingOnCommand(room1Heating); // 커맨드 생성
         remote.setOnOffCommand(Receiver.HEATING.ordinal(), Room1HeatingOn, none);
@@ -1385,10 +1380,6 @@ public class GUI_Command extends javax.swing.JFrame {
             usedEnergy += 2;
         }
 
-//         if(ledRoom1Slider.getValue() < 3)  {
-//             JOptionPane.showMessageDialog(null, "적정 밝기단계(3단계)보다 낮게 설정하여 소비전력량이 감소합니다.\n");
-//            if(usedLedEnergy>0) usedLedEnergy-=1;
-//        }
         ledELabel.setText(usedLedEnergyRoom1 + usedLedEnergyLivingRoom + " KWh");
         usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
     }//GEN-LAST:event_ledRoom1SliderMouseReleased
@@ -1416,7 +1407,6 @@ public class GUI_Command extends javax.swing.JFrame {
         remote.onButtonWasPushed(Receiver.HEATING.ordinal()); // 0번 슬롯의 on 명령 실행
 
         usedLedEnergyRoom1+=room1Led.getUsedEnergy(); 
-        usedLedEnergy += room1Led.getUsedEnergy(); // 난방기 누적 전기 사용량 업데이트
 
          ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
         usedEnergy += room1Led.getUsedEnergy();
@@ -1491,8 +1481,6 @@ public class GUI_Command extends javax.swing.JFrame {
         ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
         usedEnergy += livingRoomLed.getUsedEnergy();
         usedELabel.setText(usedEnergy + " KWh"); // 메인화면 전체 누적 전기 사용량
-        System.out.println(usedEnergy);
-        
 
 
     }//GEN-LAST:event_ledOnLivingRoomBtnActionPerformed
@@ -1516,7 +1504,6 @@ public class GUI_Command extends javax.swing.JFrame {
         
         usedLedEnergyLivingRoom = 0;
 
-        System.out.println(usedLedEnergy + "," + livingRoomLed.getUsedEnergy());
         ledELabel.setText(usedLedEnergyLivingRoom + usedLedEnergyRoom1 + " KWh");
 
         usedELabel.setText(usedEnergy + ""); // 메인화면 전체 누적 전기 사용량
