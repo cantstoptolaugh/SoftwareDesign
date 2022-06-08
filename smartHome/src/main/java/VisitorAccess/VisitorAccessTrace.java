@@ -45,8 +45,7 @@ public class VisitorAccessTrace {
     }
     
     // 로그인 파일에서 가족 구성원들을 배열 형태로 리턴
-    public String[] familyList() {
-        
+    public String[] familyList() {   
       try { 
             // 로그인 객체 생성 및 sessionID 설정
             LoginForm log = new LoginForm(); 
@@ -79,7 +78,8 @@ public class VisitorAccessTrace {
                 }
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(OpenDoor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OpenDoor.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
       // family 배열 리턴
       return family;
