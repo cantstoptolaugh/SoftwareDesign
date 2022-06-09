@@ -15,27 +15,27 @@ public class UsageFee implements Observer, DisplayElement {
     
     private EnergyData energyData;
 
-    public UsageFee(EnergyData energyData) {
+    public UsageFee(EnergyData energyData) {//객체 등록을 위한 메소드
         this.energyData = energyData;
         energyData.registerObserver(this);
     }
 
     public void update(float gas_energy, float elec_energy, float water_energy) {
-        //당월,전월 예상 요금, 당월,전월 사용 전력량 계산 메소드 작성해야함.
         this.gas_energy = gas_energy;
         this.elec_energy = elec_energy;
         this.water_energy = water_energy;
         this.sum = gas_energy + elec_energy + water_energy;
+        //가스, 전기, 수도 에너지 사용량을 불러온 뒤, 예상 요금과 사용 에너지량(이번달)을 계산 
+        this.expect_Fee = (float)((gas_energy+elec_energy+water_energy)*15.9);
+        this.use_energy = (float)(sum*15);
+        //저번 달 에너지 총 사용량과 요금 Default 값
+        this.Before_Fee = 56870;
+        this.Before_energy = 49820;
         
         display();
     }
 
     public void display() {
-
-        this.expect_Fee = (float)((gas_energy+elec_energy+water_energy)*15.9);
-        this.use_energy = (float)(sum*15);
-        this.Before_Fee = 56870;
-        this.Before_energy = 49820;
         
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("전/당월 예상 요금 및 사용 전력량");

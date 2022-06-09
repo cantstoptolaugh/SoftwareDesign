@@ -56,6 +56,7 @@ public class LoginForm extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         jLabel1.setText("Smart Home System");
@@ -68,16 +69,18 @@ public class LoginForm extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 255));
         jButton1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jButton1.setText("Sign In");
+        jButton1.setText("로그인");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(204, 204, 255));
         jButton2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jButton2.setText("Sign Up");
+        jButton2.setText("회원가입");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -90,6 +93,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel4.setText("소프트웨어설계공학 [버스태워조] 스마트홈 시스템");
 
+        jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jButton3.setText("종료");
         jButton3.addActionListener(new java.awt.event.ActionListener() {

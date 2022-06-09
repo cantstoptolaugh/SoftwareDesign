@@ -37,17 +37,17 @@ public class EnergyData implements Subject {
     public void notifyObservers() {
         for (Observer observer : observers) {
             observer.update(gas_energy, elec_energy, water_energy);
-        }
+        }//옵저버 객체s 알림 송신
     }
 
     public void measurementsChanged() {
-        notifyObservers();
+        notifyObservers(); //변화된 사항 => 옵저버 객체s 알림 송신
     }
 
     public void setMeasurements(float gas_energy, float elec_energy, float water_energy) {
-        this.gas_energy = gas_energy;
-        this.elec_energy = elec_energy;
-        this.water_energy = water_energy;
+        this.gas_energy = gas_energy; //가스 사용량
+        this.elec_energy = elec_energy; //전기 사용량
+        this.water_energy = water_energy; //수도 사용량
         measurementsChanged();
     }
 

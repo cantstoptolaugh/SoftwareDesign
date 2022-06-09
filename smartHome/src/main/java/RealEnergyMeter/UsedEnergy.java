@@ -16,19 +16,19 @@ public class UsedEnergy implements Observer, DisplayElement {
 
     public UsedEnergy(EnergyData energyData) {
         this.energyData = energyData;
-        energyData.registerObserver(this);
+        energyData.registerObserver(this); //객체 등록을 위한 메소드
     }
 
     public void update(float gas_energy, float elec_energy, float water_energy) {
-        this.gas_energy = gas_energy;
-        this.elec_energy = elec_energy;
-        this.water_energy = water_energy;
-        this.sum = gas_energy + elec_energy + water_energy;
+        this.gas_energy = gas_energy; //가스 에너지 사용량
+        this.elec_energy = elec_energy; //전기 에너지 사용량
+        this.water_energy = water_energy; //수도 에너지 사용량
+        this.sum = gas_energy + elec_energy + water_energy; //에너지 총 사용량
         display();
 
     }
 
-    public void display() {
+    public void display() { //테스트 코드 출력용 display()
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("현재 에너지 사용량 (기준 : 24 h )");
         System.out.println("---------------------------------------------------------------------------------");
